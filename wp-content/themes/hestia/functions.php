@@ -6,7 +6,7 @@
  * @since   Hestia 1.0
  */
 
-define( 'HESTIA_VERSION', '2.1.1' );
+define( 'HESTIA_VERSION', '2.4.4' );
 define( 'HESTIA_VENDOR_VERSION', '1.0.2' );
 define( 'HESTIA_PHP_INCLUDE', trailingslashit( get_template_directory() ) . 'inc/' );
 define( 'HESTIA_CORE_DIR', HESTIA_PHP_INCLUDE . 'core/' );
@@ -70,11 +70,20 @@ function hestia_run() {
 
 	new Hestia_Core();
 
-	$vendor_file = trailingslashit( get_template_directory() ) . 'vendor/autoload.php';
+	$vendor_file = trailingslashit( get_template_directory() ) . 'vendor/composer/autoload_files.php';
 	if ( is_readable( $vendor_file ) ) {
-		require_once $vendor_file;
+		$files = require_once $vendor_file;
+		foreach ( $files as $file ) {
+			if ( is_readable( $file ) ) {
+				include_once $file;
+			}
+		}
 	}
 	add_filter( 'themeisle_sdk_products', 'hestia_load_sdk' );
+
+	if ( class_exists( 'Ti_White_Label' ) ) {
+		Ti_White_Label::instance( get_template_directory() . '/style.css' );
+	}
 }
 
 /**
@@ -173,16 +182,3 @@ function hestia_setup_theme() {
 	return;
 }
 
-remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
-
-// Remove WP Version From Styles	
-add_filter( 'style_loader_src', 'sdt_remove_ver_css_js', 9999 );
-// Remove WP Version From Scripts
-add_filter( 'script_loader_src', 'sdt_remove_ver_css_js', 9999 );
-
-// Function to remove version numbers
-function sdt_remove_ver_css_js( $src ) {
-	if ( strpos( $src, 'ver=' ) )
-		$src = remove_query_arg( 'ver', $src );
-	return $src;
-}

@@ -1,4 +1,70 @@
 
+ ### v2.4.4 - 2019-04-22 
+ **Changes:** 
+ * Removed weird scroll on the blog page
+ 
+ ### v2.4.3 - 2019-04-22 
+ **Changes:** 
+ * New logging mechanism to the onboarding module
+* Improved the whole routine for the content import in the onboarding module
+* Added new wp_body_open() function for WP 5.2
+* Fixed logo disappearing on scroll on the distraction-free checkout mode
+* Made blog text color darker when using the full content articles option
+* Fixed portfolio featured image not visible in Firefox in the lightbox
+* Fixed overlapping content on the blog page
+* Fixed incorrect title attribute for the primary menu
+* Fixed Shop page layout on the third header layout
+* Remove title appearing in the navigation cart in the latest update of WooCommerce
+ 
+ ### v2.4.2 - 2019-04-02 
+ **Changes:** 
+ * Updated the Starter Sites library
+ 
+ ### v2.4.1 - 2019-03-29 
+ **Changes:** 
+ * Compatibility with the Header, Footer & Blocks for Elementor plugin
+* New Agency Travel Demo Starter Site
+* Fixed issue with the color picker needing two clicks
+* Updated the Contact and Facebook community links
+* Updated tags list with the new tags
+* Fixed importing issues with the Starter Sites
+* Fixed White Label error appearing lower PHP versions
+* Fixed issue with contact form shortcode not being translation ready
+* Updated Starter Sites library images
+ 
+ ### v2.4.0 - 2019-03-21 
+ **Changes:** 
+ * [Hestia Pro] New White Label module
+* Fixed issue with Big Title buttons shadow color
+* Fixed issue with Portfolio pop-up not opening in Microsoft Edge
+* Fixed issue with Blog options taking control over the custom post types archives pages
+* Fixed issue with invalid CSS inline style
+ 
+ ### v2.3.0 - 2019-03-01 
+ **Changes:** 
+ * Fixed products categories layout on the Shop pane and Homepage
+* Fixed issue with the title attribute not escaping HTML tags in the primary menu
+* New Hestia Original starter site
+ 
+ ### v2.2.1 - 2019-02-12 
+ **Changes:** 
+ * [Hestia PRO] Fixed issue with the [hestia_slider] shortcode not working
+* Fixed search results page layout when using the second header option
+* Replaced Google+ sharing option with an Email option
+* Fixed link for sharing on Twitter option
+* Fixed issue with color control updating only after two clicks
+ 
+ ### v2.2.0 - 2019-02-06 
+ **Changes:** 
+ * NEW Hestia Specific Gutenberg blocks for Otter Blocks
+* Improved the onboarding process
+* New filter for compatibility with the Central Color Palette plugin
+* Fixed default font weight for headings
+* Fixed issue with default small font size for lists
+* Allow HTML tags in the single product page title
+* Fixed problem with the footer not sticking to the bottom of the blog page
+* Fixed warning with the Connections plugin
+ 
  ### v2.1.1 - 2019-01-17 
  **Changes:** 
  * Changed the boxed layout for the third header layout

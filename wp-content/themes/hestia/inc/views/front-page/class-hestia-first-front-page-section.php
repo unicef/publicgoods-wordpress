@@ -108,7 +108,7 @@ class Hestia_First_Front_Page_Section extends Hestia_Abstract_Main {
 
 		switch ( $slider_alignment ) {
 			case 'left':
-				$result_array['slide']  .= ' col-sm-5 col-sm-offset-1 ';
+				$result_array['slide']  .= ' col-md-7 ';
 				$result_array['widget'] .= ' hestia-slider-alignment-left ';
 				break;
 			case 'center':

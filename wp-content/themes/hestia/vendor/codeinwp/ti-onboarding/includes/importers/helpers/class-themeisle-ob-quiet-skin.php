@@ -8,7 +8,6 @@
  * On:      21/06/2018
  *
  * @package    themeisle-onboarding
- * @soundtrack Accordion - Madvillain, Madlib & MF DOOM
  */
 
 /**
@@ -39,4 +38,20 @@ class Themeisle_OB_Quiet_Skin extends WP_Upgrader_Skin {
 	public function feedback( $string ) {
 		// Keep install quiet.
 	}
+
+	/**
+	 * Quiet after.
+	 */
+	public function after() {
+		// Quiet after
+	}
+
+	/**
+	 * Quiet before.
+	 */
+	public function before() {
+		// Quiet before.
+	}
+
+
 }

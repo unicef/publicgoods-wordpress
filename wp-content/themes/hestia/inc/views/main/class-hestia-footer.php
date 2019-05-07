@@ -130,19 +130,14 @@ class Hestia_Footer extends Hestia_Abstract_Main {
 			'hestia_general_credits',
 			sprintf(
 				/* translators: %1$s is Theme Name, %2$s is WordPress */
-				// esc_html__( '%1$s | Developed by %2$s', 'hestia' ),
-				// esc_html__( 'Hestia', 'hestia' ),
+				esc_html__( '%1$s | Developed by %2$s', 'hestia' ),
+				esc_html__( 'Hestia', 'hestia' ),
 				/* translators: %1$s is URL, %2$s is WordPress */
-				// sprintf(
-				// 	'<a href="%1$s" rel="nofollow">%2$s</a>',
-				// 	esc_url( __( 'https://themeisle.com', 'hestia' ) ),
-				// 	'ThemeIsle'
-				// )
 				sprintf(
-					'Developed and Hosted on <a href="https://github.com/unicef">Github <img src="/wp-content/uploads/2019/02/github-logo.png" width="18"></a>',null,'ThemeIsle'
+					'<a href="%1$s" rel="nofollow">%2$s</a>',
+					esc_url( __( 'https://themeisle.com', 'hestia' ) ),
+					'ThemeIsle'
 				)
-
-				
 			)
 		);
 
@@ -155,9 +150,6 @@ class Hestia_Footer extends Hestia_Abstract_Main {
 			)
 		);
 		?>
-		<div class="pull-left">
-		<!--?php global $post; $post = get_page(63); echo $post->post_content; ?-->
-		</div>
 		<?php if ( ! empty( $hestia_general_credits ) || is_customize_preview() ) : ?>
 			<div class="copyright <?php echo esc_attr( $this->add_footer_copyright_alignment_class() ); ?>">
 				<?php echo wp_kses_post( $hestia_general_credits ); ?>
