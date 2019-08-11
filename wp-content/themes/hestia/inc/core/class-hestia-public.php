@@ -29,15 +29,13 @@ class Hestia_Public {
 			wp_enqueue_style( 'hestia-font-sizes', get_template_directory_uri() . '/assets/css/font-sizes' . ( ( HESTIA_DEBUG ) ? '' : '.min' ) . '.css', array(), HESTIA_VERSION );
 		}
 
-		// FontAwesome
-		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/assets/font-awesome/css/font-awesome.min.css', array(), HESTIA_VENDOR_VERSION );
-
 		$stylesheet = $this->get_stylesheet();
 		// Main Stylesheet
 		wp_enqueue_style( 'hestia_style', $stylesheet, array(), apply_filters( 'hestia_version_filter', HESTIA_VERSION ) );
 		wp_style_add_data( 'hestia_style', 'rtl', 'replace' );
 		wp_style_add_data( 'hestia_style', 'suffix', '.min' );
 
+		$this->enqueue_font_awesome();
 		$this->enqueue_woocommerce();
 		$this->enqueue_custom_fonts();
 
@@ -783,5 +781,13 @@ class Hestia_Public {
 			'onboarding_message'     => esc_html__( 'This process will set up your website, install required plugins, import demo content (pages, posts, media) and set up the customizer options.', 'hestia' ),
 			'sites_library'          => esc_html__( 'Sites Library', 'hestia' ),
 		);
+	}
+
+	/**
+	 * Add font awesome & v4 shims.
+	 */
+	private function enqueue_font_awesome() {
+		wp_enqueue_style( 'font-awesome-5-all', get_template_directory_uri() . '/assets/font-awesome/css/all.min.css', array(), HESTIA_VENDOR_VERSION );
+		wp_enqueue_style( 'font-awesome-4-shim', get_template_directory_uri() . '/assets/font-awesome/css/v4-shims.min.css', array(), HESTIA_VENDOR_VERSION );
 	}
 }

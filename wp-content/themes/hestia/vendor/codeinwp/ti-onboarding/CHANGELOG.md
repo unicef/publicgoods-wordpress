@@ -1,3 +1,84 @@
+## [1.6.3](https://github.com/Codeinwp/ti-onboarding/compare/v1.6.2...v1.6.3) (2019-08-02)
+
+
+### Bug Fixes
+
+* release commit ([29639b6](https://github.com/Codeinwp/ti-onboarding/commit/29639b6))
+* release commit ([404c142](https://github.com/Codeinwp/ti-onboarding/commit/404c142))
+
+## [1.6.2](https://github.com/Codeinwp/ti-onboarding/compare/v1.6.1...v1.6.2) (2019-07-29)
+
+
+### Bug Fixes
+
+* release commit ([74277f9](https://github.com/Codeinwp/ti-onboarding/commit/74277f9))
+
+## [1.6.1](https://github.com/Codeinwp/ti-onboarding/compare/v1.6.0...v1.6.1) (2019-07-15)
+
+
+### Bug Fixes
+
+* allow defined screenshots for local demos [fixes [#63](https://github.com/Codeinwp/ti-onboarding/issues/63)] ([3d25571](https://github.com/Codeinwp/ti-onboarding/commit/3d25571))
+* allow defined screenshots for local demos [fixes [#63](https://github.com/Codeinwp/ti-onboarding/issues/63)] ([d721c5e](https://github.com/Codeinwp/ti-onboarding/commit/d721c5e))
+
+# [1.6.0](https://github.com/Codeinwp/ti-onboarding/compare/v1.5.1...v1.6.0) (2019-07-15)
+
+
+### Features
+
+* add import on access [[#68](https://github.com/Codeinwp/ti-onboarding/issues/68)] ([7efd81f](https://github.com/Codeinwp/ti-onboarding/commit/7efd81f))
+
+## [1.5.1](https://github.com/Codeinwp/ti-onboarding/compare/v1.5.0...v1.5.1) (2019-07-08)
+
+
+### Bug Fixes
+
+* use wp_filesystem instead of file_get_contents ([b217a9d](https://github.com/Codeinwp/ti-onboarding/commit/b217a9d))
+* use wp_filesystem instead of file_get_contents ([2045b89](https://github.com/Codeinwp/ti-onboarding/commit/2045b89))
+
+# [1.5.0](https://github.com/Codeinwp/ti-onboarding/compare/v1.4.2...v1.5.0) (2019-06-28)
+
+
+### Bug Fixes
+
+* add filter to allow outbound link query args changes ([5bfe265](https://github.com/Codeinwp/ti-onboarding/commit/5bfe265))
+* wp-cli plugin install on import ([4b471c2](https://github.com/Codeinwp/ti-onboarding/commit/4b471c2))
+
+
+### Features
+
+* add WP CLI utilities ([66cfb0f](https://github.com/Codeinwp/ti-onboarding/commit/66cfb0f))
+
+## [1.4.2](https://github.com/Codeinwp/ti-onboarding/compare/v1.4.1...v1.4.2) (2019-06-05)
+
+
+### Bug Fixes
+
+* license check for Neve Pro ([36527ff](https://github.com/Codeinwp/ti-onboarding/commit/36527ff))
+* license check for Neve Pro ([5c5f250](https://github.com/Codeinwp/ti-onboarding/commit/5c5f250))
+
+## [1.4.1](https://github.com/Codeinwp/ti-onboarding/compare/v1.4.0...v1.4.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* add option for plugins import ([793b063](https://github.com/Codeinwp/ti-onboarding/commit/793b063))
+* disable otter redirect [Codeinwp/neve[#539](https://github.com/Codeinwp/ti-onboarding/issues/539)] ([8898bd0](https://github.com/Codeinwp/ti-onboarding/commit/8898bd0))
+
+# [1.4.0](https://github.com/Codeinwp/ti-onboarding/compare/v1.3.6...v1.4.0) (2019-05-07)
+
+
+### Bug Fixes
+
+* [#329](https://github.com/Codeinwp/ti-onboarding/issues/329) zelle import ([e2b978d](https://github.com/Codeinwp/ti-onboarding/commit/e2b978d))
+* [#329](https://github.com/Codeinwp/ti-onboarding/issues/329) zelle import ([a482b77](https://github.com/Codeinwp/ti-onboarding/commit/a482b77))
+* phpcbf ([dfc04ee](https://github.com/Codeinwp/ti-onboarding/commit/dfc04ee))
+
+
+### Features
+
+* allow wp options importing ([56369ef](https://github.com/Codeinwp/ti-onboarding/commit/56369ef))
+
 ## [1.3.6](https://github.com/Codeinwp/ti-onboarding/compare/v1.3.5...v1.3.6) (2019-04-22)
 
 

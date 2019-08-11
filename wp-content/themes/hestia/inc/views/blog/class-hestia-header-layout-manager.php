@@ -85,7 +85,7 @@ class Hestia_Header_Layout_Manager extends Hestia_Abstract_Main {
 		/**
 		 * If it's blog, default will be 'default'
 		 */
-		if ( is_home() ) {
+		if ( is_home() || is_archive() ) {
 			$layout = 'default';
 		}
 
@@ -107,14 +107,15 @@ class Hestia_Header_Layout_Manager extends Hestia_Abstract_Main {
 			}
 
 			if ( is_product() ) {
-				return 'no-content';
+				$layout = get_theme_mod( 'hestia_product_layout', 'no-content' );
+
 			}
 		}
 
 		/**
 		 * Try to get individual layout.
 		 */
-		$individual_layout = get_post_meta( $page_id, 'hestia_header_layout', true );
+		$individual_layout = is_singular() ? get_post_meta( $page_id, 'hestia_header_layout', true ) : '';
 
 		return ! empty( $individual_layout ) ? $individual_layout : $layout;
 	}
@@ -292,7 +293,7 @@ class Hestia_Header_Layout_Manager extends Hestia_Abstract_Main {
 			$title_class .= ' title-in-content';
 		}
 		if ( is_404() ) {
-			$header_content_output = '<h1 class="hestia-title">' . esc_html( 'Oops! That page can&rsquo;t be found.' ) . '</h1>';
+			$header_content_output = '<h1 class="hestia-title">' . esc_html__( 'Oops! That page can&rsquo;t be found.', 'hestia' ) . '</h1>';
 
 			return $header_content_output;
 		}

@@ -41,7 +41,11 @@ class Hestia_Woocommerce_Header_Manager extends Hestia_Abstract_Main {
 		}
 
 		$header_wrapper_class = 'page-header header-small';
-		$general_layout       = get_theme_mod( 'hestia_general_layout', apply_filters( 'hestia_boxed_layout_default', 1 ) );
+		if ( is_product() ) {
+			$header_wrapper_class = 'page-header';
+		}
+
+		$general_layout = get_theme_mod( 'hestia_general_layout', apply_filters( 'hestia_boxed_layout_default', 1 ) );
 		if ( isset( $general_layout ) && true === (bool) $general_layout ) {
 			$header_wrapper_class .= ' boxed-layout-header';
 		}
@@ -136,11 +140,11 @@ class Hestia_Woocommerce_Header_Manager extends Hestia_Abstract_Main {
 		if ( is_product() || is_cart() || is_checkout() ) {
 			$header_content_output .= the_title( '', '', false );
 		}
-		if ( is_product_category() ) {
+		if ( is_product_category() || is_product_tag() ) {
 			$header_content_output .= get_the_archive_title();
 		}
 		$header_content_output .= '</h1>';
-		if ( is_product_category() ) {
+		if ( is_product_category() || is_product_tag() ) {
 			$header_content_output .= '<h5 class="description">' . get_the_archive_description() . '</h5>';
 		}
 

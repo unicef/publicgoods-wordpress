@@ -1,6 +1,6 @@
 <?php
 /**
- * Onboarding Rest Endpoints Handler.
+ * Rest Endpoints Handler.
  *
  * Author:          Andrei Baicus <andrei@themeisle.com>
  * Created on:      12/07/2018
@@ -76,7 +76,7 @@ class Themeisle_OB_Rest_Server {
 		$sdk_modules = \ThemeisleSDK\Common\Module_Factory::get_modules_map();
 		$theme       = get_stylesheet();
 
-		if ( ! array_key_exists( $theme, $sdk_modules ) ) {
+		if ( $theme === 'neve' ) {
 			$theme = 'neve-pro-addon';
 		}
 
@@ -272,7 +272,15 @@ class Themeisle_OB_Rest_Server {
 
 		$data = $this->theme_support['can_migrate'];
 
-		$old_theme = get_theme_mod( 'ti_prev_theme', 'ti_onboarding_undefined' );
+		$old_theme           = get_theme_mod( 'ti_prev_theme', 'ti_onboarding_undefined' );
+		$folder_name         = $old_theme;
+		$previous_theme_slug = $this->get_parent_theme( $old_theme );
+
+		if ( ! empty( $previous_theme_slug ) ) {
+			$folder_name = $previous_theme_slug;
+			$old_theme   = $previous_theme_slug;
+		}
+
 		if ( ! array_key_exists( $old_theme, $data ) ) {
 			return array();
 		}
@@ -282,12 +290,11 @@ class Themeisle_OB_Rest_Server {
 			return array();
 		}
 
-		$folder_name = $old_theme;
 		if ( $old_theme === 'zerif-lite' || $old_theme === 'zerif-pro' ) {
 			$folder_name = 'zelle';
 		}
 
-		return array(
+		$options = array(
 			'theme_name'          => ! empty( $data[ $old_theme ]['theme_name'] ) ? esc_html( $data[ $old_theme ]['theme_name'] ) : '',
 			'screenshot'          => get_template_directory_uri() . Themeisle_Onboarding::OBOARDING_PATH . '/migration/' . $folder_name . '/' . $data[ $old_theme ]['template'] . '.png',
 			'template'            => get_template_directory() . Themeisle_Onboarding::OBOARDING_PATH . '/migration/' . $folder_name . '/' . $data[ $old_theme ]['template'] . '.json',
@@ -298,6 +305,28 @@ class Themeisle_OB_Rest_Server {
 			'mandatory_plugins'   => $data[ $old_theme ]['mandatory_plugins'] ? $data[ $old_theme ]['mandatory_plugins'] : array(),
 			'recommended_plugins' => $data[ $old_theme ]['recommended_plugins'] ? $data[ $old_theme ]['recommended_plugins'] : array(),
 		);
+
+		if ( ! empty( $previous_theme_slug ) ) {
+			$options['description'] = __( 'Hi! We\'ve noticed you were using a child theme of Zelle before. To make your transition easier, we can help you keep the same homepage settings you had before but in original Zelle\'s style, by converting it into an Elementor template.', 'hestia' );
+		}
+
+		return $options;
+	}
+
+	/**
+	 * Get previous theme parent if it's a child theme.
+	 *
+	 * @param string $previous_theme Previous theme slug.
+	 *
+	 * @return string
+	 */
+	private function get_parent_theme( $previous_theme ) {
+		$available_themes = wp_get_themes();
+		if ( ! array_key_exists( $previous_theme, $available_themes ) ) {
+			return false;
+		}
+		$theme_object = $available_themes[ $previous_theme ];
+		return $theme_object->get( 'Template' );
 	}
 
 	/**
@@ -334,12 +363,20 @@ class Themeisle_OB_Rest_Server {
 				$returnable[ $editor ][ $template_slug ]['content_file']          = get_template_directory() . '/onboarding/' . $template_slug . '/export.xml';
 				$returnable[ $editor ][ $template_slug ]['source']                = 'local';
 				$returnable[ $editor ][ $template_slug ]['edit_content_redirect'] = '';
+				$returnable[ $editor ][ $template_slug ]['unsplash_gallery']      = isset( $this->theme_support['local'][ $editor ][ $template_slug ]['unsplash_gallery'] ) ? $this->theme_support['local'][ $editor ][ $template_slug ]['unsplash_gallery'] : '';
 
 				$ss_extension = '.png';
 				if ( file_exists( get_template_directory() . '/onboarding/' . $template_slug . '/screenshot.jpg' ) ) {
 					$ss_extension = '.jpg';
 				}
-				$returnable[ $editor ][ $template_slug ]['screenshot'] = esc_url( get_template_directory_uri() . '/onboarding/' . $template_slug . '/screenshot' . $ss_extension );
+
+				$ss_src = get_template_directory_uri() . '/onboarding/' . $template_slug . '/screenshot' . $ss_extension;
+
+				if ( isset( $this->theme_support['local'][ $editor ][ $template_slug ]['screenshot'] ) ) {
+					$ss_src = $this->theme_support['local'][ $editor ][ $template_slug ]['screenshot'];
+				}
+
+				$returnable[ $editor ][ $template_slug ]['screenshot'] = esc_url( $ss_src );
 
 				if ( isset( $template_data['edit_content_redirect'] ) ) {
 					$returnable[ $editor ][ $template_slug ]['edit_content_redirect'] = esc_html( $template_data['edit_content_redirect'] );
@@ -380,11 +417,13 @@ class Themeisle_OB_Rest_Server {
 					continue;
 				}
 
-				$returnable[ $editor ][ $template_slug ]               = json_decode( $request['body'], true );
-				$returnable[ $editor ][ $template_slug ]['title']      = esc_html( $template_data['title'] );
-				$returnable[ $editor ][ $template_slug ]['demo_url']   = esc_url( $template_data['url'] );
-				$returnable[ $editor ][ $template_slug ]['screenshot'] = esc_url( $template_data['screenshot'] );
-				$returnable[ $editor ][ $template_slug ]['source']     = 'remote';
+				$returnable[ $editor ][ $template_slug ]                     = json_decode( $request['body'], true );
+				$returnable[ $editor ][ $template_slug ]['title']            = esc_html( $template_data['title'] );
+				$returnable[ $editor ][ $template_slug ]['demo_url']         = esc_url( $template_data['url'] );
+				$returnable[ $editor ][ $template_slug ]['screenshot']       = esc_url( $template_data['screenshot'] );
+				$returnable[ $editor ][ $template_slug ]['source']           = 'remote';
+				$returnable[ $editor ][ $template_slug ]['unsplash_gallery'] = $this->theme_support['remote'][ $editor ][ $template_slug ]['unsplash_gallery'] ?: '';
+
 			}
 		}
 
@@ -424,10 +463,13 @@ class Themeisle_OB_Rest_Server {
 				$returnable[ $editor ][ $template_slug ]['source']        = 'remote';
 				$returnable[ $editor ][ $template_slug ]['in_pro']        = true;
 				$returnable[ $editor ][ $template_slug ]['outbound_link'] = add_query_arg(
-					array(
-						'utm_medium'   => 'about-' . get_template(),
-						'utm_source'   => $template_slug,
-						'utm_campaign' => 'siteslibrary',
+					apply_filters(
+						'ti_onboarding_outbound_query_args',
+						array(
+							'utm_medium'   => 'about-' . get_template(),
+							'utm_source'   => $template_slug,
+							'utm_campaign' => 'siteslibrary',
+						)
 					),
 					$this->theme_support['pro_link']
 				);
@@ -567,8 +609,9 @@ class Themeisle_OB_Rest_Server {
 				)
 			);
 		}
-		$migrator = new $class_name;
-		$import   = $migrator->import_zelle_frontpage( $params['template'] );
+		$migrator  = new $class_name;
+		$old_theme = get_theme_mod( 'ti_prev_theme', 'ti_onboarding_undefined' );
+		$import    = $migrator->import_zelle_frontpage( $params['template'], $old_theme );
 
 		if ( is_wp_error( $import ) ) {
 			return new WP_REST_Response(

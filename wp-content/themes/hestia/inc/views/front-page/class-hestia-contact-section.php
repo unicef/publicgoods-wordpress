@@ -33,9 +33,12 @@ class Hestia_Contact_Section extends Hestia_Abstract_Main {
 	 * TODO: Remove this in the next version after the release on wp.org
 	 */
 	public function contact_form_legacy() {
+		if ( ! defined( 'PIRATE_FORMS_VERSION' ) ) {
+			return false;
+		}
 		$execute = get_option( 'hestia_contact_form_legacy' );
 		if ( $execute !== false ) {
-			return;
+			return false;
 		}
 		$contact_shorcode_with_default    = get_theme_mod( 'hestia_contact_form_shortcode', '[pirate_forms]' );
 		$contact_shorcode_without_default = get_theme_mod( 'hestia_contact_form_shortcode' );
@@ -44,6 +47,7 @@ class Hestia_Contact_Section extends Hestia_Abstract_Main {
 		}
 
 		update_option( 'hestia_contact_form_legacy', true );
+		return true;
 	}
 
 	/**
@@ -181,7 +185,7 @@ class Hestia_Contact_Section extends Hestia_Abstract_Main {
 	public function content_default() {
 		$html = '<div class="hestia-info info info-horizontal">
 			<div class="icon icon-primary">
-				<i class="fa fa-map-marker"></i>
+				<i class="fas fa-map-marker-alt"></i>
 			</div>
 			<div class="description">
 				<h4 class="info-title"> Find us at the office </h4>
@@ -190,7 +194,7 @@ class Hestia_Contact_Section extends Hestia_Abstract_Main {
 		</div>
 		<div class="hestia-info info info-horizontal">
 			<div class="icon icon-primary">
-				<i class="fa fa-mobile"></i>
+				<i class="fas fa-mobile-alt"></i>
 			</div>
 			<div class="description">
 				<h4 class="info-title">Give us a ring</h4>

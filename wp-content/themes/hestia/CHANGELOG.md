@@ -1,9 +1,45 @@
 
- ### v2.4.4 - 2019-04-22 
+ ### v2.5.0 - 2019-08-08 
  **Changes:** 
- * Removed weird scroll on the blog page
+ * Migrated to Font Awesome 5
+* Updated the Starter Sites library
  
- ### v2.4.3 - 2019-04-22 
+ ### v2.4.9 - 2019-08-01 
+ **Changes:** 
+ * Allow copyright text to be changed in both Hestia and Hestia PRO
+* Allow HTML tags in the title and subtitle fields of the Portfolio section
+* Create a WPForms form as a default value for the Contact section
+* Updated the Google Fonts Library
+* Fixed header layout on the tags archive page
+* Fixed issue with accent color not affecting links in the front-end
+* Made sure the header image is translatable with WPML
+* Fixed sidebar layout metabox not appearing when WooCommerce was not installed
+ 
+ ### v2.4.8 - 2019-07-23 
+ **Changes:** 
+ * Speed improvement update for the Hestia Default Demo
+* [Hestia PRO] Fixed licensing issue in the onboarding mechanism
+ 
+ ### v2.4.7 - 2019-07-22 
+ **Changes:** 
+ * Fixed issue with Starter Sites not available in the pro packages
+ 
+ ### v2.4.6 - 2019-07-18 
+ **Changes:** 
+ * New Customizer option to control the header area on single product pages
+* [Hestia PRO] New meta option to control the header area on individual single product pages
+* Fixed alignment issue between the author title and the author image on mobile devices
+* Fixed header layout issue on the category page being affected by the first article layout
+* Move two items per line instead of one in the Our Team section for a better spacing
+* Lower header area and font sizes on mobile for better usage of the space
+* Darken color for the labels on the Checkout page
+ 
+ ### v2.4.5 - 2019-05-27 
+ **Changes:** 
+ * Fixed editor visual integration with the latest update of WordPress
+* Fixed duplicated comments area when using Elementor Pro templates
+ 
+ ### v2.4.4 - 2019-04-22 
  **Changes:** 
  * New logging mechanism to the onboarding module
 * Improved the whole routine for the content import in the onboarding module

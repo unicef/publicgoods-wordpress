@@ -32,7 +32,6 @@ class Themeisle_OB_Plugin_Importer {
 		$this->logger = Themeisle_OB_WP_Import_Logger::get_instance();
 	}
 
-
 	/**
 	 * Install Plugins.
 	 *
@@ -73,21 +72,7 @@ class Themeisle_OB_Plugin_Importer {
 			);
 		}
 
-		$active_plugins = get_option( 'active_plugins' );
-
-		foreach ( $plugins as $plugin_slug => $nicename ) {
-			if ( in_array( $plugin_slug, $active_plugins ) ) {
-				continue;
-			}
-			$this->logger->log( "Installing {$plugin_slug}." );
-			$this->install_single_plugin( $plugin_slug );
-			$this->logger->log( "Activating {$plugin_slug}." );
-			$this->activate_single_plugin( $plugin_slug );
-		}
-
-		$this->logger->log( 'Installed and activated plugins.' );
-
-		do_action( 'themeisle_ob_after_plugins_install' );
+		$this->run_plugins_install( $plugins );
 
 		return new WP_REST_Response(
 			array(
@@ -95,6 +80,41 @@ class Themeisle_OB_Plugin_Importer {
 				'log'     => $this->log,
 			)
 		);
+	}
+
+	/**
+	 * Install and activate plugins.
+	 *
+	 * @param array $plugins_array plugins formated slug => true.
+	 */
+	public function run_plugins_install( $plugins_array ) {
+		$active_plugins = get_option( 'active_plugins' );
+
+		foreach ( $plugins_array as $plugin_slug => $true ) {
+			if ( in_array( $plugin_slug, $active_plugins ) ) {
+				continue;
+			}
+			$this->logger->log( "Installing {$plugin_slug}.", 'progress' );
+			$this->install_single_plugin( $plugin_slug );
+			$this->logger->log( "Activating {$plugin_slug}.", 'progress' );
+			$this->activate_single_plugin( $plugin_slug );
+		}
+
+		$this->remove_possible_redirects();
+		$this->logger->log( 'Installed and activated plugins.', 'success' );
+
+		do_action( 'themeisle_ob_after_plugins_install' );
+
+		update_option( 'themeisle_ob_plugins_installed', 'yes' );
+	}
+
+	/**
+	 * Remove admin redirects.
+	 */
+	private function remove_possible_redirects() {
+		delete_transient( '_wc_activation_redirect' );
+		delete_transient( 'wpforms_activation_redirect' );
+		update_option( 'themeisle_blocks_settings_redirect', false );
 	}
 
 	/**

@@ -92,7 +92,7 @@ class Hestia_Button extends WP_Customize_Control {
 			}
 			echo '<a ' . $params . ' type="button" class="button menu-shortcut ' . esc_attr( $this->button_class ) . '" tabindex="0">';
 			if ( ! empty( $this->button_class ) ) {
-				echo '<i class="fa ' . esc_attr( $this->icon_class ) . '" style="margin-right: 10px"></i>';
+				echo '<i class="fas ' . esc_attr( $this->icon_class ) . '" style="margin-right: 10px"></i>';
 			}
 				echo esc_html( $this->button_text );
 			echo '</a>';
