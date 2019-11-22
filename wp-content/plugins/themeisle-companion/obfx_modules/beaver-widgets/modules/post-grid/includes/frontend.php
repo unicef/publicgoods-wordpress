@@ -88,8 +88,9 @@ if ( ! function_exists( 'obfx_show_post_grid_meta' ) ) {
 		$meta_data  = ! empty( $settings->meta_data ) ? ( is_array( $settings->meta_data ) ? $settings->meta_data : array( $settings->meta_data ) ) : array();
 		$show_icons = ! empty( $settings->show_icons ) ? $settings->show_icons : '';
 		echo '<div class="obfx-post-grid-meta">';
-		if ( in_array( 'author', $meta_data ) ) {
-			$author = get_the_author( $pid );
+		if ( in_array( 'author', $meta_data, true ) ) {
+			$author_id = get_post_field( 'post_author', $pid );
+			$author    = get_the_author_meta( 'display_name', $author_id );
 			if ( ! empty( $author ) ) {
 				echo '<div class="obfx-author">';
 				if ( $show_icons === 'yes' ) {
@@ -102,14 +103,14 @@ if ( ! function_exists( 'obfx_show_post_grid_meta' ) ) {
 						/* translators: %1$s is Author name, %2$s is author link */
 						'<a href="%2$s" title="%1$s"><b>%1$s</b></a>',
 						esc_html( get_the_author() ),
-						esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) )
+						esc_url( get_author_posts_url( $author_id ) )
 					)
 				);
 				echo '</div>';
 			}
 		}
 
-		if ( in_array( 'date', $meta_data ) ) {
+		if ( in_array( 'date', $meta_data, true ) ) {
 			echo '<div class="obfx-date">';
 			if ( $show_icons === 'yes' ) {
 				echo '<i class="fa fa-calendar"></i>';
@@ -118,7 +119,7 @@ if ( ! function_exists( 'obfx_show_post_grid_meta' ) ) {
 			echo '</div>';
 		}
 
-		if ( in_array( 'category', $meta_data ) ) {
+		if ( in_array( 'category', $meta_data, true ) ) {
 			$cat = get_the_category();
 			if ( ! empty( $cat ) ) {
 				echo '<div class="obfx-category">';
@@ -143,7 +144,7 @@ if ( ! function_exists( 'obfx_show_post_grid_meta' ) ) {
 			}
 		}
 
-		if ( in_array( 'tags', $meta_data ) ) {
+		if ( in_array( 'tags', $meta_data, true ) ) {
 			$tags = wp_get_post_tags( $pid );
 			if ( ! empty( $tags ) ) {
 				echo '<div class="obfx-tags">';
@@ -168,12 +169,13 @@ if ( ! function_exists( 'obfx_show_post_grid_meta' ) ) {
 			}
 		}
 
-		if ( in_array( 'comments', $meta_data ) ) {
+		if ( in_array( 'comments', $meta_data, true ) ) {
 			echo '<div class=obfx-comments">';
 			if ( $show_icons === 'yes' ) {
 				echo '<i class="fa fa-comment"></i>';
 			}
 			$comments_number = get_comments_number();
+			// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
 			if ( 0 == ! $comments_number ) {
 				if ( 1 === $comments_number ) {
 					/* translators: %s: post title */

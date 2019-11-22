@@ -6,7 +6,7 @@
   * Author URI: https://twitter.com/amanverma217
   * Description: Google Analytics for WordPress plugin allows you to track your website by entering your google analytics tracking code.
   * Tags: google analytics plugin, analytics for website, universal analytics of website, google analytics, website google analytics plugin wordpress, google analytics for wordpress, GA code, google analytics script, google analytics for woocommerce, googleanalytics
-  * Version: 1.3
+  * Version: 1.4.2
   * License: GPLv2 or later
   * License URI: http://www.gnu.org/licenses/gpl-2.0.html 
  **/
@@ -38,18 +38,24 @@ function fn_gaw_settings_page()
 }
 $gaw_disable = get_option('gaw_disable_track', 'No');
 
+/*******function to check ga code*******/
+function isAnalytics($str){
+    return preg_match('/^ua-\d{4,9}-\d{1,4}$/i', strval($str));
+}
 
 function fn_gaw_analytics() {
   $web_property_id = get_option('gaw_analytics_id');
 ?>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $web_property_id ?>"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', '<?php echo $web_property_id ?>');
-  </script>
+   <script type="text/javascript">
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', '<?php echo $web_property_id ?>']);
+   _gaq.push(['_trackPageview']);
+   (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+   </script>
 <?php
 }
 
@@ -57,3 +63,11 @@ function fn_gaw_analytics() {
 if ( $gaw_disable == 'No' ) {
    add_action('wp_head', 'fn_gaw_analytics');
 }
+
+function fn_gaw_action_links( $links ) {
+	$links = array_merge( array(
+		'<a href="' . esc_url( admin_url( 'admin.php?page=google-analytics-settings-page' ) ) . '">' . __( 'Settings' ) . '</a>'
+	), $links );
+	return $links;
+}
+add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'fn_gaw_action_links' );

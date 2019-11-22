@@ -43,7 +43,7 @@ class Menu_Icons_OBFX_Module extends Orbit_Fox_Module_Abstract {
 	 *
 	 * @since   1.0.0
 	 * @access  public
-	 * @return bool	
+	 * @return bool
 	 */
 	public function enable_module() {
 		return true;
@@ -109,6 +109,35 @@ class Menu_Icons_OBFX_Module extends Orbit_Fox_Module_Abstract {
 	}
 
 	/**
+	 * Check if font awesome should load.
+	 *
+	 * @return bool
+	 */
+	private function should_load_fa(){
+
+		// Get all locations
+		$locations = get_nav_menu_locations();
+
+		if( empty( $locations ) ){
+			return false;
+		}
+		foreach ( $locations as $location => $menu_id ){
+			$menu_items = wp_get_nav_menu_items( $menu_id );
+			if ( ! is_array( $menu_items ) ) {
+				continue;
+			}
+			foreach ( $menu_items as $menu_item ) {
+				$icon = get_post_meta( $menu_item->ID, 'obfx_menu_icon', true );
+				if ( !empty( $icon ) ){
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Method that returns an array of scripts and styles to be loaded
 	 * for the front end part.
 	 *
@@ -117,6 +146,10 @@ class Menu_Icons_OBFX_Module extends Orbit_Fox_Module_Abstract {
 	 * @return array
 	 */
 	public function public_enqueue() {
+		if( $this->should_load_fa() === false ){
+			return array();
+		}
+
 		return array(
 			'css' => array(
 				'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' => array( 'dashicons' ),
@@ -159,8 +192,8 @@ class Menu_Icons_OBFX_Module extends Orbit_Fox_Module_Abstract {
 		);
 
 		$font_awesome = array(
-			'vendor/font-awesome.min.css' => false,
-			'vendor/fontawesome-iconpicker.min' => array( 'vendor/font-awesome.min.css' ),
+			'vendor/font-awesome.min' => false,
+			'vendor/fontawesome-iconpicker.min' => array( 'vendor/font-awesome.min' ),
 		);
 		if ( wp_style_is( 'font-awesome', 'registered' ) || wp_style_is( 'font-awesome', 'enqueued' ) ) {
 			$font_awesome = array(
@@ -261,14 +294,13 @@ class Menu_Icons_OBFX_Module extends Orbit_Fox_Module_Abstract {
 				$theme	= wp_get_theme();
 				$name	= $theme->get( 'Name' );
 			} else {
-				require_once( ABSPATH . 'wp-admin/includes/file.php' );
-				WP_Filesystem();
-				global $wp_filesystem;
-
-				$plugin_path	= str_replace( str_replace( '\\', '/', trailingslashit( dirname( OBX_PATH ) ) ), '', $path );
-				$array			= explode( '/', $path );
-				$name			= reset( $array );
-				$type			= __( 'plugin', 'themeisle-companion' );
+				$path = explode( 'plugins', $path );
+				$path = explode( DIRECTORY_SEPARATOR, isset($path[1]) ? $path[1] : '' );
+				$path = array_values( array_filter( $path ) );
+				if ( isset( $path[0] ) ) {
+					$name = '&nbsp; <b>' . esc_attr( $path[0] ) . '</b>';
+				}
+				$type = __( 'plugin', 'themeisle-companion' );
 			}
 
 			$this->description .= '<br><i class="chip">' . sprintf( __( 'There appears to be a conflict with the %s %s. This module may not work as expected.', 'themeisle-companion' ), $type, $name ) . '</i>';

@@ -3,8 +3,9 @@ Contributors: efficientninja
 Donate link: https://amanvermaa.wordpress.com/?ref=analytics
 Tags: google analytics plugin, analytics for website, universal analytics of website, google analytics, website google analytics wordpress plugin, google analytics for wordpress, GA code, google analytics script, google analytics for woocommerce, googleanalytics
 Requires at least: 3.8
-Tested up to: 5.2.1
-Stable tag: 1.3
+Tested up to: 5.2.4
+Stable tag: 1.4.2
+Version: 1.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

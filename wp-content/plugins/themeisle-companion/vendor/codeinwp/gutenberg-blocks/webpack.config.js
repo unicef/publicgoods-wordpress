@@ -1,19 +1,31 @@
 const webpack = require( 'webpack' );
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const glob = require( 'glob' );
+const path = require( 'path' );
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
+const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 
 module.exports = {
 	mode: NODE_ENV,
-	entry: [ ...glob.sync( './blocks/**/index.js' ), ...glob.sync( './components/**/index.js' ) ],
+	entry: {
+		blocks: [
+			'./src/index.js',
+			'./src/plugins/registerPlugin.js',
+			...glob.sync( './src/blocks/**/index.js' )
+		],
+		frontend: [
+			...glob.sync( './src/frontend/**/*.js' )
+		]
+	},
 	externals: {
 		'react': 'React',
 		'react-dom': 'ReactDOM'
 	},
 	output: {
-		path: __dirname,
-		filename: './build/block.js',
-		chunkFilename: './build/[name].js'
+		path: path.resolve( __dirname, 'build' ),
+		filename: '[name].js',
+		chunkFilename: 'chunk-[name].js',
+		jsonpFunction: 'tiOtterWebpackJsonp'
 	},
 	module: {
 		rules: [
@@ -26,16 +38,17 @@ module.exports = {
 						plugins: [
 							'@babel/plugin-transform-async-to-generator',
 							'@babel/plugin-proposal-object-rest-spread',
+							'@babel/plugin-syntax-dynamic-import',
 							[
 								'@babel/plugin-transform-react-jsx', {
-									'pragma': 'wp.element.createElement'
+									pragma: 'wp.element.createElement',
+									pragmaFrag: 'wp.element.Fragment'
 								}
 							]
 						]
 					}
 				},
-				'eslint-loader' ],
-				exclude: /node_modules/
+				'eslint-loader' ]
 			},
 			{
 				test: /\.(css|scss)$/,
@@ -84,8 +97,9 @@ module.exports = {
 			'process.env.NODE_ENV': JSON.stringify( NODE_ENV )
 		}),
 		new MiniCssExtractPlugin({
-			filename: './build/style.css',
-			chunkFilename: './build/edit-blocks.css'
-		})
+			filename: 'style.css',
+			chunkFilename: 'edit-blocks.css'
+		}),
+		new CleanWebpackPlugin()
 	]
 };
