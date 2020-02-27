@@ -35,7 +35,7 @@ class Form_Manager {
 	 *
 	 * @var $forms
 	 */
-	public static $forms = [ 'contact', 'newsletter', 'registration' ];
+	public static $forms = array( 'contact', 'newsletter', 'registration' );
 
 	/**
 	 * Initialization function.
@@ -161,7 +161,7 @@ class Form_Manager {
 	public static function get_user_roles() {
 		global $wp_roles;
 		$all_roles = $wp_roles->roles;
-		$roles     = [];
+		$roles     = array();
 		foreach ( $all_roles as $role_key => $role_data ) {
 			$roles[ $role_key ] = $role_data['name'];
 		}
@@ -195,7 +195,7 @@ class Form_Manager {
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'themeisle-companion' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'textdomain' ), '1.0.0' );
 	}
 
 	/**
@@ -207,6 +207,6 @@ class Form_Manager {
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden.
-		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'themeisle-companion' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'textdomain' ), '1.0.0' );
 	}
 }

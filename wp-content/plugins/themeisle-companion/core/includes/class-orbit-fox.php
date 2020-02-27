@@ -69,7 +69,7 @@ class Orbit_Fox {
 
 		$this->plugin_name = 'orbit-fox';
 
-		$this->version = '2.8.13';
+		$this->version = '2.9.2';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -96,6 +96,7 @@ class Orbit_Fox {
 	 */
 	private function load_dependencies() {
 		$this->loader = new Orbit_Fox_Loader();
+
 	}
 
 	/**
@@ -129,6 +130,9 @@ class Orbit_Fox {
 		$module_factory = new Orbit_Fox_Module_Factory();
 		foreach ( $modules_to_load as $module_name ) {
 			$module = $module_factory::build( $module_name );
+			if ( $module === false ) {
+				continue;
+			}
 			$global_settings->register_module_reference( $module_name, $module );
 			if ( $module->enable_module() ) {
 				$module->register_loader( $this->get_loader() );
@@ -145,8 +149,8 @@ class Orbit_Fox {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    Orbit_Fox_Loader    Orchestrates the hooks of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_loader() {
 		return $this->loader;
@@ -155,8 +159,8 @@ class Orbit_Fox {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_version() {
 		return $this->version;
@@ -189,6 +193,8 @@ class Orbit_Fox {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		$this->loader->add_action( 'after_setup_theme', $this, 'load_onboarding', 999999 );
+
 		$this->loader->add_action( 'init', Orbit_Fox_Neve_Dropin::instance(), 'init' );
 
 		// Fix update checks on themeisle.com for non-premium themes
@@ -207,11 +213,42 @@ class Orbit_Fox {
 	}
 
 	/**
+	 * Load onboarding, if missing.
+	 */
+	public function load_onboarding() {
+		if ( defined( 'TI_ONBOARDING_DISABLED' ) ) {
+			return;
+		}
+		$theme_support = get_theme_support( 'themeisle-demo-import' );
+
+		if ( empty( $theme_support ) ) {
+			return;
+		}
+
+		$library = OBX_PATH . '/vendor/codeinwp/ti-onboarding/load.php';
+
+		if ( ! is_file( $library ) ) {
+			return;
+		}
+		require_once $library;
+
+		add_filter(
+			'themeisle_site_import_uri',
+			function () {
+				return OBFX_URL . Themeisle_Onboarding::OBOARDING_PATH;
+			}
+		);
+
+		\Themeisle_Onboarding::instance();
+
+	}
+
+	/**
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;

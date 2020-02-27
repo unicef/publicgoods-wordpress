@@ -6,7 +6,7 @@
   * Author URI: https://twitter.com/amanverma217
   * Description: Google Analytics for WordPress plugin allows you to track your website by entering your google analytics tracking code.
   * Tags: google analytics plugin, analytics for website, universal analytics of website, google analytics, website google analytics plugin wordpress, google analytics for wordpress, GA code, google analytics script, google analytics for woocommerce, googleanalytics
-  * Version: 1.4.2
+  * Version: 1.4.4
   * License: GPLv2 or later
   * License URI: http://www.gnu.org/licenses/gpl-2.0.html 
  **/

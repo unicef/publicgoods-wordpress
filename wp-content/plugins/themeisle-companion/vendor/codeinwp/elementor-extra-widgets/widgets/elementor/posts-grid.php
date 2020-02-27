@@ -11,8 +11,11 @@
 namespace ThemeIsle\ElementorExtraWidgets;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
 use Elementor\Scheme_Color;
+use Elementor\Scheme_Typography;
 use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -32,7 +35,7 @@ class Posts_Grid extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title() {
-		return __( 'Post Type Grid', 'themeisle-companion' );
+		return __( 'Post Type Grid', 'textdomain' );
 	}
 
 	/**
@@ -60,6 +63,15 @@ class Posts_Grid extends Widget_Base {
 	 */
 	public function get_script_depends() {
 		return [ 'obfx-grid-js' ];
+	}
+
+	/**
+	 * Retrieve the list of styles the post grid widget depended on.
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
+	public function get_style_depends() {
+		return [ 'eaw-elementor', 'font-awesome-5-all' ];
 	}
 
 	/**
@@ -111,7 +123,7 @@ class Posts_Grid extends Widget_Base {
 	 * Get post type categories.
 	 */
 	private function grid_get_all_post_type_categories( $post_type ) {
-		$options = array( 'all' => __( 'All Categories', 'themeisle-companion' ) );
+		$options = array( 'all' => __( 'All Categories', 'textdomain' ) );
 
 		if ( $post_type == 'post' ) {
 			$taxonomy = 'category';
@@ -168,7 +180,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid',
 			[
-				'label' => __( 'Grid Options', 'themeisle-companion' ),
+				'label' => __( 'Grid Options', 'textdomain' ),
 			]
 		);
 
@@ -177,7 +189,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_post_type',
 			[
 				'type'    => Controls_Manager::SELECT,
-				'label'   => '<i class="fa fa-tag"></i> ' . __( 'Post Type', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-tag"></i> ' . __( 'Post Type', 'textdomain' ),
 				'default' => 'post',
 				'options' => $this->grid_get_all_post_types(),
 			]
@@ -188,7 +200,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_post_categories',
 			[
 				'type'      => Controls_Manager::SELECT,
-				'label'     => '<i class="fa fa-folder"></i> ' . __( 'Category', 'themeisle-companion' ),
+				'label'     => '<i class="fa fa-folder"></i> ' . __( 'Category', 'textdomain' ),
 				'options'   => $this->grid_get_all_post_type_categories( 'post' ),
 				'condition' => [
 					'grid_post_type' => 'post',
@@ -202,7 +214,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_product_categories',
 			[
 				'type'      => Controls_Manager::SELECT,
-				'label'     => '<i class="fa fa-tag"></i> ' . __( 'Category', 'themeisle-companion' ),
+				'label'     => '<i class="fa fa-tag"></i> ' . __( 'Category', 'textdomain' ),
 				'options'   => $this->grid_get_all_post_type_categories( 'product' ),
 				'condition' => [
 					'grid_post_type' => 'product',
@@ -215,11 +227,11 @@ class Posts_Grid extends Widget_Base {
 			'grid_style',
 			[
 				'type'    => Controls_Manager::SELECT,
-				'label'   => '<i class="fa fa-paint-brush"></i> ' . __( 'Style', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-paint-brush"></i> ' . __( 'Style', 'textdomain' ),
 				'default' => 'grid',
 				'options' => [
-					'grid' => __( 'Grid', 'themeisle-companion' ),
-					'list' => __( 'List', 'themeisle-companion' ),
+					'grid' => __( 'Grid', 'textdomain' ),
+					'list' => __( 'List', 'textdomain' ),
 				],
 			]
 		);
@@ -229,8 +241,8 @@ class Posts_Grid extends Widget_Base {
 			'grid_items',
 			[
 				'type'        => Controls_Manager::NUMBER,
-				'label'       => '<i class="fa fa-th-large"></i> ' . __( 'Items', 'themeisle-companion' ),
-				'placeholder' => __( 'How many items?', 'themeisle-companion' ),
+				'label'       => '<i class="fa fa-th-large"></i> ' . __( 'Items', 'textdomain' ),
+				'placeholder' => __( 'How many items?', 'textdomain' ),
 				'default'     => 6,
 			]
 		);
@@ -240,7 +252,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_columns',
 			[
 				'type'           => Controls_Manager::SELECT,
-				'label'          => '<i class="fa fa-columns"></i> ' . __( 'Columns', 'themeisle-companion' ),
+				'label'          => '<i class="fa fa-columns"></i> ' . __( 'Columns', 'textdomain' ),
 				'default'        => 3,
 				'tablet_default' => 2,
 				'mobile_default' => 1,
@@ -259,14 +271,14 @@ class Posts_Grid extends Widget_Base {
 			'grid_order_by',
 			[
 				'type'    => Controls_Manager::SELECT,
-				'label'   => '<i class="fa fa-sort"></i> ' . __( 'Order by', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-sort"></i> ' . __( 'Order by', 'textdomain' ),
 				'default' => 'date',
 				'options' => [
-					'date'          => __( 'Date', 'themeisle-companion' ),
-					'title'         => __( 'Title', 'themeisle-companion' ),
-					'modified'      => __( 'Modified date', 'themeisle-companion' ),
-					'comment_count' => __( 'Comment count', 'themeisle-companion' ),
-					'rand'          => __( 'Random', 'themeisle-companion' ),
+					'date'          => __( 'Date', 'textdomain' ),
+					'title'         => __( 'Title', 'textdomain' ),
+					'modified'      => __( 'Modified date', 'textdomain' ),
+					'comment_count' => __( 'Comment count', 'textdomain' ),
+					'rand'          => __( 'Random', 'textdomain' ),
 				],
 			]
 		);
@@ -275,7 +287,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_pagination',
 			[
-				'label'   => '<i class="fa fa-arrow-circle-right"></i> ' . __( 'Pagination', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-arrow-circle-right"></i> ' . __( 'Pagination', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
 			]
@@ -291,7 +303,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_image',
 			[
-				'label' => __( 'Image', 'themeisle-companion' ),
+				'label' => __( 'Image', 'textdomain' ),
 			]
 		);
 
@@ -299,9 +311,29 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_image_hide',
 			[
-				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
+			]
+		);
+
+		$available_size = [ 'full' => __( 'Full size', 'textdomain' ) ];
+		global $_wp_additional_image_sizes;
+		if ( ! empty( $_wp_additional_image_sizes ) ) {
+			foreach ( $_wp_additional_image_sizes as $label => $size_data ) {
+			    if ( $size_data['height'] === 0 || $size_data['width'] === 0 ){
+			        continue;
+                }
+				$available_size[ $label ] = $size_data['width'] . ' x ' . $size_data['height'];
+			}
+		}
+
+		$this->add_control(
+			'grid_image_size',
+			[
+				'label'   => __( 'Image size', 'plugin-domain' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => array_unique( $available_size ),
 			]
 		);
 
@@ -309,7 +341,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_image_height',
 			[
-				'label'     => '<i class="fa fa-arrows-h"></i> ' . __( 'Image height', 'themeisle-companion' ),
+				'label'     => '<i class="fa fa-arrows-h"></i> ' . __( 'Image height', 'textdomain' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 220,
@@ -331,13 +363,13 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
             'grid_image_alignment',
             [
-	            'label'   => __( 'Image alignment', 'themeisle-companion' ),
+	            'label'   => __( 'Image alignment', 'textdomain' ),
                 'type'    => Controls_Manager::SELECT,
                 'default' => 'top',
                 'options' => [
-                    'top'    => __( 'Top', 'themeisle-companion' ),
-                    'middle' => __( 'Middle', 'themeisle-companion' ),
-                    'bottom' => __( 'Bottom', 'themeisle-companion' ),
+                    'top'    => __( 'Top', 'textdomain' ),
+                    'middle' => __( 'Middle', 'textdomain' ),
+                    'bottom' => __( 'Bottom', 'textdomain' ),
                 ],
                 'condition' => [
                     'grid_style' => 'list'
@@ -350,7 +382,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_image_link',
 			[
-				'label'   => '<i class="fa fa-link"></i> ' . __( 'Link', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-link"></i> ' . __( 'Link', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -366,7 +398,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_title',
 			[
-				'label' => __( 'Title', 'themeisle-companion' ),
+				'label' => __( 'Title', 'textdomain' ),
 			]
 		);
 
@@ -374,7 +406,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_title_hide',
 			[
-				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
 			]
@@ -385,7 +417,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_title_tag',
 			[
 				'type'    => Controls_Manager::SELECT,
-				'label'   => '<i class="fa fa-code"></i> ' . __( 'Tag', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-code"></i> ' . __( 'Tag', 'textdomain' ),
 				'default' => 'h2',
 				'options' => [
 					'h1'   => 'H1',
@@ -405,7 +437,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_title_link',
 			[
-				'label'   => '<i class="fa fa-link"></i> ' . __( 'Link', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-link"></i> ' . __( 'Link', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => 'yes',
 			]
@@ -421,7 +453,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_meta',
 			[
-				'label' => __( 'Meta', 'themeisle-companion' ),
+				'label' => __( 'Meta', 'textdomain' ),
 			]
 		);
 
@@ -429,7 +461,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_meta_hide',
 			[
-				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
 			]
@@ -439,17 +471,17 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_meta_display',
 			[
-				'label'       => '<i class="fa fa-info-circle"></i> ' . __( 'Display', 'themeisle-companion' ),
+				'label'       => '<i class="fa fa-info-circle"></i> ' . __( 'Display', 'textdomain' ),
 				'label_block' => true,
 				'type'        => Controls_Manager::SELECT2,
 				'default'     => [ 'author', 'date' ],
 				'multiple'    => true,
 				'options'     => [
-					'author'   => __( 'Author', 'themeisle-companion' ),
-					'date'     => __( 'Date', 'themeisle-companion' ),
-					'category' => __( 'Category', 'themeisle-companion' ),
-					'tags'     => __( 'Tags', 'themeisle-companion' ),
-					'comments' => __( 'Comments', 'themeisle-companion' ),
+					'author'   => __( 'Author', 'textdomain' ),
+					'date'     => __( 'Date', 'textdomain' ),
+					'category' => __( 'Category', 'textdomain' ),
+					'tags'     => __( 'Tags', 'textdomain' ),
+					'comments' => __( 'Comments', 'textdomain' ),
 				],
 			]
 		);
@@ -459,9 +491,9 @@ class Posts_Grid extends Widget_Base {
 			'grid_meta_categories_max',
 			[
 				'type'        => Controls_Manager::NUMBER,
-				'label'       => __( 'No. of Categories', 'themeisle-companion' ),
-				'placeholder' => __( 'How many categories to display?', 'themeisle-companion' ),
-				'default'     => __( '1', 'themeisle-companion' ),
+				'label'       => __( 'No. of Categories', 'textdomain' ),
+				'placeholder' => __( 'How many categories to display?', 'textdomain' ),
+				'default'     => __( '1', 'textdomain' ),
 				'condition'   => [
 					'grid_meta_display' => 'category',
 				],
@@ -473,8 +505,8 @@ class Posts_Grid extends Widget_Base {
 			'grid_meta_tags_max',
 			[
 				'type'        => Controls_Manager::NUMBER,
-				'label'       => __( 'No. of Tags', 'themeisle-companion' ),
-				'placeholder' => __( 'How many tags to display?', 'themeisle-companion' ),
+				'label'       => __( 'No. of Tags', 'textdomain' ),
+				'placeholder' => __( 'How many tags to display?', 'textdomain' ),
 				'condition'   => [
 					'grid_meta_display' => 'tags',
 				],
@@ -485,7 +517,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_meta_remove_icons',
 			[
-				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Remove icons', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Remove icons', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
 			]
@@ -501,7 +533,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_content',
 			[
-				'label' => __( 'Content', 'themeisle-companion' ),
+				'label' => __( 'Content', 'textdomain' ),
 			]
 		);
 
@@ -509,7 +541,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_content_hide',
 			[
-				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'themeisle-companion' ),
+				'label'   => '<i class="fa fa-minus-circle"></i> ' . __( 'Hide', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
 			]
@@ -519,7 +551,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_content_full_post',
 			[
-				'label'   => __( 'Show full content', 'themeisle-companion' ),
+				'label'   => __( 'Show full content', 'textdomain' ),
 				'type'    => Controls_Manager::SWITCHER,
 				'default' => '',
 			]
@@ -530,8 +562,8 @@ class Posts_Grid extends Widget_Base {
 			'grid_content_length',
 			[
 				'type'        => Controls_Manager::NUMBER,
-				'label'       => '<i class="fa fa-arrows-h"></i> ' . __( 'Length (words)', 'themeisle-companion' ),
-				'placeholder' => __( 'Length of content (words)', 'themeisle-companion' ),
+				'label'       => '<i class="fa fa-arrows-h"></i> ' . __( 'Length (words)', 'textdomain' ),
+				'placeholder' => __( 'Length of content (words)', 'textdomain' ),
 				'default'     => 30,
 				'condition'   => [
 						'grid_content_full_post!' => 'yes'
@@ -543,7 +575,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_content_price',
 			[
-				'label'     => '<i class="fa fa-usd"></i> ' . __( 'Price', 'themeisle-companion' ),
+				'label'     => '<i class="fa fa-usd"></i> ' . __( 'Price', 'textdomain' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [
@@ -556,7 +588,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_content_default_btn',
 			[
-				'label'     => '<i class="fa fa-check-square"></i> ' . __( 'Button', 'themeisle-companion' ),
+				'label'     => '<i class="fa fa-check-square"></i> ' . __( 'Button', 'textdomain' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [
@@ -570,9 +602,9 @@ class Posts_Grid extends Widget_Base {
 			'grid_content_default_btn_text',
 			[
 				'type'        => Controls_Manager::TEXT,
-				'label'       => __( 'Button text', 'themeisle-companion' ),
-				'placeholder' => __( 'Read more', 'themeisle-companion' ),
-				'default'     => __( 'Read more', 'themeisle-companion' ),
+				'label'       => __( 'Button text', 'textdomain' ),
+				'placeholder' => __( 'Read more', 'textdomain' ),
+				'default'     => __( 'Read more', 'textdomain' ),
 				'condition'   => [
 					'grid_content_default_btn!'    => '',
 					'section_grid.grid_post_type!' => 'product',
@@ -584,7 +616,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_content_product_btn',
 			[
-				'label'     => '<i class="fa fa-check-square"></i> ' . __( 'Button', 'themeisle-companion' ),
+				'label'     => '<i class="fa fa-check-square"></i> ' . __( 'Button', 'textdomain' ),
 				'type'      => Controls_Manager::SWITCHER,
 				'default'   => 'yes',
 				'condition' => [
@@ -597,23 +629,23 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_content_btn_alignment',
 			[
-				'label'          => __( 'Button alignment', 'themeisle-companion' ),
+				'label'          => __( 'Button alignment', 'textdomain' ),
 				'type'           => Controls_Manager::CHOOSE,
 				'options'        => [
 					'left'    => [
-						'title' => __( 'Left', 'themeisle-companion' ),
+						'title' => __( 'Left', 'textdomain' ),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center'  => [
-						'title' => __( 'Center', 'themeisle-companion' ),
+						'title' => __( 'Center', 'textdomain' ),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'   => [
-						'title' => __( 'Right', 'themeisle-companion' ),
+						'title' => __( 'Right', 'textdomain' ),
 						'icon'  => 'fa fa-align-right',
 					],
 					'justify' => [
-						'title' => __( 'Justified', 'themeisle-companion' ),
+						'title' => __( 'Justified', 'textdomain' ),
 						'icon'  => 'fa fa-align-justify',
 					],
 				],
@@ -633,19 +665,19 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_content_alignment',
 			[
-				'label'          => '<i class="fa fa-align-right"></i> ' . __( 'Alignment', 'themeisle-companion' ),
+				'label'          => '<i class="fa fa-align-right"></i> ' . __( 'Alignment', 'textdomain' ),
 				'type'           => Controls_Manager::CHOOSE,
 				'options'        => [
 					'left'   => [
-						'title' => __( 'Left', 'themeisle-companion' ),
+						'title' => __( 'Left', 'textdomain' ),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'themeisle-companion' ),
+						'title' => __( 'Center', 'textdomain' ),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'themeisle-companion' ),
+						'title' => __( 'Right', 'textdomain' ),
 						'icon'  => 'fa fa-align-right',
 					],
 				],
@@ -668,7 +700,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_pagination',
 			[
-				'label'     => __( 'Pagination', 'themeisle-companion' ),
+				'label'     => __( 'Pagination', 'textdomain' ),
 				'condition' => [
 					'section_grid.grid_pagination' => 'yes',
 				],
@@ -679,19 +711,19 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_pagination_alignment',
 			[
-				'label'          => __( 'Alignment', 'themeisle-companion' ),
+				'label'          => __( 'Alignment', 'textdomain' ),
 				'type'           => Controls_Manager::CHOOSE,
 				'options'        => [
 					'left'   => [
-						'title' => __( 'Left', 'themeisle-companion' ),
+						'title' => __( 'Left', 'textdomain' ),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => __( 'Center', 'themeisle-companion' ),
+						'title' => __( 'Center', 'textdomain' ),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'  => [
-						'title' => __( 'Right', 'themeisle-companion' ),
+						'title' => __( 'Right', 'textdomain' ),
 						'icon'  => 'fa fa-align-right',
 					],
 				],
@@ -715,7 +747,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_style',
 			[
-				'label' => __( 'Grid Options', 'themeisle-companion' ),
+				'label' => __( 'Grid Options', 'textdomain' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -724,7 +756,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_style_columns_margin',
 			[
-				'label'     => __( 'Columns margin', 'themeisle-companion' ),
+				'label'     => __( 'Columns margin', 'textdomain' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 15,
@@ -746,7 +778,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_style_rows_margin',
 			[
-				'label'     => __( 'Rows margin', 'themeisle-companion' ),
+				'label'     => __( 'Rows margin', 'textdomain' ),
 				'type'      => Controls_Manager::SLIDER,
 				'default'   => [
 					'size' => 30,
@@ -765,7 +797,7 @@ class Posts_Grid extends Widget_Base {
 
 		// Background.
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name'     => 'grid_style_background',
 				'types'    => [ 'classic', 'gradient' ],
@@ -777,7 +809,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_items_style_heading',
 			[
-				'label'     => __( 'Items', 'themeisle-companion' ),
+				'label'     => __( 'Items', 'textdomain' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -787,7 +819,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_items_style_padding',
 			[
-				'label'      => __( 'Padding', 'themeisle-companion' ),
+				'label'      => __( 'Padding', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -800,7 +832,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_items_style_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'themeisle-companion' ),
+				'label'      => __( 'Border Radius', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -821,7 +853,7 @@ class Posts_Grid extends Widget_Base {
 
 		// Background for items options.
 		$this->add_group_control(
-			\Elementor\Group_Control_Background::get_type(),
+			Group_Control_Background::get_type(),
 			[
 				'name'     => 'grid_items_style_background',
 				'types'    => [ 'classic', 'gradient' ],
@@ -840,7 +872,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_image_style',
 			[
-				'label'     => __( 'Image', 'themeisle-companion' ),
+				'label'     => __( 'Image', 'textdomain' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'section_grid_image.grid_image_hide' => '',
@@ -852,7 +884,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_image_style_border_radius',
 			[
-				'label'      => __( 'Border Radius', 'themeisle-companion' ),
+				'label'      => __( 'Border Radius', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -881,7 +913,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_image_style_margin',
 			[
-				'label'      => __( 'Margin', 'themeisle-companion' ),
+				'label'      => __( 'Margin', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -904,7 +936,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_title_style',
 			[
-				'label'     => __( 'Title', 'themeisle-companion' ),
+				'label'     => __( 'Title', 'textdomain' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'section_grid_title.grid_title_hide' => '',
@@ -914,10 +946,10 @@ class Posts_Grid extends Widget_Base {
 
 		// Title typography.
 		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'grid_title_style_typography',
-				'scheme'   => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .obfx-grid .entry-title.obfx-grid-title, {{WRAPPER}} .obfx-grid .entry-title.obfx-grid-title > a',
 			]
 		);
@@ -927,7 +959,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_title_style_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Color', 'themeisle-companion' ),
+				'label'     => __( 'Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -943,7 +975,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_title_style_margin',
 			[
-				'label'      => __( 'Margin', 'themeisle-companion' ),
+				'label'      => __( 'Margin', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -963,7 +995,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_meta_style',
 			[
-				'label'     => __( 'Meta', 'themeisle-companion' ),
+				'label'     => __( 'Meta', 'textdomain' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'section_grid_meta.grid_meta_hide' => '',
@@ -973,11 +1005,11 @@ class Posts_Grid extends Widget_Base {
 
 		// Meta typography.
 		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'     => 'grid_meta_style_typography',
-				'scheme'   => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
-				'selector' => '{{WRAPPER}} .obfx-grid-meta',
+				'scheme'   => Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .obfx-grid-meta > span',
 			]
 		);
 
@@ -986,7 +1018,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_meta_style_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Color', 'themeisle-companion' ),
+				'label'     => __( 'Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -999,11 +1031,28 @@ class Posts_Grid extends Widget_Base {
 			]
 		);
 
+		$this->add_responsive_control(
+			'grid_meta_icon_spacing',
+			[
+				'label'     => __( 'Icons spacing', 'textdomain' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => [
+					'px' => [
+						'min' => 0,
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .obfx-grid-meta i'   => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
+
 		// Meta margin.
 		$this->add_responsive_control(
 			'grid_meta_style_margin',
 			[
-				'label'      => __( 'Margin', 'themeisle-companion' ),
+				'label'      => __( 'Margin', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -1023,17 +1072,17 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_content_style',
 			[
-				'label' => __( 'Content', 'themeisle-companion' ),
+				'label' => __( 'Content', 'textdomain' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			]
 		);
 
 		// Content typography.
 		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'grid_content_style_typography',
-				'scheme'    => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'    => Scheme_Typography::TYPOGRAPHY_1,
 				'selector'  => '{{WRAPPER}} .obfx-grid-content',
 				'condition' => [
 					'section_grid_content.grid_content_hide' => '',
@@ -1046,7 +1095,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_content_style_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Color', 'themeisle-companion' ),
+				'label'     => __( 'Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -1064,7 +1113,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_content_style_margin',
 			[
-				'label'      => __( 'Margin', 'themeisle-companion' ),
+				'label'      => __( 'Margin', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -1080,7 +1129,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_content_price_style_heading',
 			[
-				'label'     => __( 'Price', 'themeisle-companion' ),
+				'label'     => __( 'Price', 'textdomain' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [
@@ -1092,10 +1141,10 @@ class Posts_Grid extends Widget_Base {
 
 		// Price typography.
 		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'grid_content_price_style_typography',
-				'scheme'    => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'    => Scheme_Typography::TYPOGRAPHY_1,
 				'selector'  => '{{WRAPPER}} .obfx-grid-price',
 				'condition' => [
 					'section_grid_content.grid_content_price' => 'yes',
@@ -1109,7 +1158,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_content_price_style_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Color', 'themeisle-companion' ),
+				'label'     => __( 'Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -1128,7 +1177,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_content_price_style_margin',
 			[
-				'label'      => __( 'Margin', 'themeisle-companion' ),
+				'label'      => __( 'Margin', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -1155,7 +1204,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_button_style_heading',
 			[
-				'label'     => __( 'Button', 'themeisle-companion' ),
+				'label'     => __( 'Button', 'textdomain' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 				'condition' => [
@@ -1167,10 +1216,10 @@ class Posts_Grid extends Widget_Base {
 
 		// Content typography.
 		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+			Group_Control_Typography::get_type(),
 			[
 				'name'      => 'grid_button_style_typography',
-				'scheme'    => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+				'scheme'    => Scheme_Typography::TYPOGRAPHY_1,
 				'selector'  => '{{WRAPPER}} .obfx-grid-footer a',
 				'condition' => [
 					'section_grid_content.grid_content_default_btn!' => '',
@@ -1185,7 +1234,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_tab(
 			'grid_button_style_normal',
 			[
-				'label'     => __( 'Normal', 'themeisle-companion' ),
+				'label'     => __( 'Normal', 'textdomain' ),
 				'condition' => [
 					'section_grid_content.grid_content_default_btn!' => '',
 					'section_grid_content.grid_content_product_btn!' => '',
@@ -1198,7 +1247,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_button_style_normal_text_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Text Color', 'themeisle-companion' ),
+				'label'     => __( 'Text Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -1220,7 +1269,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_button_style_normal_bg_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Background Color', 'themeisle-companion' ),
+				'label'     => __( 'Background Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -1256,7 +1305,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_tab(
 			'grid_button_style_hover',
 			[
-				'label'     => __( 'Hover', 'themeisle-companion' ),
+				'label'     => __( 'Hover', 'textdomain' ),
 				'condition' => [
 					'section_grid_content.grid_content_default_btn!' => '',
 					'section_grid_content.grid_content_product_btn!' => '',
@@ -1269,7 +1318,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_button_style_hover_text_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Text Color', 'themeisle-companion' ),
+				'label'     => __( 'Text Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -1290,7 +1339,7 @@ class Posts_Grid extends Widget_Base {
 			'grid_button_style_hover_bg_color',
 			[
 				'type'      => Controls_Manager::COLOR,
-				'label'     => __( 'Background Color', 'themeisle-companion' ),
+				'label'     => __( 'Background Color', 'textdomain' ),
 				'scheme'    => [
 					'type'  => Scheme_Color::get_type(),
 					'value' => Scheme_Color::COLOR_1,
@@ -1328,7 +1377,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_button_style_padding',
 			[
-				'label'      => __( 'Button padding', 'themeisle-companion' ),
+				'label'      => __( 'Button padding', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -1345,7 +1394,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_control(
 			'grid_button_style_border_radius',
 			[
-				'label'      => __( 'Button border radius', 'themeisle-companion' ),
+				'label'      => __( 'Button border radius', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors'  => [
@@ -1367,7 +1416,7 @@ class Posts_Grid extends Widget_Base {
 		$this->start_controls_section(
 			'section_grid_pagination_style',
 			[
-				'label'     => __( 'Pagination', 'themeisle-companion' ),
+				'label'     => __( 'Pagination', 'textdomain' ),
 				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'section_grid.grid_pagination' => 'yes',
@@ -1379,7 +1428,7 @@ class Posts_Grid extends Widget_Base {
 		$this->add_responsive_control(
 			'grid_pagination_style_margin',
 			[
-				'label'      => __( 'Margin', 'themeisle-companion' ),
+				'label'      => __( 'Margin', 'textdomain' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px' ],
 				'selectors'  => [
@@ -1397,9 +1446,6 @@ class Posts_Grid extends Widget_Base {
 	protected function render() {
 		// Get settings.
 		$settings = $this->get_settings();
-		$this->maybe_load_widget_style();
-		// ensure the needed scripts
-
 
 		// Output.
 		echo '<div class="obfx-grid">';
@@ -1487,11 +1533,10 @@ class Posts_Grid extends Widget_Base {
 				// Button.
 				$this->renderButton();
 
-				echo '</div><!-- .obfx-grid-col-content -->';
+				echo '</div>';
 				echo '</article>';
 				echo '</div>';
-
-			} // End while().
+			}
 
 			// Pagination.
 			if ( ! empty( $settings['grid_pagination'] ) ) { ?>
@@ -1509,8 +1554,8 @@ class Posts_Grid extends Widget_Base {
 						'end_size'  => 1,
 						'mid_size'  => 3,
 						'prev_next' => true,
-						'prev_text' => esc_html__( 'Previous', 'themeisle-companion' ),
-						'next_text' => esc_html__( 'Next', 'themeisle-companion' ),
+						'prev_text' => esc_html__( 'Previous', 'textdomain' ),
+						'next_text' => esc_html__( 'Next', 'textdomain' ),
 						'type'      => 'plain',
 						'add_args'  => false,
 					);
@@ -1551,10 +1596,11 @@ class Posts_Grid extends Widget_Base {
 		$a_tag_open = $settings['grid_image_link'] == 'yes' ? '<a href="' . get_permalink() . '" title="' .  the_title( '', '', false ) .'">' : '';
         $a_tag_close = '</a>';
 
+        $image_size = ! empty( $settings['grid_image_size'] ) ? $settings['grid_image_size'] : 'full';
         echo '<div class="obfx-grid-col-image" '. $alignment .'>';
         echo $a_tag_open;
 		the_post_thumbnail(
-			'full', array(
+			$image_size, array(
 				'class' => 'img-responsive',
 				'alt'   => get_the_title( get_post_thumbnail_id() ),
 			)
@@ -1604,7 +1650,7 @@ class Posts_Grid extends Widget_Base {
 							case 'author': ?>
 								<span class="obfx-grid-author">
 									<?php
-									echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fa fa-user"></i>' : '';
+									echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fas fa-user"></i>' : '';
 
 									echo get_the_author(); ?>
 								</span>
@@ -1614,7 +1660,7 @@ class Posts_Grid extends Widget_Base {
 							case 'date': ?>
 								<span class="obfx-grid-date">
 									<?php
-									echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fa fa-calendar"></i>' : '';
+									echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fas fa-calendar"></i>' : '';
 									echo get_the_date(); ?>
 								</span>
 								<?php
@@ -1633,12 +1679,12 @@ class Posts_Grid extends Widget_Base {
 							case 'comments': ?>
 								<span class="obfx-grid-comments">
 									<?php
-									echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fa fa-comment"></i>' : '';
+									echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fas fa-comment"></i>' : '';
 
 									if ( $settings['grid_post_type'] == 'product' ) {
-										echo comments_number( __( 'No reviews', 'themeisle-companion' ), __( '1 review', 'themeisle-companion' ), __( '% reviews', 'themeisle-companion' ) );
+										echo comments_number( __( 'No reviews', 'textdomain' ), __( '1 review', 'textdomain' ), __( '% reviews', 'textdomain' ) );
 									} else {
-										echo comments_number( __( 'No comments', 'themeisle-companion' ), __( '1 comment', 'themeisle-companion' ), __( '% comments', 'themeisle-companion' ) );
+										echo comments_number( __( 'No comments', 'textdomain' ), __( '1 comment', 'textdomain' ), __( '% comments', 'textdomain' ) );
 									} ?>
 								</span>
 								<?php
@@ -1758,7 +1804,7 @@ class Posts_Grid extends Widget_Base {
 		if ( $post_type_category ) { ?>
 			<span class="obfx-grid-categories">
 				<?php
-				echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fa fa-bookmark"></i>' : '';
+				echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fas fa-bookmark"></i>' : '';
 
 				foreach ( $post_type_category as $category ) {
 					if ( $i == $maxCategories ) {
@@ -1790,7 +1836,7 @@ class Posts_Grid extends Widget_Base {
 		if ( $post_type_tags ) { ?>
 			<span class="obfx-grid-tags">
 				<?php
-				echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fa fa-tags"></i>' : '';
+				echo ( $settings['grid_meta_remove_icons'] == '' ) ? '<i class="fas fa-tags"></i>' : '';
 
 				foreach ( $post_type_tags as $tag ) {
 					if ( $i == $maxTags ) {
@@ -1808,23 +1854,4 @@ class Posts_Grid extends Widget_Base {
 			<?php
 		}
 	}
-
-	/**
-	 * Load the widget style dynamically if it is a widget preview
-	 * or enqueue style and scripts if not
-	 *
-	 * This way we are sure that the assets files are loaded only when this block is present in page.
-	 */
-	protected function maybe_load_widget_style() {
-		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() === true && apply_filters( 'themeisle_content_forms_register_default_style', true ) ) { ?>
-			<style>
-				<?php echo file_get_contents( plugin_dir_path( dirname( dirname(__FILE__ ) ) ) . 'css/public.css' ) ?>
-			</style>
-			<?php
-		} else {
-			wp_enqueue_script( 'obfx-grid-js' );
-			wp_enqueue_style( 'eaw-elementor' );
-		}
-	}
 }
-

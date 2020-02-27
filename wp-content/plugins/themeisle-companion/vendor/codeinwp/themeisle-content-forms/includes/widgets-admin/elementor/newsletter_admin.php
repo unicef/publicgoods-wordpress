@@ -47,17 +47,17 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 	 * @return array
 	 */
 	function get_default_config() {
-		return [
-			[
+		return array(
+			array(
 				'key'         => 'email',
 				'type'        => 'email',
-				'label'       => esc_html__( 'Email', 'themeisle-companion' ),
+				'label'       => esc_html__( 'Email', 'textdomain' ),
 				'requirement' => 'required',
-				'placeholder' => esc_html__( 'Email', 'themeisle-companion' ),
+				'placeholder' => esc_html__( 'Email', 'textdomain' ),
 				'field_width' => '100',
 				'field_map'   => 'email',
-			],
-		];
+			),
+		);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 	 * @return string
 	 */
 	public function get_title() {
-		return esc_html__( 'Newsletter Form', 'themeisle-companion' );
+		return esc_html__( 'Newsletter Form', 'textdomain' );
 	}
 
 	/**
@@ -83,25 +83,25 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 
 		$this->add_control(
 			'provider',
-			[
+			array(
 				'type'      => 'select',
-				'label'     => esc_html__( 'Subscribe to', 'themeisle-companion' ),
-				'options'   => [
-					'mailchimp'  => esc_html__( 'MailChimp', 'themeisle-companion' ),
-					'sendinblue' => esc_html__( 'Sendinblue ', 'themeisle-companion' ),
-					'mailerlite' => esc_html__( 'MailerLite', 'themeisle-companion' ),
-				],
+				'label'     => esc_html__( 'Subscribe to', 'textdomain' ),
+				'options'   => array(
+					'mailchimp'  => esc_html__( 'MailChimp', 'textdomain' ),
+					'sendinblue' => esc_html__( 'Sendinblue ', 'textdomain' ),
+					'mailerlite' => esc_html__( 'MailerLite', 'textdomain' ),
+				),
 				'default'   => 'mailchimp',
 				'separator' => 'after',
-			]
+			)
 		);
 
 		$this->add_control(
 			'success_message',
 			array(
 				'type'    => 'text',
-				'label'   => esc_html__( 'Success message', 'themeisle-companion' ),
-				'default' => esc_html__( 'Welcome to our newsletter!', 'themeisle-companion' ),
+				'label'   => esc_html__( 'Success message', 'textdomain' ),
+				'default' => esc_html__( 'Welcome to our newsletter!', 'textdomain' ),
 			)
 		);
 
@@ -109,8 +109,8 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 			'error_message',
 			array(
 				'type'      => 'text',
-				'label'     => esc_html__( 'Error message', 'themeisle-companion' ),
-				'default'   => esc_html__( 'Action failed!', 'themeisle-companion' ),
+				'label'     => esc_html__( 'Error message', 'textdomain' ),
+				'default'   => esc_html__( 'Action failed!', 'textdomain' ),
 				'separator' => 'after',
 			)
 		);
@@ -119,65 +119,84 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 			'submit_label',
 			array(
 				'type'    => 'text',
-				'label'   => esc_html__( 'Submit', 'themeisle-companion' ),
-				'default' => esc_html__( 'Join Newsletter', 'themeisle-companion' ),
+				'label'   => esc_html__( 'Submit', 'textdomain' ),
+				'default' => esc_html__( 'Join Newsletter', 'textdomain' ),
 			)
 		);
 
 		$this->add_control(
-			'button_icon',
-			[
-				'label'       => __( 'Icon', 'elementor-pro', 'themeisle-companion' ),
-				'type'        => Controls_Manager::ICON,
-				'label_block' => true,
-				'default'     => '',
-			]
+			'button_icon_new',
+			array(
+				'label'            => __( 'Icon', 'textdomain' ),
+				'type'             => Controls_Manager::ICONS,
+				'fa4compatibility' => 'button_icon',
+			)
+		);
+
+		$this->add_control(
+			'button_icon_size',
+			array(
+				'label'     => __( 'Icon Size', 'textdomain' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'max' => 100,
+					),
+				),
+				'condition' => array(
+					'button_icon!' => '',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .elementor-button-icon svg' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .elementor-button-icon i' => 'font-size: {{SIZE}}{{UNIT}};',
+				),
+			)
 		);
 
 		$this->add_control(
 			'button_icon_indent',
-			[
-				'label'     => __( 'Icon Spacing', 'elementor-pro', 'themeisle-companion' ),
+			array(
+				'label'     => __( 'Icon Spacing', 'textdomain' ),
 				'type'      => Controls_Manager::SLIDER,
-				'range'     => [
-					'px' => [
+				'range'     => array(
+					'px' => array(
 						'max' => 100,
-					],
-				],
-				'condition' => [
+					),
+				),
+				'condition' => array(
 					'button_icon!' => '',
-				],
-				'selectors' => [
+				),
+				'selectors' => array(
 					'{{WRAPPER}} .elementor-button-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'align_submit',
-			[
-				'label'     => __( 'Alignment', 'themeisle-companion' ),
+			array(
+				'label'     => __( 'Alignment', 'textdomain' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'toggle'    => false,
 				'default'   => 'left',
-				'options'   => [
-					'left'   => [
-						'title' => __( 'Left', 'themeisle-companion' ),
+				'options'   => array(
+					'left'   => array(
+						'title' => __( 'Left', 'textdomain' ),
 						'icon'  => 'fa fa-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'themeisle-companion' ),
+					),
+					'center' => array(
+						'title' => __( 'Center', 'textdomain' ),
 						'icon'  => 'fa fa-align-center',
-					],
-					'right'  => [
-						'title' => __( 'Right', 'themeisle-companion' ),
+					),
+					'right'  => array(
+						'title' => __( 'Right', 'textdomain' ),
 						'icon'  => 'fa fa-align-right',
-					],
-				],
-				'selectors' => [
+					),
+				),
+				'selectors' => array(
 					'{{WRAPPER}} .content-form .submit-form' => 'text-align: {{VALUE}};',
-				],
-			]
+				),
+			)
 		);
 	}
 
@@ -191,7 +210,7 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 		$this->start_controls_section(
 			'provider_settings',
 			array(
-				'label' => __( 'Provider Settings', 'themeisle-companion' ),
+				'label' => __( 'Provider Settings', 'textdomain' ),
 			)
 		);
 
@@ -199,7 +218,7 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 			'access_key',
 			array(
 				'type'  => 'text',
-				'label' => esc_html__( 'Access Key', 'themeisle-companion' ),
+				'label' => esc_html__( 'Access Key', 'textdomain' ),
 			)
 		);
 
@@ -207,7 +226,7 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 			'list_id',
 			array(
 				'type'  => 'text',
-				'label' => esc_html__( 'List ID', 'themeisle-companion' ),
+				'label' => esc_html__( 'List ID', 'textdomain' ),
 			)
 		);
 
@@ -222,81 +241,81 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 		$repeater->add_control(
 			'field_map',
 			array(
-				'label'       => __( 'Map field to', 'themeisle-companion' ),
+				'label'       => __( 'Map field to', 'textdomain' ),
 				'type'        => Controls_Manager::TEXT,
 				'separator'   => 'after',
-				'description' => esc_html__( 'If you\'re using SendInBlue or MailerLite and you map the field to address, please ignore the additional settings.', 'themeisle-companion' ),
+				'description' => esc_html__( 'If you\'re using SendInBlue or MailerLite and you map the field to address, please ignore the additional settings.', 'textdomain' ),
 			)
 		);
 
 		$config = array(
 			'addr2'   => array(
 				'label'       => array(
-					'label'   => __( 'Line 2 Label', 'themeisle-companion' ),
-					'default' => __( 'Address Line 2', 'themeisle-companion' ),
+					'label'   => __( 'Line 2 Label', 'textdomain' ),
+					'default' => __( 'Address Line 2', 'textdomain' ),
 				),
 				'placeholder' => array(
-					'label'   => __( 'Line 2 Placeholder', 'themeisle-companion' ),
-					'default' => __( 'Address Line 2', 'themeisle-companion' ),
+					'label'   => __( 'Line 2 Placeholder', 'textdomain' ),
+					'default' => __( 'Address Line 2', 'textdomain' ),
 				),
 				'width'       => array(
-					'label'   => __( 'Line 2 Width', 'themeisle-companion' ),
+					'label'   => __( 'Line 2 Width', 'textdomain' ),
 					'default' => '100',
 				),
 			),
 			'city'    => array(
 				'label'       => array(
-					'label'   => __( 'City Label', 'themeisle-companion' ),
-					'default' => __( 'City', 'themeisle-companion' ),
+					'label'   => __( 'City Label', 'textdomain' ),
+					'default' => __( 'City', 'textdomain' ),
 				),
 				'placeholder' => array(
-					'label'   => __( 'City Placeholder', 'themeisle-companion' ),
-					'default' => __( 'City', 'themeisle-companion' ),
+					'label'   => __( 'City Placeholder', 'textdomain' ),
+					'default' => __( 'City', 'textdomain' ),
 				),
 				'width'       => array(
-					'label'   => __( 'City Width', 'themeisle-companion' ),
+					'label'   => __( 'City Width', 'textdomain' ),
 					'default' => '100',
 				),
 			),
 			'state'   => array(
 				'label'       => array(
-					'label'   => __( 'State Label', 'themeisle-companion' ),
-					'default' => __( 'State/Province/Region', 'themeisle-companion' ),
+					'label'   => __( 'State Label', 'textdomain' ),
+					'default' => __( 'State/Province/Region', 'textdomain' ),
 				),
 				'placeholder' => array(
-					'label'   => __( 'State Placeholder', 'themeisle-companion' ),
-					'default' => __( 'State/Province/Region', 'themeisle-companion' ),
+					'label'   => __( 'State Placeholder', 'textdomain' ),
+					'default' => __( 'State/Province/Region', 'textdomain' ),
 				),
 				'width'       => array(
-					'label'   => __( 'State Width', 'themeisle-companion' ),
+					'label'   => __( 'State Width', 'textdomain' ),
 					'default' => '100',
 				),
 			),
 			'zip'     => array(
 				'label'       => array(
-					'label'   => __( 'Zip Code Label', 'themeisle-companion' ),
-					'default' => __( 'Postal / Zip Code', 'themeisle-companion' ),
+					'label'   => __( 'Zip Code Label', 'textdomain' ),
+					'default' => __( 'Postal / Zip Code', 'textdomain' ),
 				),
 				'placeholder' => array(
-					'label'   => __( 'Zip Code Placeholder', 'themeisle-companion' ),
-					'default' => __( 'Postal / Zip Code', 'themeisle-companion' ),
+					'label'   => __( 'Zip Code Placeholder', 'textdomain' ),
+					'default' => __( 'Postal / Zip Code', 'textdomain' ),
 				),
 				'width'       => array(
-					'label'   => __( 'Zip Code Width', 'themeisle-companion' ),
+					'label'   => __( 'Zip Code Width', 'textdomain' ),
 					'default' => '100',
 				),
 			),
 			'country' => array(
 				'label'       => array(
-					'label'   => __( 'Country Label', 'themeisle-companion' ),
-					'default' => __( 'Country', 'themeisle-companion' ),
+					'label'   => __( 'Country Label', 'textdomain' ),
+					'default' => __( 'Country', 'textdomain' ),
 				),
 				'placeholder' => array(
-					'label'   => __( ' Country Placeholder', 'themeisle-companion' ),
-					'default' => __( 'Country', 'themeisle-companion' ),
+					'label'   => __( ' Country Placeholder', 'textdomain' ),
+					'default' => __( 'Country', 'textdomain' ),
 				),
 				'width'       => array(
-					'label'   => __( 'Country Width', 'themeisle-companion' ),
+					'label'   => __( 'Country Width', 'textdomain' ),
 					'default' => '100',
 				),
 			),
@@ -311,9 +330,9 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 							'label'     => $field_data['label'],
 							'type'      => Controls_Manager::TEXT,
 							'default'   => $field_data['default'],
-							'condition' => [
+							'condition' => array(
 								'field_map' => 'address',
-							],
+							),
 						)
 					);
 				} else {
@@ -322,18 +341,18 @@ class Newsletter_Admin extends Elementor_Widget_Base {
 						array(
 							'label'     => $field_data['label'],
 							'type'      => Controls_Manager::SELECT,
-							'options'   => [
+							'options'   => array(
 								'100' => '100%',
 								'75'  => '75%',
 								'66'  => '66%',
 								'50'  => '50%',
 								'33'  => '33%',
 								'25'  => '25%',
-							],
+							),
 							'default'   => $field_data['default'],
-							'condition' => [
+							'condition' => array(
 								'field_map' => 'address',
-							],
+							),
 						)
 					);
 				}
