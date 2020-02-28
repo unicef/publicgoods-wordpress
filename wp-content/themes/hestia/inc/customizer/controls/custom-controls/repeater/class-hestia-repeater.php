@@ -5,10 +5,6 @@
  * @package Hestia
  */
 
-if ( ! class_exists( 'WP_Customize_Control' ) ) {
-	return null;
-}
-
 /**
  * Class Hestia_Repeater
  */
@@ -204,7 +200,7 @@ class Hestia_Repeater extends WP_Customize_Control {
 			$this->id = $id;
 		}
 
-		if ( file_exists( get_template_directory() . '/inc/customizer/controls/custom-controls/repeater/icon-picker/icons.php' ) ) {
+		if ( is_file( get_template_directory() . '/inc/customizer/controls/custom-controls/repeater/icon-picker/icons.php' ) ) {
 			$this->customizer_icon_container = '/inc/customizer/controls/custom-controls/repeater/icon-picker/icons';
 		}
 

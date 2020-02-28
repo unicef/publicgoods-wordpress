@@ -17,6 +17,53 @@ Hestia WordPress theme, Copyright 2018 Themeisle
 Hestia is distributed under the terms of the GNU GPLv2 or later
 
 ## Changelog ##
+### 2.5.6 - 2019-12-17  ###
+
+* [Fix] Logo positioning for the third navigation layout option and no widgets
+* [Fix] Sync between the image set as the featured image for the Frontpage and the image from the About section
+* [Fix] Customizer icons missing when Font Awesome was not loaded
+* [Fix] Compatibility with the Menu Icons plugin while the transparent menu is on
+
+
+### 2.5.5 - 2019-11-14  ###
+
+* [Feat] Dedicated logo option for the transparent header
+* [Fix] Subscribe form on the blog page
+* [Fix] Line separator compatibility with WP 5.3
+
+
+### 2.5.4 - 2019-10-21  ###
+
+* [Fix] Blog page Infinite Scroll compatibility with the Alternative layout
+* [Fix] Cover block text color not updating
+* [Fix][Hestia Pro] Shop page Infinite Scroll compatibility with widgets filtering
+* [Fix][Hestia Pro] Header layout selection for the Shop page
+* [Fix][Hestia Pro] Slider arrows position on RTL
+
+
+### 2.5.3 - 2019-09-13  ###
+
+* [Fix] Improved About page layout
+* [Fix] License validation mechanism for Starter Sites
+
+
+### 2.5.2 - 2019-09-12  ###
+
+* [Fix] Compatibility with Elementor Pro Menu Cart widget
+* [Fix] Mail and phone icons compatibility with FA5
+* [Fix] Primary menu icons spacing and alignment
+* [Fix] Uppercase submenu items back to Sentence case
+* [Fix] WooCommerce product gallery images not clickable on mobile
+* [Perf] Small performance fixes
+
+
+### 2.5.1 - 2019-08-13  ###
+
+* [Fix] - Header layout on the front page
+* [Fix] - Removed Hestia's custom integration with Gutenberg
+* [Fix] - Social menu icons compatibility with FA5
+
+
 ### 2.5.0 - 2019-08-08  ###
 
 * Migrated to Font Awesome 5

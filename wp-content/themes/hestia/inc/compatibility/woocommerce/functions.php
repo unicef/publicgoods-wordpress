@@ -137,7 +137,7 @@ function hestia_woocommerce_before_main_content() {
 		hestia_shop_sidebar();
 	}
 	?>
-	<div class="<?php echo esc_attr( $wrapper_class ); ?>">
+	<div id="woo-products-wrap" class="<?php echo esc_attr( $wrapper_class ); ?>">
 	<?php
 }
 
@@ -433,16 +433,6 @@ if ( ! function_exists( 'hestia_cart_link_fragment' ) ) {
 	}
 }
 
-if ( ! function_exists( 'hestia_always_show_live_cart' ) ) {
-	/**
-	 *  Force WC_Widget_Cart widget to show on cart and checkout pages
-	 *  Used for the live cart in header
-	 */
-	function hestia_always_show_live_cart() {
-		return false;
-	}
-}
-
 /**
  * Add before cart totals code for card.
  */
@@ -478,7 +468,7 @@ function hestia_woocommerce_product_images_compatibility() {
 	update_option( 'woocommerce_thumbnail_cropping_custom_width', '23' );
 	update_option( 'woocommerce_thumbnail_cropping_custom_height', '35' );
 
-	if ( class_exists( 'WC_Regenerate_Images' ) ) {
+	if ( class_exists( 'WC_Regenerate_Images', false ) ) {
 		$regenerate_obj = new WC_Regenerate_Images();
 		$regenerate_obj::init();
 		if ( method_exists( $regenerate_obj, 'maybe_regenerate_images' ) ) {

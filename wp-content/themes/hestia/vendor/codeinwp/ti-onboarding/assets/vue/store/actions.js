@@ -92,7 +92,9 @@ const importContent = function ({commit, state}, data) {
         'contentFile': data.content.content_file,
         'frontPage': data.content.front_page,
         'shopPages': data.content.shop_pages ? data.content.shop_pages : null,
-        'source': data.source
+        'source': data.source,
+        'editor': state.editor ? state.editor : '',
+        'demoSlug': state.currentPreviewSlug,
       }
     },
     responseType: 'json',

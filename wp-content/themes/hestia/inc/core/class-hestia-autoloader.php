@@ -207,7 +207,7 @@ class Hestia_Autoloader {
 
 		$filename  = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . '.php';
 		$full_path = trailingslashit( $this->classes_to_load[ $class_name ] ) . $filename;
-		if ( file_exists( $full_path ) ) {
+		if ( is_file( $full_path ) ) {
 			require $full_path;
 		}
 

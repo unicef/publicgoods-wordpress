@@ -14,7 +14,7 @@ class Hestia_Woocommerce_Header_Manager extends Hestia_Abstract_Main {
 	 * Init layout manager.
 	 */
 	public function init() {
-		if ( ! class_exists( 'WooCommerce' ) ) {
+		if ( ! class_exists( 'WooCommerce', false ) ) {
 			return;
 		}
 		// WooCommerce.

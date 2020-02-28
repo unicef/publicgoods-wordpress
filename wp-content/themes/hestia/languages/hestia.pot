@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Hestia Pro 2.5.0\n"
+"Project-Id-Version: Hestia Pro 2.5.6\n"
 "Report-Msgid-Bugs-To: https://github.com/Codeinwp/hestia-pro/issues\n"
-"POT-Creation-Date: 2019-08-08 10:17:56+00:00\n"
+"POT-Creation-Date: 2019-12-17 15:22:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -400,15 +400,15 @@ msgstr ""
 msgid "Save Hooks"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:229
-#: inc/addons/class-hestia-main-addon.php:236
+#: inc/addons/class-hestia-main-addon.php:231
+#: inc/addons/class-hestia-main-addon.php:238
 #. translators: %s - Theme name
 msgid ""
 "Need more details? Please check our full documentation for detailed "
 "information on how to use %s."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:231
+#: inc/addons/class-hestia-main-addon.php:233
 #: inc/addons/customizer/class-hestia-customizer-notices-addon.php:75
 msgid ""
 "Extend your theme functionality with various modules like Social Media "
@@ -416,7 +416,7 @@ msgid ""
 "page builder addons and free stock featured images."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:233
+#: inc/addons/class-hestia-main-addon.php:235
 #. translators: %1$s - Theme name
 msgid ""
 "We want to make sure you have the best experience using %1$s and that is "
@@ -424,18 +424,18 @@ msgid ""
 "will enjoy using %1$s, as much as we enjoy creating great products."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:242
 #: inc/addons/class-hestia-main-addon.php:244
+#: inc/addons/class-hestia-main-addon.php:246
 #. translators: %s - Theme name
 msgid "About %s"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:246
+#: inc/addons/class-hestia-main-addon.php:248
 #. translators: %s - Theme name
 msgid "Welcome to %s! - Version "
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:248
+#: inc/addons/class-hestia-main-addon.php:250
 #. translators: %s - Theme name
 msgid ""
 "%s is a modern WordPress theme for professionals. It fits creative "
@@ -448,42 +448,42 @@ msgid ""
 "friendly, and uses Material Kit for design."
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:264
+#: inc/addons/class-hestia-main-addon.php:266
 #: inc/core/class-hestia-public.php:780
 msgid "Blog Subscribe Section"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:326
+#: inc/addons/class-hestia-main-addon.php:328
 msgid "Secondary"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:331
+#: inc/addons/class-hestia-main-addon.php:333
 #: inc/core/class-hestia-public.php:471
 #: inc/customizer/general/class-hestia-typography-controls.php:146
 msgid "Body"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:336
+#: inc/addons/class-hestia-main-addon.php:338
 msgid "Header Overlay"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:341
+#: inc/addons/class-hestia-main-addon.php:343
 msgid "Header Text"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:346
+#: inc/addons/class-hestia-main-addon.php:348
 msgid "Navbar Background"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:351
+#: inc/addons/class-hestia-main-addon.php:353
 msgid "Navbar Text"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:356
+#: inc/addons/class-hestia-main-addon.php:358
 msgid "Navbar Text Hover"
 msgstr ""
 
-#: inc/addons/class-hestia-main-addon.php:361
+#: inc/addons/class-hestia-main-addon.php:363
 #: inc/addons/customizer/general/class-hestia-color-controls-addon.php:117
 msgid "Transparent Navbar Text Color"
 msgstr ""
@@ -501,9 +501,9 @@ msgstr ""
 msgid "Hestia Pro"
 msgstr ""
 
-#: inc/addons/customizer/controls/iconpicker/class-hestia-iconpicker.php:64
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:684
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:762
+#: inc/addons/customizer/controls/iconpicker/class-hestia-iconpicker.php:61
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:680
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:758
 #. translators: 1. link to font awesome icons
 #. translators: Fontawesome link with full list of icons available
 msgid ""
@@ -511,9 +511,9 @@ msgid ""
 "icons at %1$s."
 msgstr ""
 
-#: inc/addons/customizer/controls/iconpicker/class-hestia-iconpicker.php:65
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:686
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:764
+#: inc/addons/customizer/controls/iconpicker/class-hestia-iconpicker.php:62
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:682
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:760
 #. translators: Fontawesome link with full list of icons available
 msgid "http://fontawesome.io/icons/"
 msgstr ""
@@ -790,11 +790,11 @@ msgid "Subscribe to our Newsletter"
 msgstr ""
 
 #: inc/addons/customizer/front-page/class-hestia-ribbon-controls.php:99
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:234
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:428
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:449
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:558
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:576
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:215
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:424
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:445
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:554
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:572
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:200
 msgid "Text"
 msgstr ""
@@ -812,19 +812,19 @@ msgid "Button Text"
 msgstr ""
 
 #: inc/addons/customizer/front-page/class-hestia-ribbon-controls.php:129
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:251
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:438
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:459
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:567
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:585
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:785
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:811
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:232
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:434
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:455
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:563
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:581
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:781
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:807
 #: inc/views/class-hestia-tweaks.php:174
 msgid "Link"
 msgstr ""
 
 #: inc/addons/customizer/front-page/class-hestia-shop-controls-addon.php:39
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:138
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:119
 #: inc/customizer/front-page/class-hestia-contact-controls.php:53
 #: inc/customizer/front-page/class-hestia-subscribe-controls.php:52
 #: inc/customizer/general/class-hestia-general-controls.php:44
@@ -833,7 +833,7 @@ msgstr ""
 
 #: inc/addons/customizer/front-page/class-hestia-shop-controls-addon.php:43
 #: inc/customizer/front-page/class-hestia-shop-controls.php:83
-#: inc/customizer/general/class-hestia-header-controls.php:199
+#: inc/customizer/general/class-hestia-header-controls.php:215
 #: inc/views/front-page/class-hestia-shop-section.php:72
 msgid "Products"
 msgstr ""
@@ -871,8 +871,8 @@ msgid "Add new Slide"
 msgstr ""
 
 #: inc/addons/customizer/front-page/class-hestia-slider-controls-addon.php:121
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:722
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:742
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:718
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:738
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:97
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:152
 msgid "Image"
@@ -992,7 +992,7 @@ msgid "Section Subtitle"
 msgstr ""
 
 #: inc/addons/customizer/general/class-hestia-blog-settings-controls-addon.php:221
-#: inc/customizer/controls/ui/class-hestia-contact-info.php:35
+#: inc/customizer/controls/ui/class-hestia-contact-info.php:31
 #: inc/customizer/front-page/class-hestia-subscribe-controls.php:111
 msgid "Instructions"
 msgstr ""
@@ -1007,12 +1007,12 @@ msgstr ""
 
 #: inc/addons/customizer/general/class-hestia-buttons-style-controls-addon.php:43
 #: inc/addons/customizer/general/class-hestia-footer-controls-addon.php:103
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:234
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:251
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:385
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:397
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:520
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:530
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:215
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:232
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:381
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:393
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:516
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:526
 #: inc/views/class-hestia-tweaks.php:162 inc/views/class-hestia-tweaks.php:166
 msgid "Color"
 msgstr ""
@@ -1050,16 +1050,16 @@ msgid "Number of widgets areas"
 msgstr ""
 
 #: inc/addons/customizer/general/class-hestia-footer-controls-addon.php:62
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:177
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:158
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:274
 #: inc/customizer/general/class-hestia-blog-settings-controls.php:100
-#: inc/customizer/general/class-hestia-header-controls.php:124
-#: inc/customizer/general/class-hestia-header-controls.php:199
+#: inc/customizer/general/class-hestia-header-controls.php:140
+#: inc/customizer/general/class-hestia-header-controls.php:215
 msgid "Layout"
 msgstr ""
 
 #: inc/addons/customizer/general/class-hestia-footer-controls-addon.php:68
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:183
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:164
 #: inc/admin/metabox/class-hestia-metabox-main.php:42
 #: inc/customizer/general/class-hestia-general-controls.php:192
 msgid "Left Sidebar"
@@ -1072,7 +1072,7 @@ msgid "Full Width"
 msgstr ""
 
 #: inc/addons/customizer/general/class-hestia-footer-controls-addon.php:76
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:187
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:168
 #: inc/admin/metabox/class-hestia-metabox-main.php:46
 #: inc/customizer/general/class-hestia-general-controls.php:196
 msgid "Right Sidebar"
@@ -1090,20 +1090,16 @@ msgstr ""
 msgid "Enable full screen menu"
 msgstr ""
 
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:63
-msgid "Transparent Navbar"
-msgstr ""
-
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:141
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:122
 #: inc/customizer/class-hestia-customizer-main.php:46
 msgid "Appearance Settings"
 msgstr ""
 
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:215
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:196
 msgid "Background color"
 msgstr ""
 
-#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:268
+#: inc/addons/customizer/general/class-hestia-header-controls-addon.php:249
 msgid "Link color on hover"
 msgstr ""
 
@@ -1334,7 +1330,6 @@ msgid "Get the PRO version!"
 msgstr ""
 
 #: inc/admin/metabox/class-hestia-metabox-main.php:56
-#: inc/compatibility/class-hestia-gutenberg.php:389
 #: inc/core/class-hestia-public.php:330
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:130
 msgid "Sidebar"
@@ -1434,7 +1429,7 @@ msgid ""
 msgstr ""
 
 #: inc/core/class-hestia-admin.php:75 inc/core/class-hestia-admin.php:142
-#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:137
+#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:133
 msgid "Read full documentation"
 msgstr ""
 
@@ -1623,7 +1618,7 @@ msgid "Change colors for the header overlay, header text and navbar."
 msgstr ""
 
 #: inc/core/class-hestia-admin.php:274
-#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:130
+#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:133
 #: inc/customizer/general/class-hestia-upsell-manager.php:61
 #: inc/customizer/general/class-hestia-upsell-manager.php:110
 msgid "Jetpack Portfolio"
@@ -1680,12 +1675,12 @@ msgstr ""
 
 #: inc/core/class-hestia-public.php:333 inc/core/class-hestia-public.php:488
 #: inc/customizer/general/class-hestia-header-controls.php:71
-#: inc/customizer/general/class-hestia-header-controls.php:230
+#: inc/customizer/general/class-hestia-header-controls.php:266
 msgid "Very Top Bar"
 msgstr ""
 
 #: inc/core/class-hestia-public.php:334
-#: inc/customizer/general/class-hestia-header-controls.php:219
+#: inc/customizer/general/class-hestia-header-controls.php:255
 msgid "Navigation"
 msgstr ""
 
@@ -1782,6 +1777,13 @@ msgstr ""
 msgid "Sites Library"
 msgstr ""
 
+#: inc/core/class-hestia-public.php:785
+#. translators: %1$s is Plugin name
+msgid ""
+"In order to add a contact form to this section, you need to install the "
+"%1$s plugin. Then follow %2$sthis guide%3$s to create your form."
+msgstr ""
+
 #: inc/customizer/class-hestia-customizer-notices.php:113
 #. translators: %1$s is Plugin Name
 msgid "To have access to a shop section please install and configure %1$s."
@@ -1802,94 +1804,87 @@ msgid ""
 "please install and activate %s."
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/customizer-page-editor/class-hestia-page-editor.php:58
+#: inc/customizer/controls/custom-controls/customizer-page-editor/class-hestia-page-editor.php:54
 #: inc/customizer/front-page/class-hestia-about-controls.php:161
 #: inc/helpers/layout-functions.php:177
 msgid "(Edit)"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:47
-#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:56
+#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:43
+#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:52
 msgid "Default"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:58
+#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:54
 msgid "Standard Fonts"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:59
+#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:55
 msgid "Google Fonts"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:143
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:139
 msgid "Add new field"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:148
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:144
 msgid "Customizer Repeater"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:408
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:540
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:404
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:536
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:75
 #: inc/customizer/front-page/class-hestia-big-title-controls.php:179
 #: inc/customizer/general/class-hestia-typography-controls.php:245
 msgid "Title"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:418
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:549
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:414
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:545
 msgid "Subtitle"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:470
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:594
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:466
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:590
 #: inc/customizer/front-page/class-hestia-contact-controls.php:185
 msgid "Shortcode"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:490
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:606
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:486
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:602
 msgid "Delete field"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:678
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:741
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:674
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:737
 msgid "Icon"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:725
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:721
 msgid "Upload Image"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:738
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:734
 msgid "Image type"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:743
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:739
 #: inc/customizer/general/class-hestia-blog-settings-controls.php:158
 msgid "None"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:757
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:753
 msgid "Social icons"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:788
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:825
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:784
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:821
 msgid "Remove Icon"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:793
-#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:831
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:789
+#: inc/customizer/controls/custom-controls/repeater/class-hestia-repeater.php:827
 msgid "Add Icon"
-msgstr ""
-
-#: inc/customizer/controls/ui/class-hestia-contact-info.php:38
-#. translators: %1$s is Plugin name
-msgid ""
-"In order to add a contact form to this section, you need to install the "
-"%1$s plugin. Then follow %2$sthis guide%3$s to create your form."
 msgstr ""
 
 #: inc/customizer/controls/ui/class-hestia-control-upsell.php:72
@@ -1897,41 +1892,41 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
-#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:106
+#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:109
 msgid "Install and activate"
 msgstr ""
 
-#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:110
-#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:130
+#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:113
+#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:133
 msgid "Activate"
 msgstr ""
 
-#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:125
+#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:128
 msgid "Deactivate"
 msgstr ""
 
-#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:172
+#: inc/customizer/controls/ui/helper-plugin-install/class-hestia-plugin-install-helper.php:175
 msgid "Activating "
 msgstr ""
 
-#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:113
-#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:134
+#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:109
+#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:130
 msgid "Here is where you must add the \"SendinBlue Newsletter\" widget."
 msgstr ""
 
-#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:121
+#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:117
 #. translators: %s Path in plugin wrapped
 msgid ""
 "After installing the plugin, you need to navigate to %s and configure the "
 "plugin."
 msgstr ""
 
-#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:125
+#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:121
 #. translators: %s Path in plugin
 msgid "SendinBlue > Home"
 msgstr ""
 
-#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:159
+#: inc/customizer/controls/ui/subscribe-info/class-hestia-subscribe-info.php:155
 msgid "Create SendinBlue Account"
 msgstr ""
 
@@ -2006,7 +2001,7 @@ msgid "Contact Content"
 msgstr ""
 
 #: inc/customizer/front-page/class-hestia-contact-controls.php:111
-#: inc/helpers/layout-functions.php:759
+#: inc/helpers/layout-functions.php:763
 #: inc/views/front-page/class-hestia-contact-section.php:95
 msgid "Contact Us"
 msgstr ""
@@ -2125,14 +2120,22 @@ msgid "Enable Header Image Sitewide"
 msgstr ""
 
 #: inc/customizer/general/class-hestia-header-controls.php:109
+msgid "Transparent Navbar"
+msgstr ""
+
+#: inc/customizer/general/class-hestia-header-controls.php:125
 msgid "Enable Search in Menu"
 msgstr ""
 
-#: inc/customizer/general/class-hestia-header-controls.php:172
+#: inc/customizer/general/class-hestia-header-controls.php:188
 msgid "Posts/Pages Layout"
 msgstr ""
 
-#: inc/customizer/general/class-hestia-header-controls.php:286
+#: inc/customizer/general/class-hestia-header-controls.php:234
+msgid "Transparent Header Logo"
+msgstr ""
+
+#: inc/customizer/general/class-hestia-header-controls.php:333
 msgid "Header Settings"
 msgstr ""
 
@@ -2225,12 +2228,12 @@ msgid ""
 "widgets in the sidebar"
 msgstr ""
 
-#: inc/helpers/layout-functions.php:719
+#: inc/helpers/layout-functions.php:722
 #. translators: %s is Category name
 msgid "View all posts in %s"
 msgstr ""
 
-#: inc/helpers/layout-functions.php:766
+#: inc/helpers/layout-functions.php:770
 #. translators: %1$s is Plugin name
 msgid ""
 "In order to add a contact form to this section, you need to install the %s "
@@ -2267,16 +2270,16 @@ msgstr ""
 msgid "%1$s ago %2$s"
 msgstr ""
 
-#: inc/views/blog/class-hestia-header-layout-manager.php:296
+#: inc/views/blog/class-hestia-header-layout-manager.php:334
 msgid "Oops! That page can&rsquo;t be found."
 msgstr ""
 
-#: inc/views/blog/class-hestia-header-layout-manager.php:318
+#: inc/views/blog/class-hestia-header-layout-manager.php:356
 #. translators: search result
 msgid "Search Results for: %s"
 msgstr ""
 
-#: inc/views/blog/class-hestia-header-layout-manager.php:390
+#: inc/views/blog/class-hestia-header-layout-manager.php:428
 #. translators: %1$s is Author name wrapped, %2$s is Date
 msgid "Published by %1$s on %2$s"
 msgstr ""
@@ -2413,7 +2416,7 @@ msgctxt "Roboto Slab font: on or off"
 msgid "on"
 msgstr ""
 
-#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:52
+#: inc/customizer/controls/custom-controls/font-selector/class-hestia-font-selector.php:48
 msgctxt "label"
 msgid "Search for:"
 msgstr ""

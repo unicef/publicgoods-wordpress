@@ -1934,6 +1934,7 @@ div[id^=woocommerce_layered_nav_filters].widget li a:before {
   .woocommerce.single-product .product .hestia-product-image-wrap {
     width: 100%;
     position: relative;
+    clear: both;
   }
   .woocommerce.single-product .product .summary {
     padding-right: 0;

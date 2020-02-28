@@ -547,7 +547,7 @@ class Hestia_Import_Utilities {
 	 * @since 1.1.51
 	 */
 	public function update_portfolio( $post_type ) {
-		if ( ! class_exists( 'Jetpack' ) || ! ( Jetpack::is_module_active( 'custom-content-types' ) ) ) {
+		if ( ! class_exists( 'Jetpack', false ) || ! ( Jetpack::is_module_active( 'custom-content-types' ) ) ) {
 			return;
 		}
 

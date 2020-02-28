@@ -5,7 +5,7 @@ Theme URI:      https://themeisle.com/themes/hestia/
 Author:         ThemeIsle
 Author URI:     https://themeisle.com
 Description:    Hestia is a modern WordPress theme for professionals. It fits creative business, small businesses (restaurants, wedding planners, sport/medical shops), startups, corporate businesses, online agencies and firms, portfolios, ecommerce (WooCommerce), and freelancers. It has a multipurpose one-page design, widgetized footer, blog/news page and a clean look, is compatible with: Flat Parallax Slider, Photo Gallery, Travel Map and Elementor Page Builder . The theme is responsive, WPML, Retina ready, SEO friendly, and uses Material Kit for design.
-Version:        2.5.0
+Version:        2.5.6
 License:        GNU General Public License v2 or later
 License URI:    http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:    hestia
@@ -2400,6 +2400,10 @@ body.admin-bar .navbar {
   margin-top: 32px;
 }
 
+.navbar-color-on-scroll .dashicons {
+  transition: initial;
+}
+
 .navbar.navbar-transparent {
   color: #fff;
   background-color: transparent;
@@ -2408,6 +2412,13 @@ body.admin-bar .navbar {
 }
 .navbar.navbar-transparent > .container {
   padding-top: 25px;
+}
+.navbar.navbar-transparent .hestia-hide-if-transparent {
+  display: none;
+}
+
+.navbar.navbar-not-transparent .hestia-transparent-logo {
+  display: none;
 }
 
 .navbar {
@@ -2553,19 +2564,21 @@ body.admin-bar .navbar {
 .navbar .navbar-nav > li {
   margin: 0;
 }
+.navbar .navbar-nav > li > a {
+  text-transform: uppercase;
+}
 .navbar .navbar-nav > li a {
   padding-top: 15px;
   padding-bottom: 15px;
   border-radius: 3px;
   color: inherit;
-  text-transform: uppercase;
 }
 .navbar .navbar-nav > li a:hover, .navbar .navbar-nav > li a:focus {
   color: inherit;
   opacity: 1;
 }
 .navbar .navbar-nav > li a i {
-  min-width: 30px;
+  min-width: 20px;
   text-align: center;
   position: relative;
   top: 2px;
@@ -2612,7 +2625,6 @@ body.admin-bar .navbar {
 .navbar .navbar-nav > li .dropdown-menu li > a > i {
   position: relative;
   top: 1px;
-  min-width: 30px;
   margin-right: 12px;
   opacity: 0.5;
   text-align: center;
@@ -4042,15 +4054,9 @@ table > tbody > tr:last-child,
    * rtl:ignore
    */
   right: auto;
-  /**
-   * rtl:ignore
-   */
   left: 0;
 }
 .carousel .carousel-control.right {
-  /**
-   * rtl:ignore
-   */
   right: 0;
 }
 .carousel .carousel-control i {
@@ -5257,7 +5263,7 @@ footer.footer.footer-black hr {
 .footer-big .footer-menu li a[href*="mailto:"]:before,
 .footer-big .footer-menu li a[href*="tel:"]:before {
   color: #fff;
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Brands";
   font-weight: 900;
 }
 .footer-big .footer-menu li a[href*="mailto:"]:hover:before,
@@ -5265,12 +5271,15 @@ footer.footer.footer-black hr {
   color: #999;
 }
 
+.footer-big .footer-menu li a[href*="tel:"]:before,
+.footer-big .footer-menu li a[href*="mailto:"]:before {
+  font-family: "Font Awesome 5 Free";
+}
 .footer-big .footer-menu li a[href*="mailto:"]:before {
   content: '\f0e0';
 }
-
 .footer-big .footer-menu li a[href*="tel:"]:before {
-  content: '\f095';
+  content: '\f879';
 }
 
 .footer-big .footer-menu li a[href*="facebook.com"] {
@@ -5674,6 +5683,10 @@ footer.footer.footer-black hr {
   left: auto;
   right: 0;
 }
+.hestia-top-bar .col-md-6 li a:before,
+.hestia-top-bar .col-md-12 li a:before {
+  font-family: "Font Awesome 5 Brands";
+}
 .hestia-top-bar .widget {
   margin: 0 10px 0 0;
 }
@@ -5859,7 +5872,7 @@ footer.footer.footer-black hr {
 .hestia-top-bar ul li a:before {
   background-color: transparent;
   position: static;
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Brands";
   font-weight: 900;
 }
 .hestia-top-bar ul li a:hover, .hestia-top-bar ul li a:focus {
@@ -5869,9 +5882,10 @@ footer.footer.footer-black hr {
 .hestia-top-bar ul li a[href*="tel:"]:before,
 .hestia-top-bar ul li a[href*="mailto:"]:before {
   margin-right: 7px;
+  font-family: "Font Awesome 5 Free";
 }
 .hestia-top-bar ul li a[href*="tel:"]:before {
-  content: '\f095';
+  content: '\f879';
 }
 .hestia-top-bar ul li a[href*="mailto:"]:before {
   content: '\f0e0';
@@ -6502,9 +6516,21 @@ figure.wp-block-pullquote cite {
   font-size: 48px;
 }
 
+.wp-block-separator {
+  color: #eee;
+  background-color: #eee;
+  border: none;
+}
 .wp-block-separator:not(.is-style-wide):not(.is-style-dots) {
+  height: 2px;
   max-width: 150px;
-  border-bottom: 0;
+}
+.wp-block-separator .is-style-default {
+  height: 1px;
+}
+.wp-block-separator.is-style-wide {
+  max-width: 100%;
+  height: 1px;
 }
 
 /*--------------------------------------------------------------

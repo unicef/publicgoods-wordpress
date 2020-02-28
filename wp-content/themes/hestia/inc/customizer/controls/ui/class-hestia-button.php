@@ -6,10 +6,6 @@
  * @since Hestia 1.1.10
  */
 
-if ( ! class_exists( 'WP_Customize_Control' ) ) {
-	return null;
-}
-
 /**
  * A customizer control to display text in customizer.
  *

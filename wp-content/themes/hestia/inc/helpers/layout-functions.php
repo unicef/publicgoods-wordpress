@@ -11,8 +11,8 @@ if ( ! function_exists( 'hestia_wp_link_pages' ) ) {
 	 *
 	 * @param array $args arguments.
 	 *
-	 * @since Hestia 1.0
 	 * @return string
+	 * @since Hestia 1.0
 	 */
 	function hestia_wp_link_pages( $args = array() ) {
 		$defaults = array(
@@ -142,11 +142,11 @@ if ( ! function_exists( 'hestia_comments_list' ) ) {
 	/**
 	 * Custom list of comments for the theme.
 	 *
-	 * @since Hestia 1.0
-	 *
 	 * @param string  $comment comment.
-	 * @param array   $args    arguments.
-	 * @param integer $depth   depth.
+	 * @param array   $args arguments.
+	 * @param integer $depth depth.
+	 *
+	 * @since Hestia 1.0
 	 */
 	function hestia_comments_list( $comment, $args, $depth ) {
 		?>
@@ -271,8 +271,8 @@ if ( ! function_exists( 'hestia_sidebar_placeholder' ) ) {
 	 * Display sidebar placeholder.
 	 *
 	 * @param string $class_to_add Classes to add on container.
-	 * @param string $sidebar_id   Id of the sidebar used as a class to differentiate hestia-widget-placeholder for blog and shop pages.
-	 * @param string $classes      Classes to add to placeholder.
+	 * @param string $sidebar_id Id of the sidebar used as a class to differentiate hestia-widget-placeholder for blog and shop pages.
+	 * @param string $classes Classes to add to placeholder.
 	 *
 	 * @access public
 	 * @since  1.1.24
@@ -303,10 +303,10 @@ if ( ! function_exists( 'hestia_display_customizer_shortcut' ) ) {
 	/**
 	 * This function display a shortcut to a customizer control.
 	 *
-	 * @param string $class_name        The name of control we want to link this shortcut with.
+	 * @param string $class_name The name of control we want to link this shortcut with.
 	 * @param bool   $is_section_toggle Tells function to display eye icon if it's true.
 	 */
-	function hestia_display_customizer_shortcut( $class_name, $is_section_toggle = false ) {
+	function hestia_display_customizer_shortcut( $class_name, $is_section_toggle = false, $should_return = false ) {
 		if ( ! is_customize_preview() ) {
 			return;
 		}
@@ -316,12 +316,16 @@ if ( ! function_exists( 'hestia_display_customizer_shortcut' ) ) {
 		if ( $is_section_toggle ) {
 			$icon = '<i class="far fa-eye"></i>';
 		}
-		echo
-			'<span class="hestia-hide-section-shortcut customize-partial-edit-shortcut customize-partial-edit-shortcut-' . esc_attr( $class_name ) . '">
+
+		$data = '<span class="hestia-hide-section-shortcut customize-partial-edit-shortcut customize-partial-edit-shortcut-' . esc_attr( $class_name ) . '">
 		<button class="customize-partial-edit-shortcut-button">
 			' . $icon . '
 		</button>
 	</span>';
+		if ( $should_return === true ) {
+			return $data;
+		}
+		echo $data;
 	}
 }
 
@@ -432,7 +436,7 @@ if ( ! function_exists( 'hestia_rgb_to_rgba' ) ) {
 	/**
 	 * Add opacity to rgb.
 	 *
-	 * @param array $rgb     RGB color.
+	 * @param array $rgb RGB color.
 	 * @param int   $opacity Opacity value.
 	 *
 	 * @return string
@@ -460,7 +464,7 @@ if ( ! function_exists( 'hestia_hex_rgba' ) ) {
 	/**
 	 * HEX colors conversion to RGBA.
 	 *
-	 * @param array|string $input   RGB color.
+	 * @param array|string $input RGB color.
 	 * @param int          $opacity Opacity value.
 	 *
 	 * @return string
@@ -476,11 +480,11 @@ if ( ! function_exists( 'hestia_generate_gradient_color' ) ) {
 	/**
 	 * Generate gradient second color based on Header Gradient color
 	 *
+	 * @param string $input the color from which to generate the gradient color.
+	 * @param string $opacity the opacity for the generated color.
+	 *
 	 * @return string RGBA string.
 	 * @since Hestia 1.1.53
-	 *
-	 * @param string $input   the color from which to generate the gradient color.
-	 * @param string $opacity the opacity for the generated color.
 	 */
 	function hestia_generate_gradient_color( $input, $opacity = '' ) {
 
@@ -510,7 +514,7 @@ if ( ! function_exists( 'hestia_adjust_brightness' ) ) {
 	/**
 	 * Generate a new color, darker or lighter.
 	 *
-	 * @param string $hex   Color in hex.
+	 * @param string $hex Color in hex.
 	 * @param int    $steps Steps should be between -255 and 255. Negative = darker, positive = lighter.
 	 *
 	 * @return string
@@ -592,7 +596,7 @@ if ( ! function_exists( 'hestia_layout' ) ) {
 		/**
 		 * For WooCommerce pages don't add any extra classes (except main or main-raised)
 		 */
-		if ( class_exists( 'WooCommerce' ) && is_product() ) {
+		if ( class_exists( 'WooCommerce', false ) && is_product() ) {
 			return $layout_class;
 		}
 
@@ -604,8 +608,8 @@ if ( ! function_exists( 'hestia_limit_content' ) ) {
 	/**
 	 * Function that limits a text to $limit words, words that are separated by $separator
 	 *
-	 * @param array  $input     Content to limit.
-	 * @param int    $limit     Max size.
+	 * @param array  $input Content to limit.
+	 * @param int    $limit Max size.
 	 * @param string $separator Separator.
 	 * @param bool   $show_more Flag to decide if '...' should be added at the end of result.
 	 *
@@ -644,8 +648,8 @@ if ( ! function_exists( 'hestia_edited_with_pagebuilder' ) ) {
 	 * This function returns whether the theme use or not one of the following page builders:
 	 * SiteOrigin, WP Bakery, Elementor, Divi Builder or Beaver Builder.
 	 *
-	 * @since 1.1.63
 	 * @return bool
+	 * @since 1.1.63
 	 */
 	function hestia_edited_with_pagebuilder( $pid = '' ) {
 		$frontpage_id = get_option( 'page_on_front' );
@@ -664,10 +668,10 @@ if ( ! function_exists( 'hestia_edited_with_pagebuilder' ) ) {
 		 */
 		$post_meta            = ! empty( $frontpage_id ) ? get_post_meta( $frontpage_id ) : '';
 		$page_builders_values = array(
-			'elementor'  => ! empty( $post_meta['_elementor_edit_mode'] ) && $post_meta['_elementor_edit_mode'][0] === 'builder' && class_exists( 'Elementor\Plugin' ),
-			'beaver'     => ! empty( $post_meta['_fl_builder_enabled'] ) && $post_meta['_fl_builder_enabled'][0] === '1' && class_exists( 'FLBuilder' ),
-			'siteorigin' => ! empty( $post_meta['panels_data'] ) && class_exists( 'SiteOrigin_Panels' ),
-			'divi'       => ! empty( $post_meta['_et_pb_use_builder'] ) && $post_meta['_et_pb_use_builder'][0] === 'on' && class_exists( 'ET_Builder_Plugin' ),
+			'elementor'  => ! empty( $post_meta['_elementor_edit_mode'] ) && $post_meta['_elementor_edit_mode'][0] === 'builder' && class_exists( 'Elementor\Plugin', false ),
+			'beaver'     => ! empty( $post_meta['_fl_builder_enabled'] ) && $post_meta['_fl_builder_enabled'][0] === '1' && class_exists( 'FLBuilder', false ),
+			'siteorigin' => ! empty( $post_meta['panels_data'] ) && class_exists( 'SiteOrigin_Panels', false ),
+			'divi'       => ! empty( $post_meta['_et_pb_use_builder'] ) && $post_meta['_et_pb_use_builder'][0] === 'on' && class_exists( 'ET_Builder_Plugin', false ),
 		);
 		/**
 		 * WP Bakery (former Visual Composer) doesn't store a flag in meta data to say whether or not the page
@@ -675,7 +679,7 @@ if ( ! function_exists( 'hestia_edited_with_pagebuilder' ) ) {
 		 */
 		$post_content = get_post_field( 'post_content', $frontpage_id );
 		if ( ! empty( $post_content ) ) {
-			$page_builders_values['wpbakery'] = class_exists( 'Vc_Manager' ) && strpos( $post_content, '[vc_' ) !== false;
+			$page_builders_values['wpbakery'] = class_exists( 'Vc_Manager', false ) && strpos( $post_content, '[vc_' ) !== false;
 		}
 		/**
 		 * Check if at least one page builder returns true and return true if it does.
@@ -696,9 +700,8 @@ if ( ! function_exists( 'hestia_category' ) ) {
 	 *
 	 * @param boolean $rel_tag should have rel='tag'.
 	 *
-	 * @since Hestia 1.0
-	 *
 	 * @return string
+	 * @since Hestia 1.0
 	 */
 	function hestia_category( $rel_tag = true ) {
 
@@ -756,20 +759,20 @@ if ( ! function_exists( 'hestia_contact_form_placeholder' ) ) {
 		<div class="col-md-5 col-md-offset-2 pirate-forms-placeholder hestia-contact-form-col">
 			<div class="card card-contact">
 				<div class="header header-raised header-primary text-center">
+				' . hestia_display_customizer_shortcut( 'hestia_contact_info', false, true ) . '
 					<h4 class="hestia-title">' . esc_html__( 'Contact Us', 'hestia' ) . '</h4>
 				</div>
-				<div class="pirate-forms-placeholder-overlay">
-					<div class="pirate-forms-placeholder-align">
+				<div class="pirate-forms-placeholder-overlay">	
+					<div class="pirate-forms-placeholder-align">		
 						<h4 class="placeholder-text"> ' .
 			sprintf(
 				/* translators: %1$s is Plugin name */
 				   esc_html__( 'In order to add a contact form to this section, you need to install the %s plugin.', 'hestia' ),
 				esc_html( 'WPForms Lite' )
-			) . ' </h4>
-					</div>
-				</div>
+			) . ' </h4>	
+					</div>	
+				</div>			
 				<div class="content">
-					
 					<div class="pirate_forms_wrap">
 						<form class="pirate_forms ">
 							<div class="pirate_forms_three_inputs_wrap">
@@ -807,7 +810,7 @@ if ( ! function_exists( 'hestia_contact_form_placeholder' ) ) {
  * @return bool
  */
 function hestia_check_woocommerce() {
-	return class_exists( 'WooCommerce' ) && ( is_woocommerce() || is_cart() || is_checkout() );
+	return class_exists( 'WooCommerce', false ) && ( is_woocommerce() || is_cart() || is_checkout() );
 }
 
 /**
@@ -845,10 +848,13 @@ function hestia_get_current_page_id() {
 
 		return false;
 	}
+	if ( class_exists( 'WooCommerce', false ) && is_shop() ) {
+		return get_option( 'woocommerce_shop_page_id' );
+	}
 	if ( is_search() ) {
 		return false;
 	}
-	if ( is_post_type_archive( array( 'post', 'page' ) ) ) {
+	if ( is_archive() ) {
 		return false;
 	}
 
