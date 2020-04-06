@@ -15,14 +15,14 @@ Thus, the overall structure and information flow is as follows:
 
 To follow along these instructions you need to open [Terminal](https://support.apple.com/guide/terminal/welcome/mac). 
 
-1. Open your first window and create your base folder, and change folders into it:
+1. Open your first window (will refer to it as Terminal #1) and create your base folder, and change folders into it:
 
     ```bash
     mkdir dpgsite
     cd dpgsite
     ```
 
-2. Clone the 4 interconnected repositories:
+2. Clone the 4 interconnected repositories (this step you will only do once, the rest of the steps below you will do them everytime you want to make changes to the website).
 
     ```bash
     git clone https://github.com/unicef/publicgoods-candidates.git
@@ -35,6 +35,7 @@ To follow along these instructions you need to open [Terminal](https://support.a
  
     ```bash
     cd publicgoods-candidates
+    git pull --rebase
     ./develop.bash
     ``` 
     
@@ -56,10 +57,56 @@ To follow along these instructions you need to open [Terminal](https://support.a
 
     Feel free to experiment with this site as much as you want. Everything is a local copy, and you can always discard your changes and start anew (more on this later).
 
+4. Once you have made your edits in Wordpress and are ready to publish, open a second Terminal window (Terminal #2), and change folders to `dpgsite/publicgoods-website`, and run the following:
 
-## How to run
+    ```bash
+    cd dpgsite/publicgoods-website
+    git pull --rebase
+    ```
 
-If you have `php` installed on your computer:
-1. Run `./develop.bash`
-2. Open http://localhost:8000 on your browser to access the site. 
-3. Access the administrative interface through http://localhost:8000/admin
+    This ensures that you have an up-to-date copy of this repository, and there will be no conflicts when you try to push your changes later.
+
+5. Open a third terminal (Terminal #3), and change folders to `dpgsite/publicgooods-scripts`, and run the following:
+
+    ```bash
+    cd dpgsite/publicgoods-scripts
+    git pull --rebase
+    ```
+
+    Again, this ensures that you have an up-to-date copy of this repository, which is used to generate the static site. Then run:
+
+    ```bash
+    ./static.bash && node index.js
+    ```
+
+    This will crawl the Wordpress site and save a local copy of the needed pages, and will populate the list of nominees. It will take a few minutes as it fetches data from online repositories to populate statistics for each of the nominees.
+
+6. On *Terminal #2*, run the following:
+
+    ```bash
+    ./.develop.bash
+    ```
+
+    This will launch a local copy of the static site that you intend to publish. After running the above commands, visit http://localhost:8080 with your browser, and ensure that everything looks good as you expected. If something is not right, make the necessary changes in the Wordpress site, and repeat the second part of step 5, and reload this page.
+
+    *NOTE: Please note that wordpress runs locally at http://localhost:8000 and the static site is at http://localhost:8080 (note the different ports `8000` and `8080` between both).*
+
+6. When you are ready to publish, run the following in your last terminal (type Ctrl-C to quit the program that is running there):
+
+    ```bash
+    git commit -am 'INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE'
+    git push
+    ```
+
+    Replace `INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE` above with a meaningful message about the changes you are pushing.
+    
+7. Finally, you need to also publish the changes to your local instance of Wordpress, so that others can build on these when they want to publish subsequent changes. Go back to *Terminal 1*, stop the program that is running by typing Ctrl-C, and then run:
+
+    ```bash
+    git commit -am 'INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE'
+    git push
+    ```
+    
+    Again, replace `INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE` above with a meaningful message about the changes you are pushing.
+
+8. At this stage, you are done, and you can close all three Terminal windows 🙌
