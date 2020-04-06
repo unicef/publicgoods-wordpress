@@ -13,9 +13,9 @@ Thus, the overall structure and information flow is as follows:
 
 ## Setup (MacOS)
 
-To follow along these instructions you need to open [Terminal](https://support.apple.com/guide/terminal/welcome/mac). 
+To follow along these instructions you need to open [Terminal](https://support.apple.com/guide/terminal/welcome/mac), and have a basic understanding of version control systems and git: [this is a good 10min introduction](https://guides.github.com/introduction/git-handbook/).
 
-1. Open your first window (will refer to it as Terminal #1) and create your base folder, and change folders into it:
+1. Open your first window (will refer to it as *Terminal 1*) and create your base folder, and change folders into it:
 
     ```bash
     mkdir dpgsite
@@ -57,7 +57,7 @@ To follow along these instructions you need to open [Terminal](https://support.a
 
     Feel free to experiment with this site as much as you want. Everything is a local copy, and you can always discard your changes and start anew (more on this later).
 
-4. Once you have made your edits in Wordpress and are ready to publish, open a second Terminal window (Terminal #2), and change folders to `dpgsite/publicgoods-website`, and run the following:
+4. Once you have made your edits in Wordpress and are ready to publish, open a second Terminal window (*Terminal 2*), and change folders to `dpgsite/publicgoods-website`, and run the following:
 
     ```bash
     cd dpgsite/publicgoods-website
@@ -66,7 +66,7 @@ To follow along these instructions you need to open [Terminal](https://support.a
 
     This ensures that you have an up-to-date copy of this repository, and there will be no conflicts when you try to push your changes later.
 
-5. Open a third terminal (Terminal #3), and change folders to `dpgsite/publicgooods-scripts`, and run the following:
+5. Open a third terminal (*Terminal 3*), and change folders to `dpgsite/publicgooods-scripts`, and run the following:
 
     ```bash
     cd dpgsite/publicgoods-scripts
@@ -81,7 +81,7 @@ To follow along these instructions you need to open [Terminal](https://support.a
 
     This will crawl the Wordpress site and save a local copy of the needed pages, and will populate the list of nominees. It will take a few minutes as it fetches data from online repositories to populate statistics for each of the nominees.
 
-6. On *Terminal #2*, run the following:
+6. On *Terminal 2*, run the following:
 
     ```bash
     ./.develop.bash
@@ -91,7 +91,7 @@ To follow along these instructions you need to open [Terminal](https://support.a
 
     *NOTE: Please note that wordpress runs locally at http://localhost:8000 and the static site is at http://localhost:8080 (note the different ports `8000` and `8080` between both).*
 
-6. When you are ready to publish, run the following in your last terminal (type Ctrl-C to quit the program that is running there):
+6. When you are ready to publish, run the following in your *Terminal 2* (type Ctrl-C to quit the program that is running there):
 
     ```bash
     git commit -am 'INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE'
