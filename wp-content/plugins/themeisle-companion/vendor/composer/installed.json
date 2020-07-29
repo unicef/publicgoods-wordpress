@@ -60,15 +60,15 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Codeinwp/elementor-extra-widgets.git",
-            "reference": "f908127bd044b81a7aa74fb92d61a63ad19f5b7a"
+            "reference": "88bcf00006a5d655b0d74359bbc5ed49bcb54754"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Codeinwp/elementor-extra-widgets/zipball/f908127bd044b81a7aa74fb92d61a63ad19f5b7a",
-            "reference": "f908127bd044b81a7aa74fb92d61a63ad19f5b7a",
+            "url": "https://api.github.com/repos/Codeinwp/elementor-extra-widgets/zipball/88bcf00006a5d655b0d74359bbc5ed49bcb54754",
+            "reference": "88bcf00006a5d655b0d74359bbc5ed49bcb54754",
             "shasum": ""
         },
-        "time": "2019-12-02T09:28:52+00:00",
+        "time": "2020-04-15T09:34:10+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -128,30 +128,31 @@
     },
     {
         "name": "codeinwp/gutenberg-blocks",
-        "version": "1.3.6",
-        "version_normalized": "1.3.6.0",
+        "version": "1.5.3",
+        "version_normalized": "1.5.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/Codeinwp/gutenberg-blocks.git",
-            "reference": "dbf5ed8cc9c4df1035ca6c127fb41a66e970d983"
+            "reference": "ad512c53be4f7ebe79ac2ed40f39cf9a9d4a4885"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Codeinwp/gutenberg-blocks/zipball/dbf5ed8cc9c4df1035ca6c127fb41a66e970d983",
-            "reference": "dbf5ed8cc9c4df1035ca6c127fb41a66e970d983",
+            "url": "https://api.github.com/repos/Codeinwp/gutenberg-blocks/zipball/ad512c53be4f7ebe79ac2ed40f39cf9a9d4a4885",
+            "reference": "ad512c53be4f7ebe79ac2ed40f39cf9a9d4a4885",
             "shasum": ""
         },
         "require": {
+            "masterminds/html5": "^2.7",
             "tubalmartin/cssmin": "^4.1"
         },
         "require-dev": {
             "automattic/vipwpcs": "^0.3.0",
-            "dealerdirect/phpcodesniffer-composer-installer": "0.4.4",
+            "dealerdirect/phpcodesniffer-composer-installer": "0.6.2",
             "phpcompatibility/php-compatibility": "^9",
             "squizlabs/php_codesniffer": "^3.3",
             "wp-coding-standards/wpcs": "^1"
         },
-        "time": "2020-02-13T12:51:18+00:00",
+        "time": "2020-06-22T21:35:29+00:00",
         "type": "library",
         "extra": {
             "installer-disable": "true"
@@ -218,12 +219,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/Codeinwp/themeisle-content-forms.git",
-            "reference": "cdb970b402799248b372054685e3cea8e6cae992"
+            "reference": "d639a0bbb24a32ae554805f4acc01eafe6b7a327"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Codeinwp/themeisle-content-forms/zipball/cdb970b402799248b372054685e3cea8e6cae992",
-            "reference": "cdb970b402799248b372054685e3cea8e6cae992",
+            "url": "https://api.github.com/repos/Codeinwp/themeisle-content-forms/zipball/d639a0bbb24a32ae554805f4acc01eafe6b7a327",
+            "reference": "d639a0bbb24a32ae554805f4acc01eafe6b7a327",
             "shasum": ""
         },
         "require": {
@@ -233,7 +234,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
             "wptrt/wpthemereview": "*"
         },
-        "time": "2019-12-02T09:28:39+00:00",
+        "time": "2020-07-17T08:28:46+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -256,18 +257,63 @@
         "homepage": "https://github.com/Codeinwp/themeisle-content-forms"
     },
     {
-        "name": "codeinwp/themeisle-sdk",
-        "version": "3.1.8",
-        "version_normalized": "3.1.8.0",
+        "name": "codeinwp/themeisle-onboarding",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
         "source": {
             "type": "git",
-            "url": "https://github.com/Codeinwp/themeisle-sdk.git",
-            "reference": "d036ec8dd9ad318a05af3f21222025ec6a389a42"
+            "url": "https://github.com/Codeinwp/themeisle-onboarding.git",
+            "reference": "3404cc9f5880101c23f178e07bbac2bc973294f1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/d036ec8dd9ad318a05af3f21222025ec6a389a42",
-            "reference": "d036ec8dd9ad318a05af3f21222025ec6a389a42",
+            "url": "https://api.github.com/repos/Codeinwp/themeisle-onboarding/zipball/3404cc9f5880101c23f178e07bbac2bc973294f1",
+            "reference": "3404cc9f5880101c23f178e07bbac2bc973294f1",
+            "shasum": ""
+        },
+        "require-dev": {
+            "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4 || ^0.5.0 || ^0.6.0",
+            "squizlabs/php_codesniffer": "^3.1",
+            "wp-coding-standards/wpcs": "^1.0.0 || ^2.0.0"
+        },
+        "time": "2020-07-16T11:06:16+00:00",
+        "type": "library",
+        "extra": {
+            "installer-disable": "true"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "TIOB\\": "includes/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "ThemeIsle team",
+                "email": "friends@themeisle.com",
+                "homepage": "https://themeisle.com"
+            }
+        ],
+        "description": "ThemeIsle Onboarding Module.",
+        "homepage": "https://github.com/Codeinwp/themeisle-onboarding"
+    },
+    {
+        "name": "codeinwp/themeisle-sdk",
+        "version": "3.2.14",
+        "version_normalized": "3.2.14.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Codeinwp/themeisle-sdk.git",
+            "reference": "992f5e8347836e325ffc50760da1d550b79831c4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Codeinwp/themeisle-sdk/zipball/992f5e8347836e325ffc50760da1d550b79831c4",
+            "reference": "992f5e8347836e325ffc50760da1d550b79831c4",
             "shasum": ""
         },
         "require-dev": {
@@ -275,7 +321,7 @@
             "squizlabs/php_codesniffer": "^3.1",
             "wp-coding-standards/wpcs": "^1.0.0"
         },
-        "time": "2019-11-18T12:33:19+00:00",
+        "time": "2020-06-10T16:25:09+00:00",
         "type": "library",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",
@@ -294,43 +340,6 @@
         "keywords": [
             "wordpress"
         ]
-    },
-    {
-        "name": "codeinwp/ti-onboarding",
-        "version": "1.8.2",
-        "version_normalized": "1.8.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Codeinwp/ti-onboarding.git",
-            "reference": "03d872013eeef2a7e6b088f4af5a36f5d61b56d8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Codeinwp/ti-onboarding/zipball/03d872013eeef2a7e6b088f4af5a36f5d61b56d8",
-            "reference": "03d872013eeef2a7e6b088f4af5a36f5d61b56d8",
-            "shasum": ""
-        },
-        "require-dev": {
-            "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4 || ^0.5.0 || ^0.6.0",
-            "squizlabs/php_codesniffer": "^3.1",
-            "wp-coding-standards/wpcs": "^1.0.0 || ^2.0.0"
-        },
-        "time": "2020-02-03T11:53:11+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "GPL-3.0-or-later"
-        ],
-        "authors": [
-            {
-                "name": "ThemeIsle team",
-                "email": "friends@themeisle.com",
-                "homepage": "https://themeisle.com"
-            }
-        ],
-        "description": "Onboarding for themeisle themes.",
-        "homepage": "https://github.com/Codeinwp/ti-onboarding"
     },
     {
         "name": "guzzlehttp/psr7",
@@ -454,6 +463,75 @@
         ]
     },
     {
+        "name": "masterminds/html5",
+        "version": "2.7.3",
+        "version_normalized": "2.7.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Masterminds/html5-php.git",
+            "reference": "aad73dbfefd71d46072138109ce1288d96c329cc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Masterminds/html5-php/zipball/aad73dbfefd71d46072138109ce1288d96c329cc",
+            "reference": "aad73dbfefd71d46072138109ce1288d96c329cc",
+            "shasum": ""
+        },
+        "require": {
+            "ext-ctype": "*",
+            "ext-dom": "*",
+            "ext-libxml": "*",
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35",
+            "sami/sami": "~2.0",
+            "satooshi/php-coveralls": "1.0.*"
+        },
+        "time": "2020-07-05T07:53:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Masterminds\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Matt Butcher",
+                "email": "technosophos@gmail.com"
+            },
+            {
+                "name": "Matt Farina",
+                "email": "matt@mattfarina.com"
+            },
+            {
+                "name": "Asmir Mustafic",
+                "email": "goetas@gmail.com"
+            }
+        ],
+        "description": "An HTML5 parser and serializer.",
+        "homepage": "http://masterminds.github.io/html5-php",
+        "keywords": [
+            "HTML5",
+            "dom",
+            "html",
+            "parser",
+            "querypath",
+            "serializer",
+            "xml"
+        ]
+    },
+    {
         "name": "php-http/curl-client",
         "version": "v1.7.1",
         "version_normalized": "1.7.1.0",
@@ -513,41 +591,41 @@
     },
     {
         "name": "php-http/discovery",
-        "version": "1.7.4",
-        "version_normalized": "1.7.4.0",
+        "version": "1.9.1",
+        "version_normalized": "1.9.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-http/discovery.git",
-            "reference": "82dbef649ccffd8e4f22e1953c3a5265992b83c0"
+            "reference": "64a18cc891957e05d91910b3c717d6bd11fbede9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-http/discovery/zipball/82dbef649ccffd8e4f22e1953c3a5265992b83c0",
-            "reference": "82dbef649ccffd8e4f22e1953c3a5265992b83c0",
+            "url": "https://api.github.com/repos/php-http/discovery/zipball/64a18cc891957e05d91910b3c717d6bd11fbede9",
+            "reference": "64a18cc891957e05d91910b3c717d6bd11fbede9",
             "shasum": ""
         },
         "require": {
-            "php": "^7.1"
+            "php": "^7.1 || ^8.0"
         },
         "conflict": {
             "nyholm/psr7": "<1.0"
         },
         "require-dev": {
-            "akeneo/phpspec-skip-example-extension": "^4.0",
+            "graham-campbell/phpspec-skip-example-extension": "^5.0",
             "php-http/httplug": "^1.0 || ^2.0",
             "php-http/message-factory": "^1.0",
-            "phpspec/phpspec": "^5.1",
+            "phpspec/phpspec": "^5.1 || ^6.1",
             "puli/composer-plugin": "1.0.0-beta10"
         },
         "suggest": {
             "php-http/message": "Allow to use Guzzle, Diactoros or Slim Framework factories",
             "puli/composer-plugin": "Sets up Puli which is recommended for Discovery to work. Check http://docs.php-http.org/en/latest/discovery.html for more details."
         },
-        "time": "2020-01-03T11:25:47+00:00",
+        "time": "2020-07-13T15:44:45+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.7-dev"
+                "dev-master": "1.9-dev"
             }
         },
         "installation-source": "dist",
@@ -764,24 +842,27 @@
     },
     {
         "name": "php-http/promise",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-http/promise.git",
-            "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980"
+            "reference": "4c4c1f9b7289a2ec57cde7f1e9762a5789506f88"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-http/promise/zipball/dc494cdc9d7160b9a09bd5573272195242ce7980",
-            "reference": "dc494cdc9d7160b9a09bd5573272195242ce7980",
+            "url": "https://api.github.com/repos/php-http/promise/zipball/4c4c1f9b7289a2ec57cde7f1e9762a5789506f88",
+            "reference": "4c4c1f9b7289a2ec57cde7f1e9762a5789506f88",
             "shasum": ""
         },
-        "require-dev": {
-            "henrikbjorn/phpspec-code-coverage": "^1.0",
-            "phpspec/phpspec": "^2.4"
+        "require": {
+            "php": "^7.1 || ^8.0"
         },
-        "time": "2016-01-26T13:27:02+00:00",
+        "require-dev": {
+            "friends-of-phpspec/phpspec-code-coverage": "^4.3.2",
+            "phpspec/phpspec": "^5.1.2 || ^6.2"
+        },
+        "time": "2020-07-07T09:29:14+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -800,12 +881,12 @@
         ],
         "authors": [
             {
-                "name": "Márk Sági-Kazár",
-                "email": "mark.sagikazar@gmail.com"
-            },
-            {
                 "name": "Joel Wurtz",
                 "email": "joel.wurtz@gmail.com"
+            },
+            {
+                "name": "Márk Sági-Kazár",
+                "email": "mark.sagikazar@gmail.com"
             }
         ],
         "description": "Promise used for asynchronous HTTP requests",

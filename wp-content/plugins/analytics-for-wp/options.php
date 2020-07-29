@@ -47,7 +47,7 @@ endif;
        </table>
        <?php submit_button(); ?>
 
-       <p>For any help <a href="https://amanvermaa.wordpress.com/2017/02/25/how-to-add-google-analytics-tracking-code-in-wordpress-website/?ref=wp-analytics" target="_blank">click here</a></p>
+       <p>For any help <a href="https://everythingwoocommerce.com/how-to-add-google-analytics-tracking-code-in-wordpress-website/?ref=wp-analytics" target="_blank">click here</a></p>
    </form>
     <div>
         <h3><a href="https://wordpress.org/support/plugin/analytics-for-wp/reviews/?filter=5#new-post">Please review us</a> if you like the plugin.</h3>

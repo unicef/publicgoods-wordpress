@@ -14,7 +14,6 @@ use ThemeIsle\GutenbergBlocks\Base_Block;
  */
 class Posts_Grid_Block extends Base_Block {
 
-
 	/**
 	 * Every block needs a slug, so we need to define one and assign it to the `$this->block_slug` property
 	 */
@@ -45,7 +44,10 @@ class Posts_Grid_Block extends Base_Block {
 				),
 			),
 			'categories'           => array(
-				'type' => 'string',
+				'type'  => 'array',
+				'items' => array(
+					'type' => 'object',
+				),
 			),
 			'postsToShow'          => array(
 				'type'    => 'number',
@@ -58,6 +60,10 @@ class Posts_Grid_Block extends Base_Block {
 			'orderBy'              => array(
 				'type'    => 'string',
 				'default' => 'date',
+			),
+			'offset'               => array(
+				'type'    => 'number',
+				'default' => 0,
 			),
 			'imageSize'            => array(
 				'type'    => 'string',
@@ -117,13 +123,26 @@ class Posts_Grid_Block extends Base_Block {
 	 * @return mixed|string
 	 */
 	protected function render( $attributes ) {
+		$categories = 0;
+
+		if ( isset( $attributes['categories'] ) ) {
+			$cats = array();
+
+			foreach ( $attributes['categories'] as $category ) {
+				array_push( $cats, $category['id'] );
+			}
+
+			$categories = join( ', ', $cats );
+		}
+
 		$recent_posts = wp_get_recent_posts(
 			array(
 				'numberposts' => $attributes['postsToShow'],
 				'post_status' => 'publish',
 				'order'       => $attributes['order'],
 				'orderby'     => $attributes['orderBy'],
-				'category'    => isset( $attributes['categories'] ) ? $attributes['categories'] : 0,
+				'offset'      => $attributes['offset'],
+				'category'    => $categories,
 			)
 		);
 

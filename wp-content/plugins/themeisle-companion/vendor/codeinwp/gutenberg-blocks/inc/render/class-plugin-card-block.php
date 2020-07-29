@@ -14,7 +14,6 @@ use ThemeIsle\GutenbergBlocks\Base_Block;
  */
 class Plugin_Card_Block extends Base_Block {
 
-
 	/**
 	 * Every block needs a slug, so we need to define one and assign it to the `$this->block_slug` property
 	 *
@@ -48,6 +47,10 @@ class Plugin_Card_Block extends Base_Block {
 	 * @return mixed|string
 	 */
 	protected function render( $attributes ) {
+		if ( empty( $attributes['slug'] ) ) {
+			return;
+		}
+
 		$results = $this->search( $attributes['slug'] );
 
 		if ( ! is_wp_error( $results['data'] ) ) {

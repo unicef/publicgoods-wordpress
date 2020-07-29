@@ -1,3 +1,74 @@
+##### [Version 1.5.3](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.5.2...v1.5.3) (2020-06-22)
+
+- Store images locally when importing templates
+- The improved template import mechanism
+- Fix CSS file is not enqueued for posts outside the main loop
+- Drop support for WordPress 5.3
+- Add backward compatibility to Template Library import
+- Fix category filter in Posts Section
+- Add new Block Templates
+
+##### [Version 1.5.2](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.5.1...v1.5.2) (2020-05-26)
+
+- Use WP File System in Template Import
+- Fix CSS Regeneration
+- Add TinyMCE in Map Marker
+- Use ServerSideLoader in Author & Sharing Blocks
+- Fix Posts Block for Gutenberg 8.0
+- Display template name in Template Library
+- Add AMP Support to Slider Block
+- Remove Section Outline
+- Add AMP Support to Google Maps Block
+- Fix Horizontal/Vertical Alignment
+- Add Template Preview in Template Library
+- Fix issue with Color resetting in Button Group & Section
+- Fix Font Awesome not loading on Index Pages
+- Add two new templates
+- Fix SVG issue in Slider & Section Block
+
+##### [Version 1.5.1](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.5.0...v1.5.1) (2020-04-10)
+
+- Remove Icons from Range Controls
+- Add ColorIndicator to Color Controls
+- Move Vertical Alignment to Toolbar
+- Fix Button Hover Color not saving
+- Fix Responsive Controls not working
+- Regenerate CSS file if it doesn't exist
+- Reduce FontAwesome Size
+
+#### [Version 1.5.0](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.4.2...v1.5.0) (2020-03-30)
+
+- Improve Responsiveness Control
+- Remove Popover from Sizing Control
+- Add Button Border to Global Defaults
+- Fix issue with CSS not saving properly
+
+##### [Version 1.4.2](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.4.1...v1.4.2) (2020-03-20)
+
+- Adds compatibility with WordPress 5.4
+
+##### [Version 1.4.1](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.4.0...v1.4.1) (2020-02-29)
+
+- Fix issue with Button Group & Global Defaults
+- Add Offset to Posts Block
+- Allow custom IDs in Section & Advanced Heading Block
+- Add speed option in Slider Block
+- Fix issue with Overlay Gradient not working in Section Block
+
+#### [Version 1.4.0](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.3.6...v1.4.0) (2020-02-22)
+
+- Add Column Width control to Sidebar
+- Remove Inline CSS from Blocks
+- Fix Block ID Mechanism
+- Add Global Defaults
+- Improve Vertical Alignment to Section Block
+- Add option to disable Arrows/Bullets in Slider Block
+- Option to reverse columns in Section
+- Add theme_support for global defaults
+- Inherit Sizing values
+- Button Group consistency with Button Block
+- Add Anchor field to Advanced Heading Block
+
 ##### [Version 1.3.6](https://github.com/Codeinwp/gutenberg-blocks/compare/v1.3.5...v1.3.6) (2020-02-13)
 
 * Fix library autoloading in multiple plugins
