@@ -76,7 +76,8 @@ To follow along these instructions you need to open [Terminal](https://support.a
     Again, this ensures that you have an up-to-date copy of this repository, which is used to generate the static site. Then run:
 
     ```bash
-    ./static.bash && node index.js
+    
+    ./static.bash && node generate_nominees.js && node index.js && npm run build && ./moveFiles.bash
     ```
 
     This will crawl the Wordpress site and save a local copy of the needed pages, and will populate the list of nominees. It will take a few minutes as it fetches data from online repositories to populate statistics for each of the nominees.
