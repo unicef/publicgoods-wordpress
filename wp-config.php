@@ -18,6 +18,17 @@
  * @package WordPress
  */
 
+// predefine WP_HOME and WP_SITEURL with current HTTP_HOST
+if( !defined( 'WP_CLI' ) && ( isset( $_SERVER[ 'HTTP_HOST' ] ) && $_SERVER[ 'HTTP_HOST' ] ) ) {
+  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+  define( 'WP_HOME', $protocol . $_SERVER[ 'HTTP_HOST' ] );
+  define( 'WP_SITEURL', $protocol . $_SERVER[ 'HTTP_HOST' ] );
+}
+
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false){
+  $_SERVER['HTTPS']='on';
+}
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('DB_NAME', getenv('DB_NAME'));
