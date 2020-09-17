@@ -1,126 +1,27 @@
 # Digital Public Goods Wordpress Site
 
-This repo holds an offline Wordpress site that is used to generate the static website at https://digitalpublicgoods.net. This is one of four interconnected repositories; refer to the [publicgoods-website](https://github.com/unicef/publicgoods-website) for an overview.
+This repo holds a Wordpress site that is used to generate the static website at https://digitalpublicgoods.net. This is one of four interconnected repositories; refer to the [publicgoods-website](https://github.com/unicef/publicgoods-website) for an overview.
 
-## Overview
+## Rationale
 
 We chose Wordpress as a Content Management System (CMS) due to its ease of use to manage and update content. Because of this very same reason, and the fact that is a very popular choice to manage websites, it is also known for its frequent vulnerabilities, which we don not want to fall for. Additionally, instead of having to manage the hosting for this website, we leverage GitHub massive Content Delivery Network (CDN) infrastructure, which is limited to hosting static sites.
 
-Thus, the overall structure and information flow is as follows:
-- Use `publicgoods-wordpress` repository (this very same repo) to create an offline instance of our website in your local computer that we can easily edit and modify.
-- Use `publicgoods-scripts` repository to generate the static copy of this site, including pulling from the latest version of the list of `publicgoods-candidates` to generate the live site.
-- Upload (push) the static copy of our site to `publicgoods-website`, which effectively updates and publishes the live site
+## Architecture
 
-## Setup (MacOS)
+Here's an overview of the architecture:
 
-To follow along these instructions you need to open [Terminal](https://support.apple.com/guide/terminal/welcome/mac), and have a basic understanding of version control systems and git: [this is a good 10min introduction](https://guides.github.com/introduction/git-handbook/).
+[![](https://mermaid.ink/svg/eyJjb2RlIjoiZ3JhcGggTFJcbiAgICBBW2RwZ2FsbGlhbmNlLXdlYnNpdGUgcmVwb10gLS0-fGF1dG9tYXRpY2FsbHkgZGVwbG95c3wgQihIZXJva3UpXG4gICAgQiAtLT4gRFtBV1MgTXlTUUwgREJdXG4gICAgQiAtLT4gRVtBV1MgUzNdXG4gICAgS1twdWJsaWNnb29kcy1jYW5kaWRhdGVzIHJlcG9dIC0tPnxDSXwgRltwdWJsaWNnb29kcy13ZWJzaXRlXVxuICAgIEhbaGVyb2t1XSAtLT4gRlxuICAgIExbcHVibGljZ29vZHMtc2NyaXB0cyByZXBvXSAtLT4gRlxuICAgIEsgLS0-IEhcbiAgICBLIC0tPiBMXG4gICAgRiAtLT4gR1tkaWdpdGFscHVibGljZ29vZHMubmV0XVxuICAgICAgICAgICAgIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQiLCJ0aGVtZVZhcmlhYmxlcyI6eyJiYWNrZ3JvdW5kIjoid2hpdGUiLCJwcmltYXJ5Q29sb3IiOiIjRUNFQ0ZGIiwic2Vjb25kYXJ5Q29sb3IiOiIjZmZmZmRlIiwidGVydGlhcnlDb2xvciI6ImhzbCg4MCwgMTAwJSwgOTYuMjc0NTA5ODAzOSUpIiwicHJpbWFyeUJvcmRlckNvbG9yIjoiaHNsKDI0MCwgNjAlLCA4Ni4yNzQ1MDk4MDM5JSkiLCJzZWNvbmRhcnlCb3JkZXJDb2xvciI6ImhzbCg2MCwgNjAlLCA4My41Mjk0MTE3NjQ3JSkiLCJ0ZXJ0aWFyeUJvcmRlckNvbG9yIjoiaHNsKDgwLCA2MCUsIDg2LjI3NDUwOTgwMzklKSIsInByaW1hcnlUZXh0Q29sb3IiOiIjMTMxMzAwIiwic2Vjb25kYXJ5VGV4dENvbG9yIjoiIzAwMDAyMSIsInRlcnRpYXJ5VGV4dENvbG9yIjoicmdiKDkuNTAwMDAwMDAwMSwgOS41MDAwMDAwMDAxLCA5LjUwMDAwMDAwMDEpIiwibGluZUNvbG9yIjoiIzMzMzMzMyIsInRleHRDb2xvciI6IiMzMzMiLCJtYWluQmtnIjoiI0VDRUNGRiIsInNlY29uZEJrZyI6IiNmZmZmZGUiLCJib3JkZXIxIjoiIzkzNzBEQiIsImJvcmRlcjIiOiIjYWFhYTMzIiwiYXJyb3doZWFkQ29sb3IiOiIjMzMzMzMzIiwiZm9udEZhbWlseSI6IlwidHJlYnVjaGV0IG1zXCIsIHZlcmRhbmEsIGFyaWFsIiwiZm9udFNpemUiOiIxNnB4IiwibGFiZWxCYWNrZ3JvdW5kIjoiI2U4ZThlOCIsIm5vZGVCa2ciOiIjRUNFQ0ZGIiwibm9kZUJvcmRlciI6IiM5MzcwREIiLCJjbHVzdGVyQmtnIjoiI2ZmZmZkZSIsImNsdXN0ZXJCb3JkZXIiOiIjYWFhYTMzIiwiZGVmYXVsdExpbmtDb2xvciI6IiMzMzMzMzMiLCJ0aXRsZUNvbG9yIjoiIzMzMyIsImVkZ2VMYWJlbEJhY2tncm91bmQiOiIjZThlOGU4IiwiYWN0b3JCb3JkZXIiOiJoc2woMjU5LjYyNjE2ODIyNDMsIDU5Ljc3NjUzNjMxMjglLCA4Ny45MDE5NjA3ODQzJSkiLCJhY3RvckJrZyI6IiNFQ0VDRkYiLCJhY3RvclRleHRDb2xvciI6ImJsYWNrIiwiYWN0b3JMaW5lQ29sb3IiOiJncmV5Iiwic2lnbmFsQ29sb3IiOiIjMzMzIiwic2lnbmFsVGV4dENvbG9yIjoiIzMzMyIsImxhYmVsQm94QmtnQ29sb3IiOiIjRUNFQ0ZGIiwibGFiZWxCb3hCb3JkZXJDb2xvciI6ImhzbCgyNTkuNjI2MTY4MjI0MywgNTkuNzc2NTM2MzEyOCUsIDg3LjkwMTk2MDc4NDMlKSIsImxhYmVsVGV4dENvbG9yIjoiYmxhY2siLCJsb29wVGV4dENvbG9yIjoiYmxhY2siLCJub3RlQm9yZGVyQ29sb3IiOiIjYWFhYTMzIiwibm90ZUJrZ0NvbG9yIjoiI2ZmZjVhZCIsIm5vdGVUZXh0Q29sb3IiOiJibGFjayIsImFjdGl2YXRpb25Cb3JkZXJDb2xvciI6IiM2NjYiLCJhY3RpdmF0aW9uQmtnQ29sb3IiOiIjZjRmNGY0Iiwic2VxdWVuY2VOdW1iZXJDb2xvciI6IndoaXRlIiwic2VjdGlvbkJrZ0NvbG9yIjoicmdiYSgxMDIsIDEwMiwgMjU1LCAwLjQ5KSIsImFsdFNlY3Rpb25Ca2dDb2xvciI6IndoaXRlIiwic2VjdGlvbkJrZ0NvbG9yMiI6IiNmZmY0MDAiLCJ0YXNrQm9yZGVyQ29sb3IiOiIjNTM0ZmJjIiwidGFza0JrZ0NvbG9yIjoiIzhhOTBkZCIsInRhc2tUZXh0TGlnaHRDb2xvciI6IndoaXRlIiwidGFza1RleHRDb2xvciI6IndoaXRlIiwidGFza1RleHREYXJrQ29sb3IiOiJibGFjayIsInRhc2tUZXh0T3V0c2lkZUNvbG9yIjoiYmxhY2siLCJ0YXNrVGV4dENsaWNrYWJsZUNvbG9yIjoiIzAwMzE2MyIsImFjdGl2ZVRhc2tCb3JkZXJDb2xvciI6IiM1MzRmYmMiLCJhY3RpdmVUYXNrQmtnQ29sb3IiOiIjYmZjN2ZmIiwiZ3JpZENvbG9yIjoibGlnaHRncmV5IiwiZG9uZVRhc2tCa2dDb2xvciI6ImxpZ2h0Z3JleSIsImRvbmVUYXNrQm9yZGVyQ29sb3IiOiJncmV5IiwiY3JpdEJvcmRlckNvbG9yIjoiI2ZmODg4OCIsImNyaXRCa2dDb2xvciI6InJlZCIsInRvZGF5TGluZUNvbG9yIjoicmVkIiwibGFiZWxDb2xvciI6ImJsYWNrIiwiZXJyb3JCa2dDb2xvciI6IiM1NTIyMjIiLCJlcnJvclRleHRDb2xvciI6IiM1NTIyMjIiLCJjbGFzc1RleHQiOiIjMTMxMzAwIiwiZmlsbFR5cGUwIjoiI0VDRUNGRiIsImZpbGxUeXBlMSI6IiNmZmZmZGUiLCJmaWxsVHlwZTIiOiJoc2woMzA0LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTMiOiJoc2woMTI0LCAxMDAlLCA5My41Mjk0MTE3NjQ3JSkiLCJmaWxsVHlwZTQiOiJoc2woMTc2LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTUiOiJoc2woLTQsIDEwMCUsIDkzLjUyOTQxMTc2NDclKSIsImZpbGxUeXBlNiI6ImhzbCg4LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTciOiJoc2woMTg4LCAxMDAlLCA5My41Mjk0MTE3NjQ3JSkifX19)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggTFJcbiAgICBBW2RwZ2FsbGlhbmNlLXdlYnNpdGUgcmVwb10gLS0-fGF1dG9tYXRpY2FsbHkgZGVwbG95c3wgQihIZXJva3UpXG4gICAgQiAtLT4gRFtBV1MgTXlTUUwgREJdXG4gICAgQiAtLT4gRVtBV1MgUzNdXG4gICAgS1twdWJsaWNnb29kcy1jYW5kaWRhdGVzIHJlcG9dIC0tPnxDSXwgRltwdWJsaWNnb29kcy13ZWJzaXRlXVxuICAgIEhbaGVyb2t1XSAtLT4gRlxuICAgIExbcHVibGljZ29vZHMtc2NyaXB0cyByZXBvXSAtLT4gRlxuICAgIEsgLS0-IEhcbiAgICBLIC0tPiBMXG4gICAgRiAtLT4gR1tkaWdpdGFscHVibGljZ29vZHMubmV0XVxuICAgICAgICAgICAgIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQiLCJ0aGVtZVZhcmlhYmxlcyI6eyJiYWNrZ3JvdW5kIjoid2hpdGUiLCJwcmltYXJ5Q29sb3IiOiIjRUNFQ0ZGIiwic2Vjb25kYXJ5Q29sb3IiOiIjZmZmZmRlIiwidGVydGlhcnlDb2xvciI6ImhzbCg4MCwgMTAwJSwgOTYuMjc0NTA5ODAzOSUpIiwicHJpbWFyeUJvcmRlckNvbG9yIjoiaHNsKDI0MCwgNjAlLCA4Ni4yNzQ1MDk4MDM5JSkiLCJzZWNvbmRhcnlCb3JkZXJDb2xvciI6ImhzbCg2MCwgNjAlLCA4My41Mjk0MTE3NjQ3JSkiLCJ0ZXJ0aWFyeUJvcmRlckNvbG9yIjoiaHNsKDgwLCA2MCUsIDg2LjI3NDUwOTgwMzklKSIsInByaW1hcnlUZXh0Q29sb3IiOiIjMTMxMzAwIiwic2Vjb25kYXJ5VGV4dENvbG9yIjoiIzAwMDAyMSIsInRlcnRpYXJ5VGV4dENvbG9yIjoicmdiKDkuNTAwMDAwMDAwMSwgOS41MDAwMDAwMDAxLCA5LjUwMDAwMDAwMDEpIiwibGluZUNvbG9yIjoiIzMzMzMzMyIsInRleHRDb2xvciI6IiMzMzMiLCJtYWluQmtnIjoiI0VDRUNGRiIsInNlY29uZEJrZyI6IiNmZmZmZGUiLCJib3JkZXIxIjoiIzkzNzBEQiIsImJvcmRlcjIiOiIjYWFhYTMzIiwiYXJyb3doZWFkQ29sb3IiOiIjMzMzMzMzIiwiZm9udEZhbWlseSI6IlwidHJlYnVjaGV0IG1zXCIsIHZlcmRhbmEsIGFyaWFsIiwiZm9udFNpemUiOiIxNnB4IiwibGFiZWxCYWNrZ3JvdW5kIjoiI2U4ZThlOCIsIm5vZGVCa2ciOiIjRUNFQ0ZGIiwibm9kZUJvcmRlciI6IiM5MzcwREIiLCJjbHVzdGVyQmtnIjoiI2ZmZmZkZSIsImNsdXN0ZXJCb3JkZXIiOiIjYWFhYTMzIiwiZGVmYXVsdExpbmtDb2xvciI6IiMzMzMzMzMiLCJ0aXRsZUNvbG9yIjoiIzMzMyIsImVkZ2VMYWJlbEJhY2tncm91bmQiOiIjZThlOGU4IiwiYWN0b3JCb3JkZXIiOiJoc2woMjU5LjYyNjE2ODIyNDMsIDU5Ljc3NjUzNjMxMjglLCA4Ny45MDE5NjA3ODQzJSkiLCJhY3RvckJrZyI6IiNFQ0VDRkYiLCJhY3RvclRleHRDb2xvciI6ImJsYWNrIiwiYWN0b3JMaW5lQ29sb3IiOiJncmV5Iiwic2lnbmFsQ29sb3IiOiIjMzMzIiwic2lnbmFsVGV4dENvbG9yIjoiIzMzMyIsImxhYmVsQm94QmtnQ29sb3IiOiIjRUNFQ0ZGIiwibGFiZWxCb3hCb3JkZXJDb2xvciI6ImhzbCgyNTkuNjI2MTY4MjI0MywgNTkuNzc2NTM2MzEyOCUsIDg3LjkwMTk2MDc4NDMlKSIsImxhYmVsVGV4dENvbG9yIjoiYmxhY2siLCJsb29wVGV4dENvbG9yIjoiYmxhY2siLCJub3RlQm9yZGVyQ29sb3IiOiIjYWFhYTMzIiwibm90ZUJrZ0NvbG9yIjoiI2ZmZjVhZCIsIm5vdGVUZXh0Q29sb3IiOiJibGFjayIsImFjdGl2YXRpb25Cb3JkZXJDb2xvciI6IiM2NjYiLCJhY3RpdmF0aW9uQmtnQ29sb3IiOiIjZjRmNGY0Iiwic2VxdWVuY2VOdW1iZXJDb2xvciI6IndoaXRlIiwic2VjdGlvbkJrZ0NvbG9yIjoicmdiYSgxMDIsIDEwMiwgMjU1LCAwLjQ5KSIsImFsdFNlY3Rpb25Ca2dDb2xvciI6IndoaXRlIiwic2VjdGlvbkJrZ0NvbG9yMiI6IiNmZmY0MDAiLCJ0YXNrQm9yZGVyQ29sb3IiOiIjNTM0ZmJjIiwidGFza0JrZ0NvbG9yIjoiIzhhOTBkZCIsInRhc2tUZXh0TGlnaHRDb2xvciI6IndoaXRlIiwidGFza1RleHRDb2xvciI6IndoaXRlIiwidGFza1RleHREYXJrQ29sb3IiOiJibGFjayIsInRhc2tUZXh0T3V0c2lkZUNvbG9yIjoiYmxhY2siLCJ0YXNrVGV4dENsaWNrYWJsZUNvbG9yIjoiIzAwMzE2MyIsImFjdGl2ZVRhc2tCb3JkZXJDb2xvciI6IiM1MzRmYmMiLCJhY3RpdmVUYXNrQmtnQ29sb3IiOiIjYmZjN2ZmIiwiZ3JpZENvbG9yIjoibGlnaHRncmV5IiwiZG9uZVRhc2tCa2dDb2xvciI6ImxpZ2h0Z3JleSIsImRvbmVUYXNrQm9yZGVyQ29sb3IiOiJncmV5IiwiY3JpdEJvcmRlckNvbG9yIjoiI2ZmODg4OCIsImNyaXRCa2dDb2xvciI6InJlZCIsInRvZGF5TGluZUNvbG9yIjoicmVkIiwibGFiZWxDb2xvciI6ImJsYWNrIiwiZXJyb3JCa2dDb2xvciI6IiM1NTIyMjIiLCJlcnJvclRleHRDb2xvciI6IiM1NTIyMjIiLCJjbGFzc1RleHQiOiIjMTMxMzAwIiwiZmlsbFR5cGUwIjoiI0VDRUNGRiIsImZpbGxUeXBlMSI6IiNmZmZmZGUiLCJmaWxsVHlwZTIiOiJoc2woMzA0LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTMiOiJoc2woMTI0LCAxMDAlLCA5My41Mjk0MTE3NjQ3JSkiLCJmaWxsVHlwZTQiOiJoc2woMTc2LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTUiOiJoc2woLTQsIDEwMCUsIDkzLjUyOTQxMTc2NDclKSIsImZpbGxUeXBlNiI6ImhzbCg4LCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSkiLCJmaWxsVHlwZTciOiJoc2woMTg4LCAxMDAlLCA5My41Mjk0MTE3NjQ3JSkifX19)
 
-1. Open your first window (will refer to it as *Terminal 1*) and create your base folder, and change folders into it:
+This repository holds the code for Wordpress, which is automatically deployed onto Heroku. Since Heroku dynos are ephemeral, the database is hosted on an AWS MySQL instance, and the media library is hosted on an AWS S3 instance (these two are configured through environment variables).
 
-    ```bash
-    mkdir dpgsite
-    cd dpgsite
-    ```
+When any changes from Wordpress need to be pushed to the public site at [digitalpublicgoods.net](https://digitalpublicgoods.net), a build can be triggered manually through the [Github Actions](https://github.com/unicef/publicgoods-candidates/actions) configured on the [unicef/publicgoods-candidates](https://github.com/unicef/publicgoods-candidates). Read permissions on that repo are needed to manually trigger a build. The scripted build will crawl the heroku site, automatically insert the HTML required for the DPG list available at `/explore` and push the changes to the [unicef/publicgoods-website](https://github.com/unicef/publicgoods-website) repo, which in turn is configured to use GitHub Pages to publish the site live at [digitalpublicgoods.net](https://digitalpublicgoods.net).
 
-2. Clone the 4 interconnected repositories (this step you will only do once, the rest of the steps below you will do them everytime you want to make changes to the website).
+## DOs and DONTs
 
-    ```bash
-    git clone https://github.com/unicef/publicgoods-candidates.git
-    git clone https://github.com/unicef/publicgoods-wordpress.git
-    git clone https://github.com/unicef/publicgoods-website.git
-    git clone https://github.com/unicef/publicgoods-scripts.git
-    ```
+* DO add new plugins or new themes onto this repo so that they are deployed onto Heroku.
 
-3. Change folders into the `publicgoods-wordpress`, and launch your local instance of Wordpress
- 
-    ```bash
-    cd publicgoods-candidates
-    git pull --rebase
-    ./develop.bash
-    ``` 
-    
-    which should output something like the following:
+* DO NOT add new plugins or new themes directly through the Wordpress admin interface because they will be deleted on the next push.
 
-    ```bash
-    PHP 5.6.30 Development Server started at Mon Apr  6 13:07:11 2020
-    Listening on http://localhost:8000
-    Document root is dpgsite/publicgoods-wordpress
-    Press Ctrl-C to quit.
-    ```
+## Previous version
 
-    From the message above, if you open a browser and navigate to http://localhost:8000, you should be able to access the local copy of the Wordpress site. 
-
-    You access the administrative interface by visiting: http://localhost:8000/admin, and use the following credentials:
-
-    * Username: `admin`
-    * Password: `admin`
-
-    Feel free to experiment with this site as much as you want. Everything is a local copy, and you can always discard your changes and start anew (more on this later).
-
-4. Once you have made your edits in Wordpress and are ready to publish, open a second Terminal window (*Terminal 2*), and change folders to `dpgsite/publicgoods-website`, and run the following:
-
-    ```bash
-    cd dpgsite/publicgoods-website
-    git pull --rebase
-    ```
-
-    This ensures that you have an up-to-date copy of this repository, and there will be no conflicts when you try to push your changes later.
-
-5. Open a third terminal (*Terminal 3*), and change folders to `dpgsite/publicgooods-scripts`, and run the following:
-
-    ```bash
-    cd dpgsite/publicgoods-scripts
-    git pull --rebase
-    ```
-
-    Again, this ensures that you have an up-to-date copy of this repository, which is used to generate the static site. Then run:
-
-    ```bash
-    
-    ./static.bash && node generate_nominees.js && node index.js && npm run build && ./moveFiles.bash
-    ```
-
-    This will crawl the Wordpress site and save a local copy of the needed pages, and will populate the list of nominees. It will take a few minutes as it fetches data from online repositories to populate statistics for each of the nominees.
-
-6. On *Terminal 2*, run the following:
-
-    ```bash
-    ./.develop.bash
-    ```
-
-    This will launch a local copy of the static site that you intend to publish. After running the above commands, visit http://localhost:8080 with your browser, and ensure that everything looks good as you expected. If something is not right, make the necessary changes in the Wordpress site, and repeat the second part of step 5, and reload this page.
-
-    *NOTE: Please note that wordpress runs locally at http://localhost:8000 and the static site is at http://localhost:8080 (note the different ports `8000` and `8080` between both).*
-
-6. When you are ready to publish, run the following in your *Terminal 2* (type Ctrl-C to quit the program that is running there):
-
-    ```bash
-    git commit -am 'INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE'
-    git push
-    ```
-
-    Replace `INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE` above with a meaningful message about the changes you are pushing.
-    
-7. Finally, you need to also publish the changes to your local instance of Wordpress, so that others can build on these when they want to publish subsequent changes. Go back to *Terminal 1*, stop the program that is running by typing Ctrl-C, and then run:
-
-    ```bash
-    git commit -am 'INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE'
-    git push
-    ```
-    
-    Again, replace `INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE` above with a meaningful message about the changes you are pushing.
-
-8. At this stage, you are done, and you can close all three Terminal windows 🙌
-
-## Migration from Sqlite to Postgres
-
-1. Dump the sqlite database to be later ingested into Postgres 
-
-    ```bash 
-    cd wp-content/database
-    sqlite3 .ht.sqlite .dump > dump.sql
-    ```
-    Tried several methods to convert from sqlite to mysql, but none of them really worked. The one that got closer was to (a) run [sqlite3-ti-mysql.py](https://documentation.easyredmine.com/s/K739FRX): `cat dump.sql | python sqlite3-to-mysql.py > data.sql`, (b) separately do a mysqldump of a brand new Wordpress instance, and (c) manually replace all of the table creation statments from (b) into (a). Finally you can import the output of (c) into a live MySQL instance.
-
-2. Remove `wp-content/db.php`
-
+The previous version of this repo was configured to run locally with a sqlite instance, refer to the [old documentation](docs/sqlite.md) for more information on that setup. The [migration](docs/migration.md) from sqlite to mysql is documented as well.
