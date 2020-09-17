@@ -55,7 +55,7 @@ class MockHandler implements \Countable
         if (!$this->queue) {
             throw new \OutOfBoundsException('Mock queue is empty');
         }
-        if (isset($options['delay']) && is_numeric($options['delay'])) {
+        if (isset($options['delay'])) {
             usleep($options['delay'] * 1000);
         }
         $this->lastRequest = $request;
@@ -142,15 +142,10 @@ class MockHandler implements \Countable
     {
         return count($this->queue);
     }
-    public function reset()
-    {
-        $this->queue = [];
-    }
     private function invokeStats(\DeliciousBrains\WP_Offload_Media\Gcp\Psr\Http\Message\RequestInterface $request, array $options, \DeliciousBrains\WP_Offload_Media\Gcp\Psr\Http\Message\ResponseInterface $response = null, $reason = null)
     {
         if (isset($options['on_stats'])) {
-            $transferTime = isset($options['transfer_time']) ? $options['transfer_time'] : 0;
-            $stats = new \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\TransferStats($request, $response, $transferTime, $reason);
+            $stats = new \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\TransferStats($request, $response, 0, $reason);
             call_user_func($options['on_stats'], $stats);
         }
     }

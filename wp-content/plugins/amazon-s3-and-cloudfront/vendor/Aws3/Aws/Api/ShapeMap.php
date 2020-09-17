@@ -47,9 +47,7 @@ class ShapeMap
         }
         $definition = $shapeRef + $this->definitions[$shape];
         $definition['name'] = $definition['shape'];
-        if (isset($definition['shape'])) {
-            unset($definition['shape']);
-        }
+        unset($definition['shape']);
         $result = \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\Shape::create($definition, $this);
         if ($isSimple) {
             $this->simple[$shape] = $result;

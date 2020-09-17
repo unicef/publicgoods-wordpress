@@ -19,9 +19,6 @@ namespace DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\Credentials;
 
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\CredentialsLoader;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\OAuth2;
-use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\ServiceAccountSignerTrait;
-use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\SignBlobInterface;
-use InvalidArgumentException;
 /**
  * ServiceAccountCredentials supports authorization using a Google service
  * account.
@@ -55,9 +52,8 @@ use InvalidArgumentException;
  *
  *   $res = $client->get('myproject/taskqueues/myqueue');
  */
-class ServiceAccountCredentials extends \DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\CredentialsLoader implements \DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\SignBlobInterface
+class ServiceAccountCredentials extends \DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\CredentialsLoader
 {
-    use ServiceAccountSignerTrait;
     /**
      * The OAuth2 instance used to conduct authorization.
      *
@@ -73,9 +69,8 @@ class ServiceAccountCredentials extends \DeliciousBrains\WP_Offload_Media\Gcp\Go
      *   as an associative array
      * @param string $sub an email address account to impersonate, in situations when
      *   the service account has been delegated domain wide access.
-     * @param string $targetAudience The audience for the ID token.
      */
-    public function __construct($scope, $jsonKey, $sub = null, $targetAudience = null)
+    public function __construct($scope, $jsonKey, $sub = null)
     {
         if (is_string($jsonKey)) {
             if (!file_exists($jsonKey)) {
@@ -92,23 +87,12 @@ class ServiceAccountCredentials extends \DeliciousBrains\WP_Offload_Media\Gcp\Go
         if (!array_key_exists('private_key', $jsonKey)) {
             throw new \InvalidArgumentException('json key is missing the private_key field');
         }
-        if ($scope && $targetAudience) {
-            throw new \InvalidArgumentException('Scope and targetAudience cannot both be supplied');
-        }
-        $additionalClaims = [];
-        if ($targetAudience) {
-            $additionalClaims = ['target_audience' => $targetAudience];
-        }
-        $this->auth = new \DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\OAuth2(['audience' => self::TOKEN_CREDENTIAL_URI, 'issuer' => $jsonKey['client_email'], 'scope' => $scope, 'signingAlgorithm' => 'RS256', 'signingKey' => $jsonKey['private_key'], 'sub' => $sub, 'tokenCredentialUri' => self::TOKEN_CREDENTIAL_URI, 'additionalClaims' => $additionalClaims]);
+        $this->auth = new \DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\OAuth2(['audience' => self::TOKEN_CREDENTIAL_URI, 'issuer' => $jsonKey['client_email'], 'scope' => $scope, 'signingAlgorithm' => 'RS256', 'signingKey' => $jsonKey['private_key'], 'sub' => $sub, 'tokenCredentialUri' => self::TOKEN_CREDENTIAL_URI]);
     }
     /**
      * @param callable $httpHandler
      *
-     * @return array A set of auth related metadata, containing the following
-     * keys:
-     *   - access_token (string)
-     *   - expires_in (int)
-     *   - token_type (string)
+     * @return array
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
@@ -160,17 +144,5 @@ class ServiceAccountCredentials extends \DeliciousBrains\WP_Offload_Media\Gcp\Go
     public function setSub($sub)
     {
         $this->auth->setSub($sub);
-    }
-    /**
-     * Get the client name from the keyfile.
-     *
-     * In this case, it returns the keyfile's client_email key.
-     *
-     * @param callable $httpHandler Not used by this credentials type.
-     * @return string
-     */
-    public function getClientName(callable $httpHandler = null)
-    {
-        return $this->auth->getIssuer();
     }
 }

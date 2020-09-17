@@ -39,10 +39,6 @@ class IamBucket implements \DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Co
      */
     public function getPolicy(array $args)
     {
-        if (isset($args['requestedPolicyVersion'])) {
-            $args['optionsRequestedPolicyVersion'] = $args['requestedPolicyVersion'];
-            unset($args['requestedPolicyVersion']);
-        }
         return $this->connection->getBucketIamPolicy($args);
     }
     /**

@@ -14,10 +14,6 @@ use DeliciousBrains\WP_Offload_Media\Aws3\Psr\Log\InvalidArgumentException;
  */
 class EndpointParameterMiddleware
 {
-    /** @var callable */
-    private $nextHandler;
-    /** @var Service */
-    private $service;
     /**
      * Create a middleware wrapper function
      *

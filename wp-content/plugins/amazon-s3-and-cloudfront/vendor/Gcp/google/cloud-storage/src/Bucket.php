@@ -24,13 +24,11 @@ use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Exception\ServiceExce
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Iam\Iam;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Iterator\ItemIterator;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Iterator\PageIterator;
-use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Timestamp;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Upload\ResumableUploader;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Core\Upload\StreamableUploader;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\PubSub\Topic;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Storage\Connection\ConnectionInterface;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Storage\Connection\IamBucket;
-use DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Storage\SigningHelper;
 use DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Psr7;
 use DeliciousBrains\WP_Offload_Media\Gcp\Psr\Http\Message\StreamInterface;
 /**
@@ -78,7 +76,7 @@ class Bucket
      */
     private $info;
     /**
-     * @var Iam|null
+     * @var Iam
      */
     private $iam;
     /**
@@ -204,7 +202,6 @@ class Bucket
      * uploads.
      * @see https://cloud.google.com/storage/docs/json_api/v1/objects/insert Objects insert API documentation.
      * @see https://cloud.google.com/storage/docs/encryption#customer-supplied Customer-supplied encryption keys.
-     * @see https://github.com/google/php-crc32 crc32c PHP extension for hardware-accelerated validation hashes.
      *
      * @param string|resource|StreamInterface|null $data The data to be uploaded.
      * @param array $options [optional] {
@@ -214,17 +211,10 @@ class Bucket
      *           of type string or null.
      *     @type bool $resumable Indicates whether or not the upload will be
      *           performed in a resumable fashion.
-     *     @type bool|string $validate Indicates whether or not validation will
-     *           be applied using md5 or crc32c hashing functionality. If
-     *           enabled, and the calculated hash does not match that of the
-     *           upstream server, the upload will be rejected. Available options
-     *           are `true`, `false`, `md5` and `crc32`. If true, either md5 or
-     *           crc32c will be chosen based on your platform. If false, no
-     *           validation hash will be sent. Choose either `md5` or `crc32` to
-     *           force a hash method regardless of performance implications. In
-     *           PHP versions earlier than 7.4, performance will be very
-     *           adversely impacted by using crc32c unless you install the
-     *           `crc32c` PHP extension. **Defaults to** `true`.
+     *     @type bool $validate Indicates whether or not validation will be
+     *           applied using md5 hashing functionality. If true and the
+     *           calculated hash does not match that of the upstream server the
+     *           upload will be rejected.
      *     @type int $chunkSize If provided the upload will be done in chunks.
      *           The size must be in multiples of 262144 bytes. With chunking
      *           you have increased reliability at the risk of higher overhead.
@@ -244,11 +234,11 @@ class Bucket
      *           `"projectPrivate"`, and `"publicRead"`.
      *     @type array $metadata The full list of available options are outlined
      *           at the [JSON API docs](https://cloud.google.com/storage/docs/json_api/v1/objects/insert#request-body).
-     *     @type array $metadata.metadata User-provided metadata, in key/value pairs.
+     *     @type array $metadata['metadata'] User-provided metadata, in key/value pairs.
      *     @type string $encryptionKey A base64 encoded AES-256 customer-supplied
      *           encryption key. If you would prefer to manage encryption
      *           utilizing the Cloud Key Management Service (KMS) please use the
-     *           `$metadata.kmsKeyName` setting. Please note if using KMS the
+     *           $metadata['kmsKeyName'] setting. Please note if using KMS the
      *           key ring must use the same location as the bucket.
      *     @type string $encryptionKeySHA256 Base64 encoded SHA256 hash of the
      *           customer-supplied encryption key. This value will be calculated
@@ -674,7 +664,6 @@ class Bucket
      * @see https://cloud.google.com/storage/docs/json_api/v1/buckets/patch Buckets patch API documentation.
      * @see https://cloud.google.com/storage/docs/key-terms#bucket-labels Bucket Labels
      *
-     * @codingStandardsIgnoreStart
      * @param array $options [optional] {
      *     Configuration options.
      *
@@ -708,14 +697,9 @@ class Bucket
      *           current bucket's logs.
      *     @type string $storageClass The bucket's storage class. This defines
      *           how objects in the bucket are stored and determines the SLA and
-     *           the cost of storage. Acceptable values include the following
-     *           strings: `"STANDARD"`, `"NEARLINE"`, `"COLDLINE"` and
-     *           `"ARCHIVE"`. Legacy values including `"MULTI_REGIONAL"`,
-     *           `"REGIONAL"` and `"DURABLE_REDUCED_AVAILABILITY"` are also
-     *           available, but should be avoided for new implementations. For
-     *           more information, refer to the
-     *           [Storage Classes](https://cloud.google.com/storage/docs/storage-classes)
-     *           documentation. **Defaults to** `"STANDARD"`.
+     *           the cost of storage. Acceptable values include
+     *           `"MULTI_REGIONAL"`, `"REGIONAL"`, `"NEARLINE"`, `"COLDLINE"`,
+     *           `"STANDARD"` and `"DURABLE_REDUCED_AVAILABILITY"`.
      *     @type array $versioning The bucket's versioning configuration.
      *     @type array $website The bucket's website configuration.
      *     @type array $billing The bucket's billing configuration.
@@ -742,19 +726,7 @@ class Bucket
      *     @type int $retentionPolicy.retentionPeriod Specifies the duration
      *           that objects need to be retained, in seconds. Retention
      *           duration must be greater than zero and less than 100 years.
-     *     @type array $iamConfiguration The bucket's IAM configuration.
-     *     @type bool $iamConfiguration.bucketPolicyOnly.enabled this is an alias
-     *           for $iamConfiguration.uniformBucketLevelAccess.
-     *     @type bool $iamConfiguration.uniformBucketLevelAccess.enabled If set and
-     *           true, access checks only use bucket-level IAM policies or
-     *           above. When enabled, requests attempting to view or manipulate
-     *           ACLs will fail with error code 400. **NOTE**: Before using
-     *           Uniform bucket-level access, please review the
-     *           [feature documentation](https://cloud.google.com/storage/docs/uniform-bucket-level-access),
-     *           as well as
-     *           [Should You Use uniform bucket-level access](https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use)
      * }
-     * @codingStandardsIgnoreEnd
      * @return array
      */
     public function update(array $options = [])
@@ -1012,19 +984,11 @@ class Bucket
     /**
      * Manage the IAM policy for the current Bucket.
      *
-     * To request a policy with conditions, pass an array with
-     * '[requestedPolicyVersion => 3]' as argument to the policy() and
-     * reload() methods.
+     * Please note that this method may not yet be available in your project.
      *
      * Example:
      * ```
      * $iam = $bucket->iam();
-     *
-     * // Returns the stored policy, or fetches the policy if none exists.
-     * $policy = $iam->policy(['requestedPolicyVersion' => 3]);
-     *
-     * // Fetches a policy from the server.
-     * $policy = $iam->reload(['requestedPolicyVersion' => 3]);
      * ```
      *
      * @codingStandardsIgnoreStart
@@ -1032,7 +996,6 @@ class Bucket
      * @see https://cloud.google.com/storage/docs/json_api/v1/buckets/getIamPolicy Get Bucket IAM Policy
      * @see https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy Set Bucket IAM Policy
      * @see https://cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions Test Bucket Permissions
-     * @see https://cloud.google.com/iam/docs/policies#versions policy versioning.
      * @codingStandardsIgnoreEnd
      *
      * @return Iam
@@ -1097,80 +1060,6 @@ class Bucket
             $options['ifMetagenerationMatch'] = $this->info['metageneration'];
         }
         return $this->info = $this->connection->lockRetentionPolicy($options + $this->identity);
-    }
-    /**
-     * Create a Signed URL listing objects in this bucket.
-     *
-     * Example:
-     * ```
-     * $url = $bucket->signedUrl(time() + 3600);
-     * ```
-     *
-     * ```
-     * // Use V4 Signing
-     * $url = $bucket->signedUrl(time() + 3600, [
-     *     'version' => 'v4'
-     * ]);
-     * ```
-     *
-     * @see https://cloud.google.com/storage/docs/access-control/signed-urls Signed URLs
-     *
-     * @param Timestamp|\DateTimeInterface|int $expires Specifies when the URL
-     *        will expire. May provide an instance of {@see Google\Cloud\Core\Timestamp},
-     *        [http://php.net/datetimeimmutable](`\DateTimeImmutable`), or a
-     *        UNIX timestamp as an integer.
-     * @param array $options {
-     *     Configuration Options.
-     *
-     *     @type string $cname The CNAME for the bucket, for instance
-     *           `https://cdn.example.com`. **Defaults to**
-     *           `https://storage.googleapis.com`.
-     *     @type string $contentMd5 The MD5 digest value in base64. If you
-     *           provide this, the client must provide this HTTP header with
-     *           this same value in its request. If provided, take care to
-     *           always provide this value as a base64 encoded string.
-     *     @type string $contentType If you provide this value, the client must
-     *           provide this HTTP header set to the same value.
-     *     @type bool $forceOpenssl If true, OpenSSL will be used regardless of
-     *           whether phpseclib is available. **Defaults to** `false`.
-     *     @type array $headers If additional headers are provided, the server
-     *           will check to make sure that the client provides matching
-     *           values. Provide headers as a key/value array, where the key is
-     *           the header name, and the value is an array of header values.
-     *           Headers with multiple values may provide values as a simple
-     *           array, or a comma-separated string. For a reference of allowed
-     *           headers, see [Reference Headers](https://cloud.google.com/storage/docs/xml-api/reference-headers).
-     *           Header values will be trimmed of leading and trailing spaces,
-     *           multiple spaces within values will be collapsed to a single
-     *           space, and line breaks will be replaced by an empty string.
-     *           V2 Signed URLs may not provide `x-goog-encryption-key` or
-     *           `x-goog-encryption-key-sha256` headers.
-     *     @type array $keyFile Keyfile data to use in place of the keyfile with
-     *           which the client was constructed. If `$options.keyFilePath` is
-     *           set, this option is ignored.
-     *     @type string $keyFilePath A path to a valid keyfile to use in place
-     *           of the keyfile with which the client was constructed.
-     *     @type string|array $scopes One or more authentication scopes to be
-     *           used with a key file. This option is ignored unless
-     *           `$options.keyFile` or `$options.keyFilePath` is set.
-     *     @type array $queryParams Additional query parameters to be included
-     *           as part of the signed URL query string. For allowed values,
-     *           see [Reference Headers](https://cloud.google.com/storage/docs/xml-api/reference-headers#query).
-     *     @type string $version One of "v2" or "v4". *Defaults to** `"v2"`.
-     * }
-     * @return string
-     * @throws \InvalidArgumentException If the given expiration is invalid or in the past.
-     * @throws \InvalidArgumentException If the given `$options.method` is not valid.
-     * @throws \InvalidArgumentException If the given `$options.keyFilePath` is not valid.
-     * @throws \InvalidArgumentException If the given custom headers are invalid.
-     * @throws \RuntimeException If the keyfile does not contain the required information.
-     */
-    public function signedUrl($expires, array $options = [])
-    {
-        // May be overridden for testing.
-        $signingHelper = $this->pluck('helper', $options, false) ?: \DeliciousBrains\WP_Offload_Media\Gcp\Google\Cloud\Storage\SigningHelper::getHelper();
-        $resource = sprintf('/%s', $this->identity['bucket']);
-        return $signingHelper->sign($this->connection, $expires, $resource, null, $options);
     }
     /**
      * Determines if an object name is required.

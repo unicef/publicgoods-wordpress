@@ -88,7 +88,10 @@ abstract class AbstractRestParser extends \DeliciousBrains\WP_Offload_Media\Aws3
                 break;
             case 'timestamp':
                 try {
-                    $value = \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\DateTimeResult::fromTimestamp($value, !empty($shape['timestampFormat']) ? $shape['timestampFormat'] : null);
+                    if (!empty($shape['timestampFormat']) && $shape['timestampFormat'] === 'unixTimestamp') {
+                        $value = \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\DateTimeResult::fromEpoch($value);
+                    }
+                    $value = new \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\DateTimeResult($value);
                     break;
                 } catch (\Exception $e) {
                     // If the value cannot be parsed, then do not add it to the
@@ -96,20 +99,10 @@ abstract class AbstractRestParser extends \DeliciousBrains\WP_Offload_Media\Aws3
                     return;
                 }
             case 'string':
-                try {
-                    if ($shape['jsonvalue']) {
-                        $value = $this->parseJson(base64_decode($value), $response);
-                    }
-                    // If value is not set, do not add to output structure.
-                    if (!isset($value)) {
-                        return;
-                    }
-                    break;
-                } catch (\Exception $e) {
-                    //If the value cannot be parsed, then do not add it to the
-                    //output structure.
-                    return;
+                if ($shape['jsonvalue']) {
+                    $value = $this->parseJson(base64_decode($value), $response);
                 }
+                break;
         }
         $result[$name] = $value;
     }

@@ -78,8 +78,8 @@ class CookieJar implements \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Cook
      */
     public function getCookieByName($name)
     {
-        // don't allow a non string name
-        if ($name === null || !is_scalar($name)) {
+        // don't allow a null name
+        if ($name === null) {
             return null;
         }
         foreach ($this->cookies as $cookie) {
@@ -87,7 +87,6 @@ class CookieJar implements \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Cook
                 return $cookie;
             }
         }
-        return null;
     }
     public function toArray()
     {
@@ -101,7 +100,7 @@ class CookieJar implements \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Cook
             $this->cookies = [];
             return;
         } elseif (!$path) {
-            $this->cookies = array_filter($this->cookies, function (\DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Cookie\SetCookie $cookie) use($domain) {
+            $this->cookies = array_filter($this->cookies, function (\DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Cookie\SetCookie $cookie) use($path, $domain) {
                 return !$cookie->matchesDomain($domain);
             });
         } elseif (!$name) {

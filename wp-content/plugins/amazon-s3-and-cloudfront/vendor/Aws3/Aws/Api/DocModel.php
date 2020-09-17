@@ -94,7 +94,7 @@ class DocModel
         if (!$content) {
             return '';
         }
-        $tidy = new \tidy();
+        $tidy = new \Tidy();
         $tidy->parseString($content, ['indent' => true, 'doctype' => 'omit', 'output-html' => true, 'show-body-only' => true, 'drop-empty-paras' => true, 'drop-font-tags' => true, 'drop-proprietary-attributes' => true, 'hide-comments' => true, 'logical-emphasis' => true]);
         $tidy->cleanRepair();
         return (string) $content;

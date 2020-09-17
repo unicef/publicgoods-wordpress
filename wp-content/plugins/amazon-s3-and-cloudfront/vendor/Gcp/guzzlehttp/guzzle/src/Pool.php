@@ -2,12 +2,11 @@
 
 namespace DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp;
 
-use DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\EachPromise;
-use DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\PromiseInterface;
 use DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\PromisorInterface;
 use DeliciousBrains\WP_Offload_Media\Gcp\Psr\Http\Message\RequestInterface;
+use DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\EachPromise;
 /**
- * Sends an iterator of requests concurrently using a capped pool size.
+ * Sends and iterator of requests concurrently using a capped pool size.
  *
  * The pool will read from an iterator until it is cancelled or until the
  * iterator is consumed. When a request is yielded, the request is sent after
@@ -59,11 +58,6 @@ class Pool implements \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\P
         };
         $this->each = new \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\EachPromise($requests(), $config);
     }
-    /**
-     * Get promise
-     *
-     * @return PromiseInterface
-     */
     public function promise()
     {
         return $this->each->promise();
@@ -95,11 +89,6 @@ class Pool implements \DeliciousBrains\WP_Offload_Media\Gcp\GuzzleHttp\Promise\P
         ksort($res);
         return $res;
     }
-    /**
-     * Execute callback(s)
-     *
-     * @return void
-     */
     private static function cmpCallback(array &$options, $name, array &$results)
     {
         if (!isset($options[$name])) {

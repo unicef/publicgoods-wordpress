@@ -67,18 +67,16 @@ class Service extends \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\AbstractMod
     /**
      * Creates an error parser for the given protocol.
      *
-     * Redundant method signature to preserve backwards compatibility.
-     *
      * @param string $protocol Protocol to parse (e.g., query, json, etc.)
      *
      * @return callable
      * @throws \UnexpectedValueException
      */
-    public static function createErrorParser($protocol, \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\Service $api = null)
+    public static function createErrorParser($protocol)
     {
         static $mapping = ['json' => 'DeliciousBrains\\WP_Offload_Media\\Aws3\\Aws\\Api\\ErrorParser\\JsonRpcErrorParser', 'query' => 'DeliciousBrains\\WP_Offload_Media\\Aws3\\Aws\\Api\\ErrorParser\\XmlErrorParser', 'rest-json' => 'DeliciousBrains\\WP_Offload_Media\\Aws3\\Aws\\Api\\ErrorParser\\RestJsonErrorParser', 'rest-xml' => 'DeliciousBrains\\WP_Offload_Media\\Aws3\\Aws\\Api\\ErrorParser\\XmlErrorParser', 'ec2' => 'DeliciousBrains\\WP_Offload_Media\\Aws3\\Aws\\Api\\ErrorParser\\XmlErrorParser'];
         if (isset($mapping[$protocol])) {
-            return new $mapping[$protocol]($api);
+            return new $mapping[$protocol]();
         }
         throw new \UnexpectedValueException("Unknown protocol: {$protocol}");
     }
@@ -223,22 +221,6 @@ class Service extends \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\AbstractMod
         $result = [];
         foreach ($this->definition['operations'] as $name => $definition) {
             $result[$name] = $this->getOperation($name);
-        }
-        return $result;
-    }
-    /**
-     * Get all of the error shapes of the service
-     *
-     * @return array
-     */
-    public function getErrorShapes()
-    {
-        $result = [];
-        foreach ($this->definition['shapes'] as $name => $definition) {
-            if (!empty($definition['exception'])) {
-                $definition['name'] = $name;
-                $result[] = new \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\StructureShape($definition, $this->getShapeMap());
-            }
         }
         return $result;
     }

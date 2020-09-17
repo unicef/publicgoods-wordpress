@@ -3,8 +3,6 @@
 namespace DeliciousBrains\WP_Offload_Media\Aws3\Aws\S3;
 
 use DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface;
-use DeliciousBrains\WP_Offload_Media\Aws3\Aws\Endpoint\EndpointProvider;
-use DeliciousBrains\WP_Offload_Media\Aws3\Aws\Endpoint\PartitionEndpointProvider;
 use DeliciousBrains\WP_Offload_Media\Aws3\Psr\Http\Message\RequestInterface;
 /**
  * Used to update the URL used for S3 requests to support:
@@ -34,31 +32,27 @@ class S3EndpointMiddleware
     /** @var string */
     private $region;
     /** @var callable */
-    private $endpointProvider;
-    /** @var callable */
     private $nextHandler;
     /**
      * Create a middleware wrapper function
      *
      * @param string $region
-     * @param EndpointProvider $endpointProvider
      * @param array  $options
      *
      * @return callable
      */
-    public static function wrap($region, $endpointProvider, array $options)
+    public static function wrap($region, array $options)
     {
-        return function (callable $handler) use($region, $endpointProvider, $options) {
-            return new self($handler, $region, $options, $endpointProvider);
+        return function (callable $handler) use($region, $options) {
+            return new self($handler, $region, $options);
         };
     }
-    public function __construct(callable $nextHandler, $region, array $options, $endpointProvider = null)
+    public function __construct(callable $nextHandler, $region, array $options)
     {
         $this->pathStyleByDefault = isset($options['path_style']) ? (bool) $options['path_style'] : false;
         $this->dualStackByDefault = isset($options['dual_stack']) ? (bool) $options['dual_stack'] : false;
         $this->accelerateByDefault = isset($options['accelerate']) ? (bool) $options['accelerate'] : false;
         $this->region = (string) $region;
-        $this->endpointProvider = is_null($endpointProvider) ? \DeliciousBrains\WP_Offload_Media\Aws3\Aws\Endpoint\PartitionEndpointProvider::defaultProvider() : $endpointProvider;
         $this->nextHandler = $nextHandler;
     }
     public function __invoke(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface $command, \DeliciousBrains\WP_Offload_Media\Aws3\Psr\Http\Message\RequestInterface $request)
@@ -85,7 +79,7 @@ class S3EndpointMiddleware
     }
     private static function isRequestHostStyleCompatible(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface $command, \DeliciousBrains\WP_Offload_Media\Aws3\Psr\Http\Message\RequestInterface $request)
     {
-        return \DeliciousBrains\WP_Offload_Media\Aws3\Aws\S3\S3Client::isBucketDnsCompatible($command['Bucket']) && ($request->getUri()->getScheme() === 'http' || strpos($command['Bucket'], '.') === false) && filter_var($request->getUri()->getHost(), FILTER_VALIDATE_IP) === false;
+        return \DeliciousBrains\WP_Offload_Media\Aws3\Aws\S3\S3Client::isBucketDnsCompatible($command['Bucket']) && ($request->getUri()->getScheme() === 'http' || strpos($command['Bucket'], '.') === false);
     }
     private function endpointPatternDecider(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface $command, \DeliciousBrains\WP_Offload_Media\Aws3\Psr\Http\Message\RequestInterface $request)
     {
@@ -136,8 +130,7 @@ class S3EndpointMiddleware
     }
     private function getDualStackHost()
     {
-        $dnsSuffix = $this->endpointProvider->getPartition($this->region, 's3')->getDnsSuffix();
-        return "s3.dualstack.{$this->region}.{$dnsSuffix}";
+        return "s3.dualstack.{$this->region}.amazonaws.com";
     }
     private function applyAccelerateEndpoint(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface $command, \DeliciousBrains\WP_Offload_Media\Aws3\Psr\Http\Message\RequestInterface $request, $pattern)
     {
@@ -146,8 +139,7 @@ class S3EndpointMiddleware
     }
     private function getAccelerateHost(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface $command, $pattern)
     {
-        $dnsSuffix = $this->endpointProvider->getPartition($this->region, 's3')->getDnsSuffix();
-        return "{$command['Bucket']}.{$pattern}.{$dnsSuffix}";
+        return "{$command['Bucket']}.{$pattern}.amazonaws.com";
     }
     private function getBucketlessPath($path, \DeliciousBrains\WP_Offload_Media\Aws3\Aws\CommandInterface $command)
     {

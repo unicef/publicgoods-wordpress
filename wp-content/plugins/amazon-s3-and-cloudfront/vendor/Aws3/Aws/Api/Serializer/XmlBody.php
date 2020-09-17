@@ -61,7 +61,7 @@ class XmlBody
     private function defaultShape(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\Shape $shape, $name, $value, \XMLWriter $xml)
     {
         $this->startElement($shape, $name, $xml);
-        $xml->text($value);
+        $xml->writeRaw($value);
         $xml->endElement();
     }
     private function add_structure(\DeliciousBrains\WP_Offload_Media\Aws3\Aws\Api\StructureShape $shape, $name, array $value, \XMLWriter $xml)

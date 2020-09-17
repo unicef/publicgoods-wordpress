@@ -49,16 +49,9 @@ trait AwsClientTrait
     }
     public function __call($name, array $args)
     {
-        if (substr($name, -5) === 'Async') {
-            $name = substr($name, 0, -5);
-            $isAsync = true;
-        }
-        if (!empty($this->aliases[ucfirst($name)])) {
-            $name = $this->aliases[ucfirst($name)];
-        }
         $params = isset($args[0]) ? $args[0] : [];
-        if (!empty($isAsync)) {
-            return $this->executeAsync($this->getCommand($name, $params));
+        if (substr($name, -5) === 'Async') {
+            return $this->executeAsync($this->getCommand(substr($name, 0, -5), $params));
         }
         return $this->execute($this->getCommand($name, $params));
     }
