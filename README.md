@@ -111,3 +111,16 @@ To follow along these instructions you need to open [Terminal](https://support.a
     Again, replace `INSERT_A_ONE_LINE_DESCRIPTOR_OF_YOUR_CHANGES_HERE` above with a meaningful message about the changes you are pushing.
 
 8. At this stage, you are done, and you can close all three Terminal windows 🙌
+
+## Migration from Sqlite to Postgres
+
+1. Dump the sqlite database to be later ingested into Postgres 
+
+    ```bash 
+    cd wp-content/database
+    sqlite3 .ht.sqlite .dump > dump.sql
+    ```
+    Tried several methods to convert from sqlite to mysql, but none of them really worked. The one that got closer was to (a) run [sqlite3-ti-mysql.py](https://documentation.easyredmine.com/s/K739FRX): `cat dump.sql | python sqlite3-to-mysql.py > data.sql`, (b) separately do a mysqldump of a brand new Wordpress instance, and (c) manually replace all of the table creation statments from (b) into (a). Finally you can import the output of (c) into a live MySQL instance.
+
+2. Remove `wp-content/db.php`
+
