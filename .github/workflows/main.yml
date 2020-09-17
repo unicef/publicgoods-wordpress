@@ -1,0 +1,20 @@
+name: Database backup
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dbdump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: DB dbdump
+        env:
+            DB_HOST: ${{ secrets.DB_HOST }}
+            DB_USER: ${{ secrets.DB_USER }}
+            DB_PASS: ${{ secrets.DB_PASS }}
+            DB_NAME: ${{ secrets.DB_NAME }}
+      - run: |
+        mysqldump -h $DB_HOST -u $DB_USER --password=$DB_PASS $DBNAME > wp-content/database/dbdump-$(date +%F).sql
+
