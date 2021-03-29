@@ -34,7 +34,7 @@ To follow along these instructions you need to open [Terminal](https://support.a
 3. Change folders into the `publicgoods-wordpress`, and launch your local instance of Wordpress
  
     ```bash
-    cd publicgoods-candidates
+    cd publicgoods-wordpress
     git pull --rebase
     ./develop.bash
     ``` 
